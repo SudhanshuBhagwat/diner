@@ -6,6 +6,12 @@
     "type": "git",
     "url": "git+https://github.com/SudhanshuBhagwat/diner.git"
   },
+  "scripts": {
+    "dev": "lerna run dev --stream",
+    "test": "lerna run test",
+    "new-version": "lerna version --conventional-commits --yes",
+    "diff": "lerna diff"
+  },
   "private": true,
   "workspaces": [
     "packages/*"
@@ -16,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/SudhanshuBhagwat/diner/issues"
   },
-  "homepage": "https://github.com/SudhanshuBhagwat/diner#readme"
+  "homepage": "https://github.com/SudhanshuBhagwat/diner#readme",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
 }
