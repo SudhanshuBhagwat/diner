@@ -9,7 +9,7 @@ app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({
-    message: "Hello from API",
+    message: "Hello from New API",
   });
 });
 
