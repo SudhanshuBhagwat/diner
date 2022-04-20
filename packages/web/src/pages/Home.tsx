@@ -1,5 +1,6 @@
 import { Html5Qrcode } from "html5-qrcode";
 import { useNavigate } from "react-router-dom";
+import jsonpack from "jsonpack";
 
 function Home() {
   const navigate = useNavigate();
@@ -18,7 +19,9 @@ function Home() {
         (decodedText) => {
           if (decodedText) {
             qrReader.stop();
-            navigate(decodedText);
+            const unpacked: { id: number; type: string } =
+              jsonpack.unpack(decodedText);
+            navigate(`restaurants/${unpacked.id}`);
           }
         },
         (errorMessage) => {}
