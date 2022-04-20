@@ -18,7 +18,11 @@ function Home() {
         (decodedText) => {
           if (decodedText) {
             qrReader.stop();
-            navigate("/restaurants/1");
+            try {
+              navigate(decodedText);
+            } catch (err) {
+              console.error(err);
+            }
           }
         },
         (errorMessage) => {}
