@@ -10,9 +10,13 @@ createServer({
     restaurants: Model,
   },
   seeds(server) {
-    server.create("restaurant", { id: 1, name: "Shwarma King", year: 2013 });
-    server.create("restaurant", { id: 2, name: "Barbeque Nation", year: 2010 });
-    server.create("restaurant", { id: 3, name: "NH 37", year: 2012 });
+    server.create("restaurant", { id: "1", name: "Shwarma King", year: 2013 });
+    server.create("restaurant", {
+      id: "2",
+      name: "Barbeque Nation",
+      year: 2010,
+    });
+    server.create("restaurant", { id: "3", name: "NH 37", year: 2012 });
   },
   routes() {
     this.namespace = "api";
