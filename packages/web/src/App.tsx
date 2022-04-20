@@ -1,42 +1,38 @@
-import axios from "axios";
-import { format } from "date-fns";
-import { useQuery } from "react-query";
-import Spinner from "./components/Spinner";
+import { createServer, Model } from "miragejs";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Restaurant from "./pages/Restaurant";
 
-interface Restaurant {
-  id: Number;
-  name: string;
-  createdAt: string;
-}
+/* For testing purpose */
+createServer({
+  timing: 4000,
+  models: {
+    restaurants: Model,
+  },
+  seeds(server) {
+    server.create("restaurant", { id: 1, name: "Shwarma King", year: 2013 });
+    server.create("restaurant", { id: 2, name: "Barbeque Nation", year: 2010 });
+    server.create("restaurant", { id: 3, name: "NH 37", year: 2012 });
+  },
+  routes() {
+    this.namespace = "api";
+
+    this.get("/restaurants", (schema) => {
+      return schema.all("restaurants");
+    });
+    this.get("/restaurants/:id", (schema, request) => {
+      const id = request.params.id;
+      return schema.find("restaurants", id);
+    });
+  },
+});
 
 function App() {
-  const { data, error, isLoading } = useQuery<{
-    results: Restaurant[];
-  }>("getRestaurants", () =>
-    axios.get("http://localhost:3001/restaurants").then((data) => data.data)
-  );
-
-  if (isLoading && !data) {
-    return (
-      <div className="w-full h-screen flex items-center justify-center">
-        <Spinner />
-      </div>
-    );
-  }
-
   return (
-    <div className="h-screen bg-gray-100 flex flex-col justify-center items-center">
-      <div className="flex flex-col space-y-2 max-w-md">
-        {data?.results.map((result: any) => {
-          return (
-            <div className="flex w-64 justify-between items-center px-4 py-2 bg-gray-200 rounded-md">
-              <h2>{result.name}</h2>
-              <span>{format(new Date(result.createdAt), "Lo LLLL")}</span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="restaurants/:restaurantId" element={<Restaurant />} />
+    </Routes>
   );
 }
 
