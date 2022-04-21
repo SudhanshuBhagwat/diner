@@ -1,6 +1,9 @@
 import { Html5Qrcode } from "html5-qrcode";
 import { useNavigate } from "react-router-dom";
-import jsonpack from "jsonpack";
+
+function isSameHost(host: string) {
+  return host === window.location.host || host === "192.168.1.17:3000";
+}
 
 function Home() {
   const navigate = useNavigate();
@@ -19,9 +22,10 @@ function Home() {
         (decodedText) => {
           if (decodedText) {
             qrReader.stop();
-            const unpacked: { id: number; type: string } =
-              jsonpack.unpack(decodedText);
-            navigate(`restaurants/${unpacked.id}`);
+            const currentUrl = new URL(decodedText);
+            if (isSameHost(currentUrl.host)) {
+              navigate(currentUrl.pathname);
+            }
           }
         },
         (errorMessage) => {}
