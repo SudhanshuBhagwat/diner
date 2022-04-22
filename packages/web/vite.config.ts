@@ -31,43 +31,14 @@ const pwaOptions: Partial<VitePWAOptions> = {
       },
     ],
   },
-  devOptions: {
-    enabled: process.env.SW_DEV === "true",
-    type: "module",
-    navigateFallback: "index.html",
-  },
+  strategies: "injectManifest",
+  srcDir: "src",
+  filename: "sw.js",
 };
-
-const replaceOptions = { __DATE__: new Date().toISOString() };
-const claims = process.env.CLAIMS === "true";
-const reload = process.env.RELOAD_SW === "true";
-
-if (process.env.SW === "true") {
-  pwaOptions.srcDir = "src";
-  pwaOptions.filename = claims ? "claims-sw.ts" : "prompt-sw.ts";
-  pwaOptions.strategies = "injectManifest";
-  (pwaOptions.manifest as Partial<ManifestOptions>).name =
-    "Diner Inject Manifest";
-  (pwaOptions.manifest as Partial<ManifestOptions>).short_name = "Diner Inject";
-}
-
-if (claims) pwaOptions.registerType = "autoUpdate";
-
-if (reload) {
-  // @ts-expect-error just ignore
-  replaceOptions.__RELOAD_SW__ = "true";
-}
 
 export default defineConfig({
   build: {
     sourcemap: process.env.SOURCE_MAP === "true",
   },
-  plugins: [
-    react(),
-    VitePWA(pwaOptions),
-    replace({
-      ...replaceOptions,
-      preventAssignment: true,
-    }),
-  ],
+  plugins: [react(), VitePWA(pwaOptions)],
 });
