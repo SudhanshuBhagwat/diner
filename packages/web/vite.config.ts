@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
-import type { ManifestOptions, VitePWAOptions } from "vite-plugin-pwa";
+import type { VitePWAOptions } from "vite-plugin-pwa";
 import { VitePWA } from "vite-plugin-pwa";
-import replace from "@rollup/plugin-replace";
 import react from "@vitejs/plugin-react";
 
 const pwaOptions: Partial<VitePWAOptions> = {
@@ -31,14 +30,9 @@ const pwaOptions: Partial<VitePWAOptions> = {
       },
     ],
   },
-  strategies: "injectManifest",
-  srcDir: "src",
-  filename: "sw.js",
+  strategies: "generateSW",
 };
 
 export default defineConfig({
-  build: {
-    sourcemap: process.env.SOURCE_MAP === "true",
-  },
   plugins: [react(), VitePWA(pwaOptions)],
 });
