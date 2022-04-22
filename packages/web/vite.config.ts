@@ -4,16 +4,18 @@ import { VitePWA } from "vite-plugin-pwa";
 import react from "@vitejs/plugin-react";
 
 const pwaOptions: Partial<VitePWAOptions> = {
-  mode: "development",
-  base: "/",
   includeAssets: ["favicon.svg"],
   manifest: {
     name: "Diner App",
     short_name: "Diner",
-    theme_color: "#ffffff",
+    theme_color: "#F9FAFB",
+    background_color: "#F9FAFB",
+    scope: "/",
+    start_url: "/",
+    display: "standalone",
     icons: [
       {
-        src: "pwa-192x192.png",
+        src: "/pwa-192x192.png",
         sizes: "192x192",
         type: "image/png",
       },
@@ -25,6 +27,8 @@ const pwaOptions: Partial<VitePWAOptions> = {
     ],
   },
   strategies: "injectManifest",
+  srcDir: "src",
+  filename: "sw.js",
 };
 
 export default defineConfig({
