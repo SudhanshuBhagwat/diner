@@ -1,5 +1,4 @@
 import { defineConfig } from "vite";
-import reactRefresh from "@vitejs/plugin-react-refresh";
 import type { ManifestOptions, VitePWAOptions } from "vite-plugin-pwa";
 import { VitePWA } from "vite-plugin-pwa";
 import replace from "@rollup/plugin-replace";
@@ -48,8 +47,8 @@ if (process.env.SW === "true") {
   pwaOptions.filename = claims ? "claims-sw.ts" : "prompt-sw.ts";
   pwaOptions.strategies = "injectManifest";
   (pwaOptions.manifest as Partial<ManifestOptions>).name =
-    "PWA Inject Manifest";
-  (pwaOptions.manifest as Partial<ManifestOptions>).short_name = "PWA Inject";
+    "Diner Inject Manifest";
+  (pwaOptions.manifest as Partial<ManifestOptions>).short_name = "Diner Inject";
 }
 
 if (claims) pwaOptions.registerType = "autoUpdate";
@@ -65,7 +64,6 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    reactRefresh(),
     VitePWA(pwaOptions),
     replace({
       ...replaceOptions,
