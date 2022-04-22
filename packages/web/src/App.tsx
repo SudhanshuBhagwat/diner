@@ -1,5 +1,9 @@
+import { onAuthStateChanged, User } from "firebase/auth";
 import { createServer, Model } from "miragejs";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { getFirebase } from "./config/firebase";
+import Auth from "./pages/Auth";
 import Home from "./pages/Home";
 import Restaurant from "./pages/Restaurant";
 
@@ -32,11 +36,24 @@ createServer({
 });
 
 function App() {
+  const [user, setUser] = useState<User | null>(null);
+  const { auth } = getFirebase();
+
+  useEffect(() => {
+    return onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  }, [auth]);
+
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="restaurants/:restaurantId" element={<Restaurant />} />
-    </Routes>
+    <>
+      <div>User: {user?.displayName}</div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="restaurants/:restaurantId" element={<Restaurant />} />
+        <Route path="/auth" element={<Auth />} />
+      </Routes>
+    </>
   );
 }
 
