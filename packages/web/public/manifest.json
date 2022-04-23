@@ -1,0 +1,22 @@
+{
+  "name": "Diner App",
+  "description": "Dining app",
+  "short_name": "Diner",
+  "theme_color": "#F9FAFB",
+  "background_color": "#F9FAFB",
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
