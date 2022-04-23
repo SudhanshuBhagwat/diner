@@ -6,9 +6,22 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      scope: ".",
+      includeAssets: ["*.svg", "*.png"],
+      mode: "development",
+      base: "/",
       srcDir: "src",
       filename: "sw.ts",
+      strategies: "injectManifest",
+      registerType: "autoUpdate",
+      injectRegister: "inline",
+      workbox: {
+        cleanupOutdatedCaches: false,
+        sourcemap: true,
+      },
+      devOptions: {
+        enabled: true,
+        type: "module",
+      },
     }),
   ],
 });

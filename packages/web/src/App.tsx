@@ -1,5 +1,6 @@
 import { createServer, Model } from "miragejs";
 import { Route, Routes } from "react-router-dom";
+import { useRegisterSW } from "virtual:pwa-register/react";
 import Home from "./pages/Home";
 import Restaurant from "./pages/Restaurant";
 
