@@ -11,9 +11,12 @@ const pwaOptions: Partial<VitePWAOptions> = {
     type: "module",
     navigateFallback: "index.html",
   },
-  srcDir: "src",
-  filename: "sw.ts",
 };
+
+if (process.env.SW === "true") {
+  pwaOptions.srcDir = "src";
+  pwaOptions.filename = "sw.ts";
+}
 
 export default defineConfig({
   build: {
