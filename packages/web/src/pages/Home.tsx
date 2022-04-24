@@ -1,4 +1,5 @@
 import { Html5Qrcode } from "html5-qrcode";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function isSameHost(host: string) {

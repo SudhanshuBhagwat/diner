@@ -3,12 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "start": "npm run run-build && npm run serve",
     "dev": "cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true vite",
     "build": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
-    "run-build": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
-    "preview": "vite preview",
-    "serve": "serve dist"
+    "preview": "vite preview"
   },
   "dependencies": {
     "autoprefixer": "^10.4.4",
