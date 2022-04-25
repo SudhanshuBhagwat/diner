@@ -1,10 +1,29 @@
 import { defineConfig } from "vite";
+import type { ManifestOptions, VitePWAOptions } from "vite-plugin-pwa";
+import { VitePWA } from "vite-plugin-pwa";
 import react from "@vitejs/plugin-react";
 
-// https://vitejs.dev/config/
+const pwaOptions: Partial<VitePWAOptions> = {
+  mode: "development",
+  base: "/",
+  devOptions: {
+    enabled: process.env.SW_DEV === "true",
+    type: "module",
+    navigateFallback: "index.html",
+  },
+};
+
+if (process.env.SW === "true") {
+  pwaOptions.srcDir = "src";
+  pwaOptions.filename = "sw.ts";
+}
+
 export default defineConfig({
-  plugins: [react()],
+  build: {
+    sourcemap: process.env.SOURCE_MAP === "true",
+  },
   server: {
     host: true,
   },
+  plugins: [react(), VitePWA(pwaOptions)],
 });
