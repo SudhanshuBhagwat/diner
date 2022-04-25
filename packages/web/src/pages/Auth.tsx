@@ -1,31 +1,18 @@
-import {
-  getRedirectResult,
-  GoogleAuthProvider,
-  signInWithRedirect,
-} from "firebase/auth";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { getFirebase } from "../config/firebase";
+import { GoogleAuthProvider, signInWithRedirect, signOut } from "firebase/auth";
+import { useAuth } from "../lib/firebase";
 
 const Auth = () => {
-  const navigate = useNavigate();
-  const { auth } = getFirebase();
+  const handleGooglSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    const auth = useAuth();
 
-  useEffect(() => {
-    async function getUser() {
-      const result = await getRedirectResult(auth);
-      console.log({ result });
+    signInWithRedirect(auth, provider);
+  };
 
-      if (result) {
-        navigate("/");
-      }
-    }
-    getUser();
-  }, [navigate]);
-
-  function handleGooglSignIn() {
-    signInWithRedirect(auth, new GoogleAuthProvider());
-  }
+  const handleSignOut = () => {
+    const auth = useAuth();
+    signOut(auth);
+  };
 
   return (
     <div className="h-screen bg-gray-100 flex flex-col justify-center items-center space-y-2">
@@ -35,6 +22,12 @@ const Auth = () => {
         className="px-4 py-2 bg-gray-200 rounded-md font-bold"
       >
         Sign In with <span className="text-blue-400 ml-1">Google</span>
+      </button>
+      <button
+        onClick={handleSignOut}
+        className="px-4 py-2 bg-red-400 rounded-md font-bold text-white"
+      >
+        Sign Out
       </button>
     </div>
   );
