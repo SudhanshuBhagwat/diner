@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { setupFirebase } from "./lib/firebase";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 import Auth from "./pages/Auth";
 import Home from "./pages/Home";
 import Restaurant from "./pages/Restaurant";
@@ -20,6 +20,7 @@ function App() {
   return (
     <>
       <div>User: {user?.displayName}</div>
+      <NavLink to="/auth">Auth</NavLink>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="restaurants/:restaurantId" element={<Restaurant />} />
