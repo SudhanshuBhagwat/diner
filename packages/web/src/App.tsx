@@ -24,7 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="restaurants/:restaurantId" element={<Restaurant />} />
-        <Route path="/auth" element={<Auth />} />
+        <Route path="auth" element={<Auth />} />
       </Routes>
     </>
   );
