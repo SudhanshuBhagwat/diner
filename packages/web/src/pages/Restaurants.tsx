@@ -32,7 +32,7 @@ const Restaurants = () => {
   }
 
   return (
-    <div>
+    <div className="px-4">
       <h1 className="text-2xl font-bold mb-2">Restaurants</h1>
       <ul className="flex flex-col space-y-2">
         {data.results.map((restaurant: Restaurant) => {
