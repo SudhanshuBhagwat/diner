@@ -13,7 +13,7 @@ const Restaurant = () => {
 
   if (isLoading) {
     return (
-      <div className="w-full h-screen flex items-center justify-center">
+      <div className="w-full h-full flex items-center justify-center">
         <Spinner />
       </div>
     );
@@ -21,7 +21,7 @@ const Restaurant = () => {
 
   if (!isLoading && error) {
     return (
-      <div className="w-full h-screen flex items-center justify-center">
+      <div className="w-full h-full flex items-center justify-center">
         <span className="font-bold text-white px-4 py-2 bg-red-500 rounded-md">
           An unexpected error occurred
         </span>
