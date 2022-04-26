@@ -37,7 +37,7 @@ function Home() {
   }
 
   return (
-    <div className="h-screen bg-gray-100 flex flex-col justify-center items-center space-y-2">
+    <div className="h-full bg-gray-100 flex flex-col justify-center items-center space-y-2">
       <div
         id="reader"
         className="h-52 w-52 border-2 border-gray-600 rounded-md"

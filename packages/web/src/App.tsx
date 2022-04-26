@@ -1,34 +1,59 @@
-import { useEffect, useState } from "react";
-import { setupFirebase } from "./lib/firebase";
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-import { Routes, Route, NavLink } from "react-router-dom";
+import React, { lazy, Suspense } from "react";
+import { Outlet, RouteObject, useRoutes } from "react-router-dom";
+import Spinner from "./components/Spinner";
 import Auth from "./pages/Auth";
-import Home from "./pages/Home";
 import Restaurant from "./pages/Restaurant";
-import React from "react";
+
+const IndexScreen = lazy(() => import("./pages/Home"));
+const Page404Screen = lazy(() => import("./pages/Page404"));
+
+function Layout() {
+  return (
+    <div className="h-screen flex flex-col">
+      <nav className="p-4 flex items-center justify-between">
+        <span className="font-bold text-2xl">Some Header</span>
+      </nav>
+      <div className="flex-1">
+        <Outlet />
+      </div>
+    </div>
+  );
+}
+
+const routes: RouteObject[] = [
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <IndexScreen />,
+      },
+      {
+        path: "auth",
+        element: <Auth />,
+      },
+      {
+        path: "restaurants",
+        children: [
+          {
+            path: ":restaurantId",
+            element: <Restaurant />,
+          },
+        ],
+      },
+      {
+        path: "*",
+        element: <Page404Screen />,
+      },
+    ],
+  },
+];
 
 function App() {
-  const [user, setUser] = useState<User | null>(null);
-  useEffect(() => {
-    setupFirebase();
-    const auth = getAuth();
+  const elements = useRoutes(routes);
 
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    });
-  }, []);
-
-  return (
-    <>
-      <div>User: {user?.displayName}</div>
-      <NavLink to="/auth">Auth</NavLink>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="restaurants/:restaurantId" element={<Restaurant />} />
-        <Route path="auth" element={<Auth />} />
-      </Routes>
-    </>
-  );
+  return <Suspense fallback={<Spinner />}>{elements}</Suspense>;
 }
 
 export default App;

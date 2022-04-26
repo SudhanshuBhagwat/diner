@@ -1,4 +1,5 @@
 import { GoogleAuthProvider, signInWithRedirect, signOut } from "firebase/auth";
+import React from "react";
 import { useAuth } from "../lib/firebase";
 
 const Auth = () => {
@@ -15,7 +16,7 @@ const Auth = () => {
   };
 
   return (
-    <div className="h-screen bg-gray-100 flex flex-col justify-center items-center space-y-2">
+    <div className="h-full bg-gray-100 flex flex-col justify-center items-center space-y-2">
       <h1 className="text-2xl font-bold">Sign In to Diner</h1>
       <button
         onClick={handleGooglSignIn}
