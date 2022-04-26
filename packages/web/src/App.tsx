@@ -3,6 +3,7 @@ import { Outlet, RouteObject, useRoutes } from "react-router-dom";
 import Spinner from "./components/Spinner";
 import Auth from "./pages/Auth";
 import Restaurant from "./pages/Restaurant";
+import Restaurants from "./pages/Restaurants";
 
 const IndexScreen = lazy(() => import("./pages/Home"));
 const Page404Screen = lazy(() => import("./pages/Page404"));
@@ -13,7 +14,7 @@ function Layout() {
       <nav className="p-4 flex items-center justify-between">
         <span className="font-bold text-2xl">Some Header</span>
       </nav>
-      <div className="flex-1">
+      <div className="flex-1 px-4">
         <Outlet />
       </div>
     </div>
@@ -35,12 +36,11 @@ const routes: RouteObject[] = [
       },
       {
         path: "restaurants",
-        children: [
-          {
-            path: ":restaurantId",
-            element: <Restaurant />,
-          },
-        ],
+        element: <Restaurants />,
+      },
+      {
+        path: "restaurants/:restaurantId",
+        element: <Restaurant />,
       },
       {
         path: "*",
