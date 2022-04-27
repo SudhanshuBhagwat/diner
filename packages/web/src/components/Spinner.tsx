@@ -1,18 +1,10 @@
 import React from "react";
 
-interface Props {
-  props?: any;
-}
+interface Props extends React.SVGAttributes<SVGSVGElement> {}
 
-const Spinner: React.FC<Props> = ({ props }) => {
+const Spinner: React.FC<Props> = (props) => {
   return (
-    <svg
-      className="text-gray-500"
-      viewBox="0 0 2400 2400"
-      width={24}
-      height={24}
-      {...props}
-    >
+    <svg className="" viewBox="0 0 2400 2400" width={24} height={24} {...props}>
       <g
         strokeWidth={200}
         strokeLinecap="round"

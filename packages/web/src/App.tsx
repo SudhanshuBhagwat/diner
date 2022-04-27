@@ -2,6 +2,8 @@ import React, { lazy, Suspense } from "react";
 import { Outlet, RouteObject, useRoutes } from "react-router-dom";
 import Spinner from "./components/Spinner";
 import Auth from "./pages/Auth";
+import CreateRestaurant from "./pages/CreateRestaurant";
+import EditRestaurant from "./pages/EditRestaurant";
 import Restaurant from "./pages/Restaurant";
 import Restaurants from "./pages/Restaurants";
 
@@ -36,11 +38,24 @@ const routes: RouteObject[] = [
       },
       {
         path: "restaurants",
-        element: <Restaurants />,
-      },
-      {
-        path: "restaurants/:restaurantId",
-        element: <Restaurant />,
+        children: [
+          {
+            path: "",
+            element: <Restaurants />,
+          },
+          {
+            path: ":restaurantId",
+            element: <Restaurant />,
+          },
+          {
+            path: "create",
+            element: <CreateRestaurant />,
+          },
+          {
+            path: "edit/:restaurantId",
+            element: <EditRestaurant />,
+          },
+        ],
       },
       {
         path: "*",
