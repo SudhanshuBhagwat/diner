@@ -3,6 +3,7 @@ import { Outlet, RouteObject, useRoutes } from "react-router-dom";
 import Spinner from "./components/Spinner";
 import Auth from "./pages/Auth";
 import CreateRestaurant from "./pages/CreateRestaurant";
+import EditRestaurant from "./pages/EditRestaurant";
 import Restaurant from "./pages/Restaurant";
 import Restaurants from "./pages/Restaurants";
 
@@ -49,6 +50,10 @@ const routes: RouteObject[] = [
           {
             path: "create",
             element: <CreateRestaurant />,
+          },
+          {
+            path: "edit/:restaurantId",
+            element: <EditRestaurant />,
           },
         ],
       },

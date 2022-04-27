@@ -69,6 +69,40 @@ export async function createRestaurant(req: Request, res: Response) {
   }
 }
 
+export async function editRestaurant(req: Request, res: Response) {
+  const id = req.params.id;
+  const body = req.body;
+
+  if (!body) {
+    res.status(401).json({
+      message: "Data is required",
+    });
+  }
+
+  try {
+    const data = await client.restaurant.update({
+      data: body,
+      where: {
+        id: Number(id),
+      },
+    });
+
+    if (!data) {
+      return res.status(401).json({
+        message: "Restaurant updation was unsuccessfull",
+      });
+    }
+
+    return res.status(200).json({
+      results: data,
+    });
+  } catch (error) {
+    res.status(401).json({
+      error: error.message,
+    });
+  }
+}
+
 export async function deleteRestaurant(req: Request, res: Response) {
   const id = req.params.id;
   if (!id) {
