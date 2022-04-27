@@ -33,7 +33,7 @@ const Restaurant = () => {
     <div className="h-full w-full px-4">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">{data.results.name}</h2>
-        <span className="text-gray-400">Since 2016</span>
+        <span className="text-gray-400">Since {data.results.since}</span>
       </div>
     </div>
   );

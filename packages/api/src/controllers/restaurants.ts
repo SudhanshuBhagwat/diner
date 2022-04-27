@@ -40,6 +40,8 @@ export async function getSingleRestaurant(req: Request, res: Response) {
 
 export async function createRestaurant(req: Request, res: Response) {
   const body = req.body;
+  console.log(body);
+
   if (!body) {
     res.status(401).json({
       message: "Data is required",
