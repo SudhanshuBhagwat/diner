@@ -68,7 +68,15 @@ const routes: RouteObject[] = [
 function App() {
   const elements = useRoutes(routes);
 
-  return <Suspense fallback={<Spinner />}>{elements}</Suspense>;
+  return <Suspense fallback={<FallbackSpinner />}>{elements}</Suspense>;
+}
+
+function FallbackSpinner() {
+  return (
+    <div className="h-screen flex justify-center items-center">
+      <Spinner />
+    </div>
+  );
 }
 
 export default App;
