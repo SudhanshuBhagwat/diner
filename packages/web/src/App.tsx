@@ -1,20 +1,27 @@
+import { QrcodeIcon } from "@heroicons/react/outline";
 import React, { lazy, Suspense } from "react";
-import { Outlet, RouteObject, useRoutes } from "react-router-dom";
+import { Outlet, RouteObject, useNavigate, useRoutes } from "react-router-dom";
 import Spinner from "./components/Spinner";
 import Auth from "./pages/Auth";
 import CreateRestaurant from "./pages/CreateRestaurant";
 import EditRestaurant from "./pages/EditRestaurant";
 import Restaurant from "./pages/Restaurant";
 import Restaurants from "./pages/Restaurants";
+import Scan from "./pages/Scan";
 
 const IndexScreen = lazy(() => import("./pages/Home"));
 const Page404Screen = lazy(() => import("./pages/Page404"));
 
 function Layout() {
+  const navigate = useNavigate();
   return (
     <div className="h-screen flex flex-col">
       <nav className="p-4 flex items-center justify-between">
         <span className="font-bold text-2xl">Diner</span>
+        <QrcodeIcon
+          onClick={() => navigate("/scan")}
+          className="h-6 w-6 text-gray-600"
+        />
       </nav>
       <div className="flex-1">
         <Outlet />
@@ -31,6 +38,10 @@ const routes: RouteObject[] = [
       {
         index: true,
         element: <IndexScreen />,
+      },
+      {
+        path: "scan",
+        element: <Scan />,
       },
       {
         path: "auth",
