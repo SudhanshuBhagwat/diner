@@ -14,7 +14,7 @@ function Layout() {
   return (
     <div className="h-screen flex flex-col">
       <nav className="p-4 flex items-center justify-between">
-        <span className="font-bold text-2xl">Some Header</span>
+        <span className="font-bold text-2xl">Diner</span>
       </nav>
       <div className="flex-1">
         <Outlet />
