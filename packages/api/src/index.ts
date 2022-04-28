@@ -21,7 +21,7 @@ apiRouter.use("/restaurants", restaurantsRouter);
 /* Default Express Route */
 apiRouter.get("/", (req: Request, res: Response) => {
   res.status(200).json({
-    message: "Hello from New API",
+    message: "Hello from New API 🚀",
   });
 });
 
