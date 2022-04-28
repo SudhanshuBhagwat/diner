@@ -4,6 +4,8 @@
   "description": "",
   "scripts": {
     "dev": "ts-node-dev --respawn --exit-child --watch src src/index.ts",
+    "start": "node dist/src/index.js",
+    "build": "tsc -w",
     "studio": "prisma studio",
     "db:push": "npx prisma db push",
     "db:pull": "npx prisma db pull",
