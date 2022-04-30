@@ -7,6 +7,10 @@ import { fetcher } from "../shared/fetcher";
 interface Restaurant {
   id: number;
   name: string;
+  ownerName: string;
+  location: string;
+  since: string;
+  imageURL: string;
   createdAt: string;
 }
 
@@ -46,10 +50,17 @@ const Restaurants = () => {
           return (
             <li
               key={restaurant.id}
-              className="py-4 px-4 bg-gray-200 rounded-md"
+              className="bg-gray-100 rounded-md overflow-hidden pb-2"
             >
               <NavLink to={`/restaurants/${restaurant.id}`}>
-                <span className="text-md font-bold">{restaurant.name}</span>
+                <img
+                  src={restaurant.imageURL}
+                  alt={restaurant.name}
+                  className="pb-2 w-full h-40 object-cover aspect-video"
+                />
+                <span className="text-md font-bold px-4">
+                  {restaurant.name}
+                </span>
               </NavLink>
             </li>
           );
