@@ -4,7 +4,6 @@ import Layout from "../components/Layout";
 import homeRoutes from "./home.routes";
 import restaurntRoutes from "./restaurant.routes";
 
-const IndexScreen = lazy(() => import("../pages/Home"));
 const Page404Screen = lazy(() => import("../pages/Page404"));
 
 const routes: RouteObject[] = [

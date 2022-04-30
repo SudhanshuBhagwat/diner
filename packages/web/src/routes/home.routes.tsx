@@ -1,7 +1,8 @@
-import React from "react";
-import { IndexScreen } from "../App";
+import React, { lazy } from "react";
 import Auth from "../pages/Auth";
 import Scan from "../pages/Scan";
+
+const IndexScreen = lazy(() => import("../pages/Home"));
 
 export default [
   {
