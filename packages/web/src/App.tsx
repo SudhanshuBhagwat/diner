@@ -3,9 +3,6 @@ import { useRoutes } from "react-router-dom";
 import FallbackSpinner from "./components/FallbackSpinner";
 import routes from "./routes";
 
-export const IndexScreen = lazy(() => import("./pages/Home"));
-export const Page404Screen = lazy(() => import("./pages/Page404"));
-
 const App = () => {
   const elements = useRoutes(routes);
 

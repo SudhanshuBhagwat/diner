@@ -1,9 +1,11 @@
-import React from "react";
+import React, { lazy } from "react";
 import { RouteObject } from "react-router-dom";
-import { Page404Screen } from "../App";
 import Layout from "../components/Layout";
 import homeRoutes from "./home.routes";
 import restaurntRoutes from "./restaurant.routes";
+
+const IndexScreen = lazy(() => import("../pages/Home"));
+const Page404Screen = lazy(() => import("../pages/Page404"));
 
 const routes: RouteObject[] = [
   {
