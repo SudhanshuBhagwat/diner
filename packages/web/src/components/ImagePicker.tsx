@@ -24,18 +24,22 @@ const ImagePicker: React.FC<Props> = ({ initialImage, onChange }) => {
       <img
         src={dataURL}
         alt="Restaurant Image"
-        className={`${!dataURL ? "hidden" : ""}`}
+        className={`${
+          !dataURL ? "hidden" : ""
+        } rounded-md h-48 w-full object-cover`}
       />
-      <div className="border-2 border-dashed h-48 w-full flex justify-center items-center">
-        <input
-          id="filePicker"
-          type="file"
-          accept="image/*"
-          className="hidden"
-          onChange={onChangeHandler}
-        />
-        Click to add image
-      </div>
+      <input
+        id="filePicker"
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={onChangeHandler}
+      />
+      {!dataURL && (
+        <div className="border-2 border-dashed h-48 w-full flex justify-center items-center">
+          Click to add image
+        </div>
+      )}
     </label>
   );
 };
