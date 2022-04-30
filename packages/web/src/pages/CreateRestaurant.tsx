@@ -1,7 +1,8 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import ImagePicker from "../components/ImagePicker";
 import Spinner from "../components/Spinner";
 import { API_BASE_URL } from "../constants";
 
@@ -12,8 +13,8 @@ interface Props {
 const CreateRestaurant: React.FC<Props> = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-  const [file, setFile] = useState<File | undefined>();
   const [dataURL, setDataURL] = useState<string | undefined>();
+
   const { mutateAsync, isLoading, error, isError } = useMutation(
     (data: FieldValues) => {
       return fetch(`${API_BASE_URL}/restaurants`, {
@@ -40,16 +41,6 @@ const CreateRestaurant: React.FC<Props> = () => {
     });
   };
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target?.files?.[0];
-    const reader = new FileReader();
-    setFile(file);
-    reader.readAsDataURL(file!);
-    reader.onloadend = () => {
-      setDataURL(reader.result?.toString());
-    };
-  };
-
   return (
     <div className="h-full flex flex-col px-4 gap-2">
       <h2 className="text-xl font-semibold">Create Restaurant</h2>
@@ -62,23 +53,7 @@ const CreateRestaurant: React.FC<Props> = () => {
       >
         <div className="h-full flex flex-col flex-1 gap-3">
           <div className="rounded-md h-48 overflow-hidden">
-            <label htmlFor="filePicker" className="text-gray-400 font-semibold">
-              <img
-                src={dataURL}
-                alt="Restaurant Image"
-                className={`${!dataURL ? "hidden" : ""}`}
-              />
-              <div className="border-2 border-dashed h-48 w-full flex justify-center items-center">
-                <input
-                  id="filePicker"
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={onChange}
-                />
-                Click to add image
-              </div>
-            </label>
+            <ImagePicker onChange={setDataURL} />
           </div>
           <label className="flex flex-col text-base font-medium">
             Name

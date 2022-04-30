@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import ImagePicker from "../components/ImagePicker";
 import Spinner from "../components/Spinner";
 import { API_BASE_URL } from "../constants";
 import { fetcher } from "../shared/fetcher";
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const EdtRestaurant: React.FC<Props> = () => {
+  const [dataURL, setDataURL] = useState<string | undefined>();
   const { restaurantId } = useParams();
   const {
     data,
@@ -100,6 +102,10 @@ const EdtRestaurant: React.FC<Props> = () => {
         className="flex flex-1 flex-col"
       >
         <div className="h-full flex flex-col flex-1 gap-3">
+          <ImagePicker
+            initialImage={data.results.imageURL}
+            onChange={setDataURL}
+          />
           <label className="flex flex-col text-base font-medium">
             Name
             <input
