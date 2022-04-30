@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import client from "../../prisma";
+import { v2 as cloudinary } from "cloudinary";
 
 export async function getAllRestaurants(req: Request, res: Response) {
   try {
@@ -40,7 +41,6 @@ export async function getSingleRestaurant(req: Request, res: Response) {
 
 export async function createRestaurant(req: Request, res: Response) {
   const body = req.body;
-  console.log(body);
 
   if (!body) {
     res.status(401).json({
@@ -49,8 +49,18 @@ export async function createRestaurant(req: Request, res: Response) {
   }
 
   try {
+    const cloudinaryResponse = await cloudinary.uploader.upload(body.image, {
+      upload_preset: "ml_default",
+    });
+
     const data = await client.restaurant.create({
-      data: body,
+      data: {
+        name: body.name,
+        ownerName: body.ownerName,
+        since: body.since,
+        location: body.location,
+        imageURL: cloudinaryResponse.secure_url,
+      },
     });
 
     if (!data) {
@@ -60,7 +70,7 @@ export async function createRestaurant(req: Request, res: Response) {
     }
 
     return res.status(201).json({
-      results: data,
+      results: "",
     });
   } catch (error) {
     res.status(401).json({

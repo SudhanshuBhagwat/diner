@@ -13,5 +13,6 @@ model Restaurant {
   ownerName String
   since     Int
   location  String
+  imageURL  String
   createdAt DateTime @default(now())
 }

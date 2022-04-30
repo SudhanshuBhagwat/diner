@@ -45,7 +45,7 @@ const Restaurant = () => {
       <div className="flex flex-col flex-1 gap-2 mt-2">
         <img
           className="object-cover rounded-md aspect-video shadow-md my-1"
-          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format"
+          src={data.results.imageURL}
         />
         <label className="font-medium text-lg">
           Owner: <span className="text-gray-600">{data.results.ownerName}</span>

@@ -6,6 +6,9 @@ import {
   getAllRestaurants,
   getSingleRestaurant,
 } from "../controllers/restaurants";
+import multer from "multer";
+
+const upload = multer({});
 
 const router = Router();
 
