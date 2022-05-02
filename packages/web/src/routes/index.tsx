@@ -2,6 +2,7 @@ import React, { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 import Layout from "../components/Layout";
 import homeRoutes from "./home.routes";
+import menuRoutes from "./menu.routes";
 import restaurntRoutes from "./restaurant.routes";
 
 const Page404Screen = lazy(() => import("../pages/Page404"));
@@ -13,6 +14,7 @@ const routes: RouteObject[] = [
     children: [
       ...homeRoutes,
       restaurntRoutes,
+      menuRoutes,
       {
         path: "*",
         element: <Page404Screen />,

@@ -30,15 +30,17 @@ const CreateRestaurant: React.FC<Props> = () => {
       }).catch((error: Error) => {
         throw new Error(error.message);
       });
+    },
+    {
+      onSuccess: async (data) => {
+        const { results } = await data.json();
+        navigate(`/menus/create?restaurantId=${results.id}`);
+      },
     }
   );
 
   const handleSubmitForm: SubmitHandler<FieldValues> = async (data) => {
-    return await mutateAsync(data, {
-      onSuccess: () => {
-        navigate("/restaurants");
-      },
-    });
+    return await mutateAsync(data);
   };
 
   return (
@@ -95,7 +97,7 @@ const CreateRestaurant: React.FC<Props> = () => {
             type="submit"
             className="w-full flex justify-center px-4 py-2 font-medium bg-green-200 rounded-md mb-4"
           >
-            {isLoading ? <Spinner /> : "Add Restaurant"}
+            {isLoading ? <Spinner /> : "Save Restaurant & Proceed"}
           </button>
         </div>
       </form>

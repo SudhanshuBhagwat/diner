@@ -28,7 +28,43 @@ export async function getSingleRestaurant(req: Request, res: Response) {
       where: {
         id: Number(id),
       },
+      select: {
+        Menu: true,
+        id: true,
+        imageUrl: true,
+        location: true,
+        name: true,
+        ownerName: true,
+        since: true,
+      },
     });
+    console.log(data);
+
+    return res.status(200).json({
+      results: data || [],
+    });
+  } catch (error) {
+    return res.status(401).json({
+      error: error.message,
+    });
+  }
+}
+
+export async function getrestaurantWithMenu(req: Request, res: Response) {
+  const id = req.params.id;
+  if (!id) {
+    res.status(401).json({
+      message: "ID is required",
+    });
+  }
+
+  try {
+    const data = await client.restaurant.findUnique({
+      where: {
+        id: Number(id),
+      },
+    });
+
     return res.status(200).json({
       results: data || [],
     });
@@ -70,7 +106,7 @@ export async function createRestaurant(req: Request, res: Response) {
     }
 
     return res.status(201).json({
-      results: "",
+      results: data,
     });
   } catch (error) {
     res.status(401).json({

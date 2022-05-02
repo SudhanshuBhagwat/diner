@@ -5,6 +5,14 @@ import { useQuery } from "react-query";
 import { fetcher } from "../shared/fetcher";
 import { PencilAltIcon } from "@heroicons/react/outline";
 
+export interface Menu {
+  id: number;
+  name: string;
+  restaurantId: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 const Restaurant = () => {
   const { restaurantId } = useParams();
   const navigate = useNavigate();
@@ -45,7 +53,7 @@ const Restaurant = () => {
       <div className="flex flex-col flex-1 gap-2 mt-2">
         <img
           className="object-cover rounded-md aspect-video shadow-md my-1"
-          src={data.results.imageURL}
+          src={data.results.imageUrl}
         />
         <label className="font-medium text-lg">
           Owner: <span className="text-gray-600">{data.results.ownerName}</span>
@@ -57,6 +65,12 @@ const Restaurant = () => {
           Location:{" "}
           <span className="text-gray-600">{data.results.location}</span>
         </label>
+        <div>
+          <h2 className="font-medium text-lg">Menu's</h2>
+          {data.results.Menu.map((menu: Menu) => {
+            return <h3>{menu.name}</h3>;
+          })}
+        </div>
       </div>
     </div>
   );

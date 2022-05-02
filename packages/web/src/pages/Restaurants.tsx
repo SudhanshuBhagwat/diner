@@ -10,7 +10,7 @@ interface Restaurant {
   ownerName: string;
   location: string;
   since: string;
-  imageURL: string;
+  imageUrl: string;
   createdAt: string;
 }
 
@@ -54,7 +54,7 @@ const Restaurants = () => {
             >
               <NavLink to={`/restaurants/${restaurant.id}`}>
                 <img
-                  src={restaurant.imageURL}
+                  src={restaurant.imageUrl}
                   alt={restaurant.name}
                   className="pb-2 w-full h-40 object-cover aspect-video"
                 />

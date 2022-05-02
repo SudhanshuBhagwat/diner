@@ -103,7 +103,7 @@ const EdtRestaurant: React.FC<Props> = () => {
       >
         <div className="h-full flex flex-col flex-1 gap-3">
           <ImagePicker
-            initialImage={data.results.imageURL}
+            initialImage={data.results.imageUrl}
             onChange={setDataURL}
           />
           <label className="flex flex-col text-base font-medium">
@@ -154,12 +154,18 @@ const EdtRestaurant: React.FC<Props> = () => {
               className="mt-1 border-2 border-green-200 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-green-400"
             />
           </label>
+          <button
+            type="button"
+            className="w-full flex justify-center px-4 py-2 font-medium bg-gray-200 rounded-md mb-4"
+          >
+            Save & Edit Menu
+          </button>
         </div>
         <button
           type="submit"
           className="w-full flex justify-center px-4 py-2 font-medium bg-green-200 rounded-md mb-4"
         >
-          {isLoading ? <Spinner /> : "Edit Restaurant"}
+          {isLoading ? <Spinner /> : "Save"}
         </button>
         <button
           type="button"
