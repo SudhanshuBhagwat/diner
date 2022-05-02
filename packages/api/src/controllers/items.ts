@@ -4,7 +4,13 @@ import { v2 as cloudinary } from "cloudinary";
 
 export async function getAllItems(req: Request, res: Response) {
   try {
-    const data = await client.restaurant.findMany();
+    const menuId = req.query.menuId;
+
+    const data = await client.item.findMany({
+      where: {
+        menuId: Number(menuId),
+      },
+    });
     res.status(200).json({
       results: data,
     });
@@ -24,7 +30,7 @@ export async function getSingleItem(req: Request, res: Response) {
   }
 
   try {
-    const data = await client.restaurant.findUnique({
+    const data = await client.item.findUnique({
       where: {
         id: Number(id),
       },
@@ -49,23 +55,24 @@ export async function createItem(req: Request, res: Response) {
   }
 
   try {
+    const menuId = req.query.menuId;
     const cloudinaryResponse = await cloudinary.uploader.upload(body.image, {
       upload_preset: "ml_default",
     });
 
-    const data = await client.restaurant.create({
+    const data = await client.item.create({
       data: {
         name: body.name,
-        ownerName: body.ownerName,
-        since: body.since,
-        location: body.location,
-        imageURL: cloudinaryResponse.secure_url,
+        price: Number(body.price),
+        veg: Boolean(body.isVeg),
+        imageUrl: cloudinaryResponse.secure_url,
+        menuId: Number(menuId),
       },
     });
 
     if (!data) {
       return res.status(401).json({
-        message: "Restaurant creation was unsuccessfull",
+        message: "Item creation was unsuccessfull",
       });
     }
 
@@ -90,7 +97,7 @@ export async function editItem(req: Request, res: Response) {
   }
 
   try {
-    const data = await client.restaurant.update({
+    const data = await client.item.update({
       data: body,
       where: {
         id: Number(id),
@@ -99,7 +106,7 @@ export async function editItem(req: Request, res: Response) {
 
     if (!data) {
       return res.status(401).json({
-        message: "Restaurant updation was unsuccessfull",
+        message: "Item updation was unsuccessfull",
       });
     }
 
@@ -122,7 +129,7 @@ export async function deleteItem(req: Request, res: Response) {
   }
 
   try {
-    const data = await client.restaurant.delete({
+    const data = await client.item.delete({
       where: {
         id: Number(id),
       },

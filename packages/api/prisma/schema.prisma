@@ -13,7 +13,7 @@ model Restaurant {
   ownerName String
   since     Int
   location  String
-  imageURL  String
+  imageUrl  String
   createdAt DateTime @default(now())
   Menu      Menu[]
 }
@@ -24,7 +24,7 @@ model Menu {
   restaurantId Int
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   createdAt    DateTime   @default(now())
-  updateAt     DateTime
+  updatedAt    DateTime   @default(now())
   Item         Item[]
 }
 
@@ -37,5 +37,5 @@ model Item {
   menuId    Int
   menu      Menu     @relation(fields: [menuId], references: [id])
   createdAt DateTime @default(now())
-  updateAt  DateTime
+  updatedAt DateTime @default(now())
 }

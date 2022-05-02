@@ -1,10 +1,15 @@
 import { Request, Response } from "express";
 import client from "../../prisma";
-import { v2 as cloudinary } from "cloudinary";
 
 export async function getAllMenus(req: Request, res: Response) {
   try {
-    const data = await client.restaurant.findMany();
+    const restaurantId = req.query.restaurantId;
+
+    const data = await client.menu.findMany({
+      where: {
+        restaurantId: Number(restaurantId),
+      },
+    });
     res.status(200).json({
       results: data,
     });
@@ -24,7 +29,7 @@ export async function getSingleMenu(req: Request, res: Response) {
   }
 
   try {
-    const data = await client.restaurant.findUnique({
+    const data = await client.menu.findUnique({
       where: {
         id: Number(id),
       },
@@ -49,23 +54,22 @@ export async function createMenu(req: Request, res: Response) {
   }
 
   try {
-    const cloudinaryResponse = await cloudinary.uploader.upload(body.image, {
-      upload_preset: "ml_default",
-    });
+    const restaurantId = req.query.restaurantId;
 
-    const data = await client.restaurant.create({
+    const data = await client.menu.create({
       data: {
         name: body.name,
-        ownerName: body.ownerName,
-        since: body.since,
-        location: body.location,
-        imageURL: cloudinaryResponse.secure_url,
+        restaurant: {
+          connect: {
+            id: Number(restaurantId),
+          },
+        },
       },
     });
 
     if (!data) {
       return res.status(401).json({
-        message: "Restaurant creation was unsuccessfull",
+        message: "Menu creation was unsuccessfull",
       });
     }
 
@@ -90,7 +94,7 @@ export async function editMenu(req: Request, res: Response) {
   }
 
   try {
-    const data = await client.restaurant.update({
+    const data = await client.menu.update({
       data: body,
       where: {
         id: Number(id),
@@ -99,7 +103,7 @@ export async function editMenu(req: Request, res: Response) {
 
     if (!data) {
       return res.status(401).json({
-        message: "Restaurant updation was unsuccessfull",
+        message: "Menu updation was unsuccessfull",
       });
     }
 
@@ -122,7 +126,7 @@ export async function deleteMenu(req: Request, res: Response) {
   }
 
   try {
-    const data = await client.restaurant.delete({
+    const data = await client.menu.delete({
       where: {
         id: Number(id),
       },

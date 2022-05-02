@@ -59,7 +59,7 @@ export async function createRestaurant(req: Request, res: Response) {
         ownerName: body.ownerName,
         since: body.since,
         location: body.location,
-        imageURL: cloudinaryResponse.secure_url,
+        imageUrl: cloudinaryResponse.secure_url,
       },
     });
 
