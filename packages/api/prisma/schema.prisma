@@ -15,4 +15,14 @@ model Restaurant {
   location  String
   imageURL  String
   createdAt DateTime @default(now())
+  Menu      Menu[]
+}
+
+model Menu {
+  id           Int        @id @default(autoincrement())
+  name         String
+  restaurantId Int
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  createdAt    DateTime   @default(now())
+  updateAt     DateTime
 }
