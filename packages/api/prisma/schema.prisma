@@ -25,4 +25,17 @@ model Menu {
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   createdAt    DateTime   @default(now())
   updateAt     DateTime
+  Item         Item[]
+}
+
+model Item {
+  id        Int      @id @default(autoincrement())
+  name      String
+  imageUrl  String
+  price     Int
+  veg       Boolean
+  menuId    Int
+  menu      Menu     @relation(fields: [menuId], references: [id])
+  createdAt DateTime @default(now())
+  updateAt  DateTime
 }
