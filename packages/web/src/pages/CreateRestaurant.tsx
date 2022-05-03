@@ -34,7 +34,7 @@ const CreateRestaurant: React.FC<Props> = () => {
     {
       onSuccess: async (data) => {
         const { results } = await data.json();
-        navigate(`/menus/create?restaurantId=${results.id}`);
+        navigate(`/menus?restaurantId=${results.id}`);
       },
     }
   );

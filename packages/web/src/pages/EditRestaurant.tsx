@@ -156,6 +156,7 @@ const EdtRestaurant: React.FC<Props> = () => {
           </label>
           <button
             type="button"
+            onClick={() => navigate(`/menus?restaurantId=${restaurantId}`)}
             className="w-full flex justify-center px-4 py-2 font-medium bg-gray-200 rounded-md mb-4"
           >
             Save & Edit Menu

@@ -1,13 +1,9 @@
-import { Disclosure } from "@headlessui/react";
-import { ChevronUpIcon } from "@heroicons/react/outline";
 import React from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { API_BASE_URL } from "../constants";
-import { fetcher } from "../shared/fetcher";
-import { Menu } from "./Restaurant";
 
 interface Props {
   children?: React.ReactNode;
@@ -17,14 +13,7 @@ const CreateMenu: React.FC<Props> = () => {
   const [params] = useSearchParams();
   const restaurantId = params.get("restaurantId");
   const navigate = useNavigate();
-  const { register, handleSubmit, reset } = useForm();
-
-  const {
-    data: menuData,
-    error: menuError,
-    isLoading: menuIsLoading,
-    refetch,
-  } = useQuery(["menus", `?restaurantId=${restaurantId}`], fetcher);
+  const { register, handleSubmit } = useForm();
 
   const { mutateAsync, isLoading, error, isError } = useMutation(
     (data: FieldValues) => {
@@ -43,9 +32,7 @@ const CreateMenu: React.FC<Props> = () => {
     {
       onSuccess: async (data) => {
         const { results } = await data.json();
-        refetch();
-        reset();
-        // navigate(`/menus/create?restaurantId=${restaurantId}`);
+        navigate(`/menus?restaurantId=${restaurantId}`);
       },
     }
   );
@@ -79,26 +66,6 @@ const CreateMenu: React.FC<Props> = () => {
           </button>
         </div>
       </form>
-      {menuData &&
-        menuData.results.map((menu: Menu) => (
-          <Disclosure>
-            {({ open }) => (
-              <>
-                <Disclosure.Button className="focus:outline-none flex w-full justify-between rounded-lg bg-gray-100 px-4 py-2 text-left text-sm font-medium text-gray-900 hover:bg-gray-200 focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
-                  <span>{menu.name}</span>
-                  <ChevronUpIcon
-                    className={`${
-                      open ? "rotate-180 transform" : ""
-                    } h-5 w-5 text-gray-500`}
-                  />
-                </Disclosure.Button>
-                <Disclosure.Panel className="px-4 pt-2 pb-2 text-sm text-gray-500">
-                  Place for Menu Items
-                </Disclosure.Panel>
-              </>
-            )}
-          </Disclosure>
-        ))}
     </div>
   );
 };

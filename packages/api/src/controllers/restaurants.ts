@@ -38,7 +38,6 @@ export async function getSingleRestaurant(req: Request, res: Response) {
         since: true,
       },
     });
-    console.log(data);
 
     return res.status(200).json({
       results: data || [],

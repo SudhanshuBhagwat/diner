@@ -9,6 +9,12 @@ export async function getAllMenus(req: Request, res: Response) {
       where: {
         restaurantId: Number(restaurantId),
       },
+      select: {
+        Item: true,
+        id: true,
+        name: true,
+        restaurantId: true,
+      },
     });
     res.status(200).json({
       results: data,
@@ -32,6 +38,12 @@ export async function getSingleMenu(req: Request, res: Response) {
     const data = await client.menu.findUnique({
       where: {
         id: Number(id),
+      },
+      select: {
+        Item: true,
+        id: true,
+        name: true,
+        restaurantId: true,
       },
     });
     return res.status(200).json({
