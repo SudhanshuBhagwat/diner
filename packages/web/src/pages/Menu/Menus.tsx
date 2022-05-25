@@ -3,8 +3,10 @@ import { ChevronUpIcon } from "@heroicons/react/outline";
 import React from "react";
 import { useQuery } from "react-query";
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import Item from "../../components/Item";
 import { fetcher } from "../../shared/fetcher";
 import { Menu } from "../Restaurant";
+import { Item as ItemType } from "./EditMenu";
 
 interface Props {
   children?: React.ReactNode;
@@ -34,7 +36,7 @@ const Menus: React.FC<Props> = () => {
       )}
       {data &&
         data.results.map((menu: Menu) => (
-          <Disclosure>
+          <Disclosure key={menu.id}>
             {({ open }) => (
               <>
                 <div className="flex items-center space-x-4">
@@ -52,8 +54,13 @@ const Menus: React.FC<Props> = () => {
                     Edit
                   </button>
                 </div>
-                <Disclosure.Panel className="px-2 text-sm text-gray-500 bg-gray-100">
-                  Place for Menu Items
+                <Disclosure.Panel>
+                  <div className="flex flex-col space-y-2">
+                    {menu.Item &&
+                      menu.Item.map((item: ItemType) => (
+                        <Item key={item.id} item={item} />
+                      ))}
+                  </div>
                 </Disclosure.Panel>
               </>
             )}

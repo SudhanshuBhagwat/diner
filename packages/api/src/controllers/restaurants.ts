@@ -29,7 +29,18 @@ export async function getSingleRestaurant(req: Request, res: Response) {
         id: Number(id),
       },
       select: {
-        Menu: true,
+        Menu: {
+          select: {
+            id: true,
+            name: true,
+            Item: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
         id: true,
         imageUrl: true,
         location: true,

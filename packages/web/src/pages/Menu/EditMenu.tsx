@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import Item from "../../components/Item";
 import Spinner from "../../components/Spinner";
 import { API_BASE_URL } from "../../constants";
 import { fetcher } from "../../shared/fetcher";
-import Item from "../Item/Item";
+import CreateItem from "../Item/CreateItem";
 
 interface Props {
   children?: React.ReactNode;
@@ -108,28 +109,9 @@ const EditMenu: React.FC<Props> = () => {
             </div>
             <div className="flex flex-col space-y-2 mt-2">
               {data.results.Item &&
-                data.results.Item.map((item: Item) => {
-                  return (
-                    <div className="flex bg-gray-100 rounded-md overflow-hidden space-x-2">
-                      <img
-                        className="w-20 h-16 aspect-video object-cover "
-                        src={item.imageUrl}
-                        alt={item.name}
-                      />
-                      <div className="w-full flex justify-between items-center">
-                        <div className="flex flex-col justify-evenly">
-                          <h4 className="font-medium">{item.name}</h4>
-                          <span>{item.price}</span>
-                        </div>
-                        <span
-                          className={`w-4 h-4 rounded-full mr-4 ${
-                            item.veg ? "bg-green-600" : "bg-red-600"
-                          }`}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+                data.results.Item.map((item: Item) => (
+                  <Item key={item.id} item={item} />
+                ))}
             </div>
           </div>
           <button
@@ -141,7 +123,7 @@ const EditMenu: React.FC<Props> = () => {
         </div>
       </form>
 
-      <Item
+      <CreateItem
         isOpen={isModalOpen}
         onClose={(value) => {
           setIsModalOpen(value);

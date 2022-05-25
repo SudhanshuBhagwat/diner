@@ -16,7 +16,7 @@ interface Props {
   menuId: number;
 }
 
-const Item: React.FC<Props> = ({ isOpen, onClose, menuId }) => {
+const CreateItem: React.FC<Props> = ({ isOpen, onClose, menuId }) => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [dataURL, setDataURL] = useState<string | undefined>();
@@ -129,4 +129,4 @@ const Item: React.FC<Props> = ({ isOpen, onClose, menuId }) => {
   );
 };
 
-export default Item;
+export default CreateItem;

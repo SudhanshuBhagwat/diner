@@ -4,6 +4,7 @@ import Spinner from "../components/Spinner";
 import { useQuery } from "react-query";
 import { fetcher } from "../shared/fetcher";
 import { PencilAltIcon } from "@heroicons/react/outline";
+import { Item } from "./Menu/EditMenu";
 
 export interface Menu {
   id: number;
@@ -11,6 +12,7 @@ export interface Menu {
   restaurantId: number;
   createdAt: Date;
   updatedAt: Date;
+  Item?: Item[];
 }
 
 const Restaurant = () => {
@@ -55,21 +57,38 @@ const Restaurant = () => {
           className="object-cover rounded-md aspect-video shadow-md my-1"
           src={data.results.imageUrl}
         />
-        <label className="font-medium text-lg">
+        <label className="font-semibold text-lg">
           Owner: <span className="text-gray-600">{data.results.ownerName}</span>
         </label>
-        <label className="font-medium text-lg">
+        <label className="font-semibold text-lg">
           Since: <span className="text-gray-600">{data.results.since}</span>
         </label>
-        <label className="font-medium text-lg">
+        <label className="font-semibold text-lg">
           Location:{" "}
           <span className="text-gray-600">{data.results.location}</span>
         </label>
-        <div>
-          <h2 className="font-medium text-lg">Menu's</h2>
-          {data.results.Menu.map((menu: Menu) => {
-            return <h3>{menu.name}</h3>;
-          })}
+        <div className="pb-4">
+          <h2 className="font-semibold mb-2 text-lg">Menu's</h2>
+          <div className="divide-y divide-gray-200 space-y-2">
+            {data.results.Menu.map((menu: Menu) => {
+              return (
+                <div key={menu.id}>
+                  <h3 className="font-medium">{menu.name}</h3>
+                  {menu.Item && menu.Item?.length > 0 ? (
+                    <ul>
+                      {menu.Item?.map((item) => (
+                        <li className="ml-4" key={item.id}>
+                          {item.name}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-sm">No Items in menu</p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
