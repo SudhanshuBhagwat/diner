@@ -37,6 +37,9 @@ export async function getSingleRestaurant(req: Request, res: Response) {
               select: {
                 id: true,
                 name: true,
+                imageUrl: true,
+                veg: true,
+                price: true,
               },
             },
           },
