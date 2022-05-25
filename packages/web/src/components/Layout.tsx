@@ -35,7 +35,7 @@ const Layout: React.FC<Props> = () => {
             )}
           </div>
         )}
-        <div className={`${routes.length > 0 ? "" : "mt-14"} h-screen`}>
+        <div className={`${routes.length > 0 ? "" : "pt-14"} h-full`}>
           <Outlet />
         </div>
       </div>
