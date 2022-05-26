@@ -11,9 +11,9 @@ export async function createUser(req: Request, res: Response) {
       });
     }
 
-    const data = await client.user.findUnique({
+    const data = await client.user.findFirst({
       where: {
-        id: body.uid,
+        uid: body.uid,
       },
     });
 
@@ -27,7 +27,7 @@ export async function createUser(req: Request, res: Response) {
       });
     }
 
-    res.status(200);
+    res.status(201);
   } catch (error) {
     res.status(401).json({
       error: error.message,
@@ -45,9 +45,9 @@ export async function getUser(req: Request, res: Response) {
       });
     }
 
-    const data = await client.user.findUnique({
+    const data = await client.user.findFirst({
       where: {
-        id: body.uid,
+        uid: body.uid,
       },
     });
 

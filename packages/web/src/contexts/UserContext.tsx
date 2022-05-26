@@ -1,6 +1,7 @@
 import React from "react";
 import { createContext, ReactNode, useContext, useReducer } from "react";
 import { User } from "firebase/auth";
+import { API_BASE_URL } from "../constants";
 
 type AuthActions =
   | { type: "SIGN_IN"; payload: { user: User } }
@@ -63,7 +64,7 @@ const useAuthState = () => {
 const useFirebaseAuth = () => {
   const { dispatch } = useContext(AuthContext);
 
-  const signIn = (user: User) => {
+  const signIn = async (user: User) => {
     dispatch({ type: "SIGN_IN", payload: { user } });
   };
 

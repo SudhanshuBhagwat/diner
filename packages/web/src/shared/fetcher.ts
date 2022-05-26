@@ -5,3 +5,16 @@ export const fetcher = ({ queryKey }: { queryKey: any }) => {
     res.json()
   );
 };
+
+export const postFetcher = ({
+  queryKey,
+  body,
+}: {
+  queryKey: any;
+  body: any;
+}) => {
+  return fetch(`${API_BASE_URL}/${queryKey.join("/")}`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  }).then((res) => res.json());
+};

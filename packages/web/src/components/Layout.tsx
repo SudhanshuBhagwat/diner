@@ -1,13 +1,16 @@
 import { ChevronLeftIcon, ShareIcon } from "@heroicons/react/outline";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
+import { FieldValues } from "react-hook-form";
+import { useMutation } from "react-query";
 import {
   matchRoutes,
   Outlet,
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import { useFirebaseAuth } from "../contexts/UserContext";
+import { API_BASE_URL } from "../constants";
+import { useAuthState, useFirebaseAuth } from "../contexts/UserContext";
 import { setupFirebase } from "../lib/firebase";
 import Spinner from "./Spinner";
 
@@ -27,17 +30,46 @@ const Layout: React.FC<Props> = () => {
     ) || [];
 
   const { signIn, signOut } = useFirebaseAuth();
+  const { state } = useAuthState();
+  const {
+    mutateAsync,
+    isLoading: mutationLoading,
+    error,
+    isError,
+  } = useMutation(
+    (data: FieldValues) => {
+      return fetch(`${API_BASE_URL}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...data,
+        }),
+      }).catch((error: Error) => {
+        throw new Error(error.message);
+      });
+    },
+    {
+      onSuccess: async (data) => {
+        setIsLoading(false);
+        navigate("/", {
+          replace: true,
+        });
+      },
+    }
+  );
 
   useEffect(() => {
     setupFirebase();
     const auth = getAuth();
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         signIn(user);
-        setIsLoading(false);
-        navigate("/", {
-          replace: true,
+        await mutateAsync({
+          name: user.displayName,
+          uid: user.uid,
         });
       } else {
         signOut();
@@ -75,7 +107,7 @@ const Layout: React.FC<Props> = () => {
               <Spinner />
             </div>
           ) : (
-            <Outlet />
+            <Outlet context={state} />
           )}
         </div>
       </div>
