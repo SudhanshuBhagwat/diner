@@ -21,7 +21,10 @@ const Layout: React.FC<Props> = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const routes =
-    matchRoutes([{ path: "restaurants/:id" }, { path: "" }], location) || [];
+    matchRoutes(
+      [{ path: "restaurants/:id" }, { path: "" }, { path: "/auth" }],
+      location
+    ) || [];
 
   const { signIn, signOut } = useFirebaseAuth();
 
