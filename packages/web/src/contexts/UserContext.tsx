@@ -60,22 +60,18 @@ const useAuthState = () => {
   };
 };
 
-const useSignIn = () => {
+const useFirebaseAuth = () => {
   const { dispatch } = useContext(AuthContext);
-  return {
-    signIn: (user: User) => {
-      dispatch({ type: "SIGN_IN", payload: { user } });
-    },
+
+  const signIn = (user: User) => {
+    dispatch({ type: "SIGN_IN", payload: { user } });
   };
+
+  const signOut = () => {
+    dispatch({ type: "SIGN_OUT" });
+  };
+
+  return { signIn, signOut };
 };
 
-const useSignOut = () => {
-  const { dispatch } = useContext(AuthContext);
-  return {
-    signOut: () => {
-      dispatch({ type: "SIGN_OUT" });
-    },
-  };
-};
-
-export { useAuthState, useSignIn, useSignOut, AuthProvider };
+export { useAuthState, useFirebaseAuth, AuthProvider };

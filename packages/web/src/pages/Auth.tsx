@@ -6,13 +6,7 @@ const Auth = () => {
   const handleGooglSignIn = () => {
     const provider = new GoogleAuthProvider();
     const auth = useAuth();
-
     signInWithRedirect(auth, provider);
-  };
-
-  const handleSignOut = () => {
-    const auth = useAuth();
-    signOut(auth);
   };
 
   return (
@@ -23,12 +17,6 @@ const Auth = () => {
         className="px-4 py-2 bg-gray-200 rounded-md font-bold"
       >
         Sign In with <span className="text-blue-400 ml-1">Google</span>
-      </button>
-      <button
-        onClick={handleSignOut}
-        className="px-4 py-2 bg-red-400 rounded-md font-bold text-white"
-      >
-        Sign Out
       </button>
     </div>
   );
