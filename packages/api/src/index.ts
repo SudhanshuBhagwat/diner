@@ -4,7 +4,7 @@ import cors from "cors";
 import "dotenv/config";
 import { v2 as cloudinary } from "cloudinary";
 
-import restaurantsRouter from "./routes/restaurants";
+import { restaurantsRouter, menusRouter, itemsRouter } from "./routes";
 
 const PORT: number = parseInt(process.env.PORT) || 3001;
 const app: Express = express();
@@ -25,6 +25,8 @@ app.use("/api", apiRouter);
 
 /* Routers section */
 apiRouter.use("/restaurants", restaurantsRouter);
+apiRouter.use("/menus", menusRouter);
+apiRouter.use("/items", itemsRouter);
 
 /* Default Express Route */
 apiRouter.get("/", (req: Request, res: Response) => {

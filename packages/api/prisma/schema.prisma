@@ -13,6 +13,29 @@ model Restaurant {
   ownerName String
   since     Int
   location  String
-  imageURL  String
+  imageUrl  String
   createdAt DateTime @default(now())
+  Menu      Menu[]
+}
+
+model Menu {
+  id           Int        @id @default(autoincrement())
+  name         String
+  restaurantId Int
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @default(now())
+  Item         Item[]
+}
+
+model Item {
+  id        Int      @id @default(autoincrement())
+  name      String
+  imageUrl  String
+  price     Int
+  veg       Boolean
+  menuId    Int
+  menu      Menu     @relation(fields: [menuId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
