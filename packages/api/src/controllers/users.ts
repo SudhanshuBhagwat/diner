@@ -27,7 +27,9 @@ export async function createUser(req: Request, res: Response) {
       });
     }
 
-    res.status(201);
+    res.status(201).json({
+      message: "success",
+    });
   } catch (error) {
     res.status(401).json({
       error: error.message,

@@ -31,43 +31,39 @@ const Layout: React.FC<Props> = () => {
 
   const { signIn, signOut } = useFirebaseAuth();
   const { state } = useAuthState();
-  const {
-    mutateAsync,
-    isLoading: mutationLoading,
-    error,
-    isError,
-  } = useMutation(
-    (data: FieldValues) => {
-      return fetch(`${API_BASE_URL}/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...data,
-        }),
-      }).catch((error: Error) => {
-        throw new Error(error.message);
-      });
-    },
-    {
-      onSuccess: async (data) => {
+
+  async function postUserData(data: any) {
+    fetch(`${API_BASE_URL}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((result) => {
+        if (result.status === 201) {
+          setIsLoading(false);
+          navigate("/", {
+            replace: true,
+          });
+        }
+      })
+      .catch((error) => {
         setIsLoading(false);
-        navigate("/", {
+        navigate("/auth", {
           replace: true,
         });
-      },
-    }
-  );
+      });
+  }
 
   useEffect(() => {
     setupFirebase();
     const auth = getAuth();
 
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         signIn(user);
-        await mutateAsync({
+        postUserData({
           name: user.displayName,
           uid: user.uid,
         });
