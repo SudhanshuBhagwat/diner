@@ -1,4 +1,6 @@
+import { Prisma } from "@prisma/client";
 import { Request, Response } from "express";
+import { cache } from "..";
 import client from "../../prisma";
 
 export async function createUser(req: Request, res: Response) {
@@ -18,22 +20,40 @@ export async function createUser(req: Request, res: Response) {
     });
 
     if (!data) {
-      await client.user.create({
+      const result = await client.user.create({
         data: {
           name: body.name,
           role: "ADMIN",
           uid: body.uid,
         },
       });
+      cache.set(`user-${body.uid}`, {
+        ...result,
+      });
+      res.status(201).json({
+        result,
+      });
+    } else {
+      res.status(201).json({
+        result: data,
+      });
     }
-
-    res.status(201).json({
-      message: "success",
-    });
   } catch (error) {
-    res.status(401).json({
-      error: error.message,
-    });
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      const currentError = error as Prisma.PrismaClientKnownRequestError;
+      if (currentError.code === "P2002") {
+        res.status(304).json({
+          error: "User already exists",
+        });
+      } else {
+        res.status(401).json({
+          error: "Something went wrong",
+        });
+      }
+      res.status(401).json({
+        error: "Something went wrong",
+      });
+    }
   }
 }
 

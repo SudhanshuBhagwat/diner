@@ -14,8 +14,6 @@ interface Props {
   children?: React.ReactNode;
 }
 
-let request: boolean = false;
-
 const Layout: React.FC<Props> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const stateIdx = window.history.state.idx;
@@ -35,10 +33,6 @@ const Layout: React.FC<Props> = () => {
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        if (request) {
-          return;
-        }
-        request = true;
         signIn(user)
           .then((data) => {
             setIsLoading(false);

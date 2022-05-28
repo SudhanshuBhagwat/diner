@@ -2,14 +2,22 @@ import { User } from "firebase/auth";
 import React, { createContext, ReactNode, useContext, useReducer } from "react";
 import { API_BASE_URL } from "../constants";
 
+interface IUser {
+  id: number;
+  uid: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
 type AuthActions =
-  | { type: "SIGN_IN"; payload: { user: User } }
+  | { type: "SIGN_IN"; payload: { user: IUser } }
   | { type: "SIGN_OUT" };
 
 type AuthState =
   | {
       state: "SIGNED_IN";
-      currentUser: User;
+      currentUser: IUser;
     }
   | {
       state: "SIGNED_OUT";
@@ -68,9 +76,8 @@ async function postUserData(data: any) {
     },
     body: JSON.stringify(data),
   })
-    .then((result) => {
-      return true;
-    })
+    .then((result) => result.json())
+    .then((result) => result.result)
     .catch((error) => {
       throw new Error(error);
     });
@@ -80,10 +87,22 @@ const useFirebaseAuth = () => {
   const { dispatch } = useContext(AuthContext);
 
   const signIn = async (user: User) => {
-    dispatch({ type: "SIGN_IN", payload: { user } });
-    return await postUserData({
+    const result = await postUserData({
       name: user.displayName,
       uid: user.uid,
+    });
+
+    dispatch({
+      type: "SIGN_IN",
+      payload: {
+        user: {
+          id: Number(result.id),
+          name: result.id,
+          email: user.email!,
+          role: result.role,
+          uid: result.uid,
+        },
+      },
     });
   };
 
