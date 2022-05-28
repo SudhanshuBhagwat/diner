@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { User } from "firebase/auth";
-import { API_BASE_URL } from "../constants";
+import { API_BASE_URL } from "../../constants";
 
 interface IUser {
   id: number;
@@ -55,17 +55,14 @@ export const userSlice = createSlice({
   },
   extraReducers: {
     [`${signIn.pending}`]: (state) => {
-      console.log("Pending");
       state.status = "UNKNOWN";
       state.currentUser = null;
     },
     [`${signIn.fulfilled}`]: (state, { payload }) => {
-      console.log("Fulfilled", payload);
       state.status = "SIGNED_IN";
       state.currentUser = payload;
     },
     [`${signIn.rejected}`]: (state) => {
-      console.log("Rejected");
       state.status = "SIGNED_OUT";
       state.currentUser = null;
     },

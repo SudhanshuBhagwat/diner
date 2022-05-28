@@ -7,7 +7,7 @@ import { registerSW } from "virtual:pwa-register";
 import "./index.css";
 import Root from "./Root";
 import { store } from "./store";
-import { signIn, signOut } from "./store/userSlice";
+import { signIn, signOut } from "./store/slices/userSlice";
 
 const client = new QueryClient();
 

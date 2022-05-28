@@ -2,7 +2,7 @@ import { LogoutIcon, QrcodeIcon } from "@heroicons/react/outline";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { signOut } from "../store/userSlice";
+import { signOut } from "../store/slices/userSlice";
 
 interface Props {
   children?: React.ReactNode;
