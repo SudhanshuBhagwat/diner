@@ -109,6 +109,7 @@ export async function createRestaurant(req: Request, res: Response) {
         since: body.since,
         location: body.location,
         imageUrl: cloudinaryResponse.secure_url,
+        userId: body.userId,
       },
     });
 

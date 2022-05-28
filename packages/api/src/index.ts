@@ -1,13 +1,22 @@
-import express, { Router } from "express";
+import express, { NextFunction, Router } from "express";
 import type { Express, Request, Response } from "express";
 import cors from "cors";
 import "dotenv/config";
 import { v2 as cloudinary } from "cloudinary";
+import NodeCache from "node-cache";
 
-import { restaurantsRouter, menusRouter, itemsRouter } from "./routes";
+import {
+  restaurantsRouter,
+  menusRouter,
+  itemsRouter,
+  usersRouter,
+} from "./routes";
 
 const PORT: number = parseInt(process.env.PORT) || 3001;
 const app: Express = express();
+export const cache = new NodeCache({
+  stdTTL: 300,
+});
 
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
@@ -19,6 +28,31 @@ cloudinary.config({
   api_secret: "DMnd4nll_CTi3KxGKIYY-OrQJDs",
 });
 
+async function checkUserCache(req: Request, res: Response, next: NextFunction) {
+  try {
+    const body = req.body;
+
+    if (!body) {
+      res.status(401).json({
+        message: "Data is required",
+      });
+    }
+    const key = `user-${body.uid}`;
+    if (!cache.has(key)) {
+      next();
+    } else {
+      const data: any = cache.get(key);
+      res.status(301).json({
+        ...data,
+      });
+    }
+  } catch (error) {
+    res.status(401).json({
+      error: error.message,
+    });
+  }
+}
+
 const apiRouter = Router();
 
 app.use("/api", apiRouter);
@@ -27,6 +61,7 @@ app.use("/api", apiRouter);
 apiRouter.use("/restaurants", restaurantsRouter);
 apiRouter.use("/menus", menusRouter);
 apiRouter.use("/items", itemsRouter);
+apiRouter.use(checkUserCache).use("/users", usersRouter);
 
 /* Default Express Route */
 apiRouter.get("/", (req: Request, res: Response) => {
