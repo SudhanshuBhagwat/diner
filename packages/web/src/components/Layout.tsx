@@ -1,13 +1,13 @@
 import { ChevronLeftIcon, ShareIcon } from "@heroicons/react/outline";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   matchRoutes,
   Outlet,
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import { useAuthState, useFirebaseAuth } from "../contexts/UserContext";
+import { RootState } from "../store";
 import Spinner from "./Spinner";
 
 interface Props {
@@ -25,38 +25,21 @@ const Layout: React.FC<Props> = () => {
       location
     ) || [];
 
-  const { signIn, signOut } = useFirebaseAuth();
-  const { state } = useAuthState();
+  const userState = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    const auth = getAuth();
-
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        signIn(user)
-          .then((data) => {
-            setIsLoading(false);
-            navigate("/", {
-              replace: true,
-            });
-          })
-          .catch((error) => {
-            setIsLoading(false);
-            navigate("/auth", {
-              replace: true,
-            });
-          });
-      } else {
-        signOut();
-        setIsLoading(false);
-        navigate("/auth", {
-          replace: true,
-        });
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
+    if (userState.status === "SIGNED_OUT") {
+      setIsLoading(false);
+      navigate("/auth", {
+        replace: true,
+      });
+    } else if (userState.status === "SIGNED_IN") {
+      setIsLoading(false);
+      navigate("/", {
+        replace: true,
+      });
+    }
+  }, [userState]);
 
   return (
     <div className="h-screen flex flex-col">
@@ -82,7 +65,7 @@ const Layout: React.FC<Props> = () => {
               <Spinner />
             </div>
           ) : (
-            <Outlet context={state} />
+            <Outlet context={userState} />
           )}
         </div>
       </div>
