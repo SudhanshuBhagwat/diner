@@ -1,22 +1,20 @@
 import { ChevronLeftIcon, ShareIcon } from "@heroicons/react/outline";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { FieldValues } from "react-hook-form";
-import { useMutation } from "react-query";
 import {
   matchRoutes,
   Outlet,
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import { API_BASE_URL } from "../constants";
 import { useAuthState, useFirebaseAuth } from "../contexts/UserContext";
-import { setupFirebase } from "../lib/firebase";
 import Spinner from "./Spinner";
 
 interface Props {
   children?: React.ReactNode;
 }
+
+let request: boolean = false;
 
 const Layout: React.FC<Props> = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -32,41 +30,28 @@ const Layout: React.FC<Props> = () => {
   const { signIn, signOut } = useFirebaseAuth();
   const { state } = useAuthState();
 
-  async function postUserData(data: any) {
-    fetch(`${API_BASE_URL}/users`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((result) => {
-        if (result.status === 201) {
-          setIsLoading(false);
-          navigate("/", {
-            replace: true,
-          });
-        }
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        navigate("/auth", {
-          replace: true,
-        });
-      });
-  }
-
   useEffect(() => {
-    setupFirebase();
     const auth = getAuth();
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        signIn(user);
-        postUserData({
-          name: user.displayName,
-          uid: user.uid,
-        });
+        if (request) {
+          return;
+        }
+        request = true;
+        signIn(user)
+          .then((data) => {
+            setIsLoading(false);
+            navigate("/", {
+              replace: true,
+            });
+          })
+          .catch((error) => {
+            setIsLoading(false);
+            navigate("/auth", {
+              replace: true,
+            });
+          });
       } else {
         signOut();
         setIsLoading(false);

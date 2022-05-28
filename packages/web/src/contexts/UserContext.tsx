@@ -1,6 +1,5 @@
-import React from "react";
-import { createContext, ReactNode, useContext, useReducer } from "react";
 import { User } from "firebase/auth";
+import React, { createContext, ReactNode, useContext, useReducer } from "react";
 import { API_BASE_URL } from "../constants";
 
 type AuthActions =
@@ -61,11 +60,31 @@ const useAuthState = () => {
   };
 };
 
+async function postUserData(data: any) {
+  return fetch(`${API_BASE_URL}/users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((result) => {
+      return true;
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
+}
+
 const useFirebaseAuth = () => {
   const { dispatch } = useContext(AuthContext);
 
   const signIn = async (user: User) => {
     dispatch({ type: "SIGN_IN", payload: { user } });
+    return await postUserData({
+      name: user.displayName,
+      uid: user.uid,
+    });
   };
 
   const signOut = () => {
