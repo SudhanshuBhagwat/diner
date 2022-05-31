@@ -11,7 +11,8 @@
     "test": "lerna run test",
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff",
-    "build": "lerna run build --scope app"
+    "build": "lerna run build --scope app",
+    "expo:build": "lerna run build --scope app"
   },
   "private": true,
   "workspaces": [
@@ -26,5 +27,8 @@
   "homepage": "https://github.com/SudhanshuBhagwat/diner#readme",
   "devDependencies": {
     "lerna": "^4.0.0"
+  },
+  "resolutions": {
+    "babel-preset-expo": "^8.5.1"
   }
 }
