@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 export function HelloWorld() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hello Sudhanshu</Text>
+      <Text style={styles.text}>Hello from shared</Text>
     </View>
   );
 }

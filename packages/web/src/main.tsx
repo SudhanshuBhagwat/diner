@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { registerSW } from "virtual:pwa-register";
@@ -11,14 +11,15 @@ import { signIn, signOut } from "./store/slices/userSlice";
 
 const client = new QueryClient();
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <QueryClientProvider client={client}>
         <Root />
       </QueryClientProvider>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById("root")!
 );
 
 onAuthStateChanged(getAuth(), (user) => {

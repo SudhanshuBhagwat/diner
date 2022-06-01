@@ -14,10 +14,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
-    "types": [
-      "vite-plugin-pwa/client"
-    ]
+    "jsx": "react-jsx",
+    "types": ["vite-plugin-pwa/client"]
   },
-  "include": ["./src"],
+  "include": ["./src"]
 }

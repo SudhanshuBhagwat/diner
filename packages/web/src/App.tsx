@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import { Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 import FallbackSpinner from "./components/FallbackSpinner";
 import routes from "./routes";
