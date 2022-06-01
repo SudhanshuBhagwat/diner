@@ -8,7 +8,8 @@
     "build": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
     "preview": "vite preview",
     "dev:web": "vite",
-    "build:electron": "tsc -p electron"
+    "build:electron": "tsc -p electron",
+    "dev:electron": "wait-on http://localhost:3000/index.html && electron ."
   },
   "dependencies": {
     "@headlessui/react": "^1.6.0",
