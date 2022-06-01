@@ -4,11 +4,10 @@
   "version": "0.0.0",
   "main": "main/index.js",
   "scripts": {
-    "dev": "cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true vite",
+    "dev": "yarn build:electron && concurrently \"yarn dev:web\" \"wait-on http://localhost:3000/index.html && electron .\"",
     "build": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
     "preview": "vite preview",
     "dev:web": "vite",
-    "dev:electron": "yarn build:electron && concurrently \"BROWSER=none yarn dev:web\" \"wait-on http://localhost:3000/index.html && electron .\"",
     "build:electron": "tsc -p electron"
   },
   "dependencies": {
