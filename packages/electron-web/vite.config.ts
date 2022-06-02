@@ -1,7 +1,7 @@
-import { defineConfig } from "vite";
-import type { ManifestOptions, VitePWAOptions } from "vite-plugin-pwa";
-import { VitePWA } from "vite-plugin-pwa";
 import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+import type { VitePWAOptions } from "vite-plugin-pwa";
+import { VitePWA } from "vite-plugin-pwa";
 
 const pwaOptions: Partial<VitePWAOptions> = {
   mode: "development",
@@ -24,6 +24,11 @@ export default defineConfig({
   },
   server: {
     host: true,
+  },
+  resolve: {
+    alias: {
+      "react-native": "react-native-web",
+    },
   },
   plugins: [react(), VitePWA(pwaOptions)],
 });
