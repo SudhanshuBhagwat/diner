@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { Font } from "../Font";
 
 function AuthForm() {
   return (
@@ -42,7 +43,13 @@ function AuthForm() {
             alignItems: "center",
           }}
         >
-          <Text>Or</Text>
+          <Text
+            style={{
+              fontFamily: "Inter_400Regular",
+            }}
+          >
+            Or
+          </Text>
         </View>
         <View>
           <TouchableOpacity style={styles.button}>
@@ -64,7 +71,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontFamily: "Inter_800ExtraBold",
+    fontFamily: Font[900],
     fontSize: 38,
     marginVertical: 16,
   },
@@ -75,7 +82,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#efefef",
     borderRadius: 6,
-    fontFamily: "Inter_400Regular",
+    fontFamily: Font[400],
   },
   button: {
     width: "100%",
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   buttonText: {
-    fontFamily: "Inter_800ExtraBold",
+    fontFamily: Font[800],
     fontSize: 16,
   },
   googleColor: {
@@ -94,7 +101,7 @@ const styles = StyleSheet.create({
   label: {
     marginVertical: 6,
     fontSize: 16,
-    fontFamily: "Inter_400Regular",
+    fontFamily: Font[400],
   },
   inputGroup: {
     marginBottom: 14,
