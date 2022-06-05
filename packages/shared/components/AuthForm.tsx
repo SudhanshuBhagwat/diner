@@ -7,11 +7,21 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Font } from "../Font";
+import FText from "./core/FText";
+import Spinner from "./core/Spinner";
 
-function AuthForm() {
+interface Props {
+  handleLogin: () => void;
+  handleGoogleSignIn: () => void;
+}
+
+const AuthForm: React.FC<React.PropsWithChildren<Props> & Props> = ({
+  handleLogin,
+  handleGoogleSignIn,
+}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign In to Diner</Text>
+      <FText style={styles.title}>Sign In to Diner</FText>
       <View
         style={{
           width: "100%",
@@ -19,22 +29,22 @@ function AuthForm() {
       >
         <View>
           <View style={styles.inputGroup}>
-            <Text style={styles.label}>Email</Text>
+            <FText style={styles.label}>Email</FText>
             <TextInput
               style={styles.input}
               placeholder="john.doe@example.com"
             />
           </View>
           <View style={styles.inputGroup}>
-            <Text style={styles.label}>Password</Text>
+            <FText style={styles.label}>Password</FText>
             <TextInput
               placeholder="●●●●●●"
               style={styles.input}
               secureTextEntry={true}
             />
           </View>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Login</Text>
+          <TouchableOpacity onPress={handleLogin} style={styles.button}>
+            <FText style={styles.buttonText}>Login</FText>
           </TouchableOpacity>
         </View>
         <View
@@ -43,25 +53,25 @@ function AuthForm() {
             alignItems: "center",
           }}
         >
-          <Text
+          <FText
             style={{
               fontFamily: "Inter_400Regular",
             }}
           >
             Or
-          </Text>
+          </FText>
         </View>
         <View>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>
+          <TouchableOpacity onPress={handleGoogleSignIn} style={styles.button}>
+            <FText style={styles.buttonText}>
               Sign In with <Text style={styles.googleColor}>Google</Text>
-            </Text>
+            </FText>
           </TouchableOpacity>
         </View>
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -82,7 +92,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#efefef",
     borderRadius: 6,
-    fontFamily: Font[400],
   },
   button: {
     width: "100%",
@@ -101,7 +110,6 @@ const styles = StyleSheet.create({
   label: {
     marginVertical: 6,
     fontSize: 16,
-    fontFamily: Font[400],
   },
   inputGroup: {
     marginBottom: 14,
