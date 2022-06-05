@@ -14,11 +14,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { loadAsync } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useEffect, useState } from "react";
-import { Pressable, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import Auth from "./src/screens/Auth";
 import Home from "./src/screens/Home";
 import QRCode from "./src/screens/QRCode";
 import { QrcodeIcon } from "react-native-heroicons/outline";
+import { Font } from "shared/Font";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -79,6 +80,16 @@ function Root() {
         <Stack.Navigator
           screenOptions={({ route, navigation }) => ({
             headerShadowVisible: false,
+            headerTitle: () => (
+              <Text
+                style={{
+                  fontSize: 30,
+                  fontFamily: Font[900],
+                }}
+              >
+                Diner
+              </Text>
+            ),
             headerRight: () =>
               route.name !== "QR" ? (
                 <Pressable onPress={() => navigation.navigate("QR")}>
