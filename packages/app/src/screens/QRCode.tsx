@@ -1,3 +1,4 @@
+import { useLinkTo } from "@react-navigation/native";
 import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import React, { useEffect, useState } from "react";
 import {
@@ -15,6 +16,7 @@ interface Props {}
 const QRCode: React.FC<React.PropsWithChildren<Props> & Props> = () => {
   const [hasPermission, setHasPermission] = useState<boolean>();
   const [showQR, setShowQR] = useState<boolean>(false);
+  const linkTo = useLinkTo();
 
   useEffect(() => {
     (async () => {
@@ -32,9 +34,8 @@ const QRCode: React.FC<React.PropsWithChildren<Props> & Props> = () => {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }: BarCodeEvent) => {
-    console.log(
-      `Bar code with type ${type} and data ${data} has been scanned!`
-    );
+    const returnData = data.split("--");
+    linkTo(returnData[1]);
   };
 
   if (hasPermission === null) {

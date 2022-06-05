@@ -9,7 +9,11 @@ import {
   Inter_800ExtraBold,
   Inter_900Black,
 } from "@expo-google-fonts/inter";
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import {
+  DefaultTheme,
+  LinkingOptions,
+  NavigationContainer,
+} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { loadAsync } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -20,6 +24,7 @@ import Home from "./src/screens/Home";
 import QRCode from "./src/screens/QRCode";
 import { QrcodeIcon } from "react-native-heroicons/outline";
 import { Font } from "shared/Font";
+import * as Linking from "expo-linking";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -31,9 +36,23 @@ const MyTheme = {
 
 const Stack = createNativeStackNavigator();
 
+const prefix = Linking.createURL("/");
+const linking: LinkingOptions<ReactNavigation.RootParamList> = {
+  prefixes: [prefix],
+  config: {
+    screens: {
+      Home: {
+        path: "Home/:user",
+        parse: {
+          user: (user: string) => user,
+        },
+      },
+    },
+  },
+};
+
 function Root() {
   const [appIsReady, setAppIsReady] = useState(false);
-
   useEffect(() => {
     async function prepare() {
       try {
@@ -76,7 +95,11 @@ function Root() {
       }}
       onLayout={onLayoutRootView}
     >
-      <NavigationContainer theme={MyTheme}>
+      <NavigationContainer
+        linking={linking}
+        fallback={<Text>Loading...</Text>}
+        theme={MyTheme}
+      >
         <Stack.Navigator
           screenOptions={({ route, navigation }) => ({
             headerShadowVisible: false,

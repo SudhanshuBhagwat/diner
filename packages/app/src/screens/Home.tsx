@@ -4,10 +4,10 @@ import { Font } from "shared/Font";
 
 interface Props {}
 
-const Home: React.FC<React.PropsWithChildren<Props> & Props> = () => {
+const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({ route }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Home</Text>
+      <Text style={styles.text}>{route.params?.user}'s Home</Text>
     </View>
   );
 };
