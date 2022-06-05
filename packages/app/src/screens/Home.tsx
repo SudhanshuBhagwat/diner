@@ -1,14 +1,23 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 import { Font } from "shared/Font";
 
 interface Props {}
 
 const Home: React.FC<React.PropsWithChildren<Props> & Props> = () => {
-  return <Text style={styles.text}>Home</Text>;
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Home</Text>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   text: {
     fontFamily: Font[900],
   },

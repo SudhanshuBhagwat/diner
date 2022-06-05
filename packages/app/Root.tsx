@@ -14,9 +14,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { loadAsync } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useEffect, useState } from "react";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 import Auth from "./src/screens/Auth";
 import Home from "./src/screens/Home";
+import QRCode from "./src/screens/QRCode";
+import { QrcodeIcon } from "react-native-heroicons/outline";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -46,7 +48,6 @@ function Root() {
           Inter_800ExtraBold,
           Inter_900Black,
         });
-        await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -76,12 +77,19 @@ function Root() {
     >
       <NavigationContainer theme={MyTheme}>
         <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
+          screenOptions={({ route, navigation }) => ({
+            headerShadowVisible: false,
+            headerRight: () =>
+              route.name !== "QR" ? (
+                <Pressable onPress={() => navigation.navigate("QR")}>
+                  <QrcodeIcon size={26} color="black" />
+                </Pressable>
+              ) : null,
+          })}
         >
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Auth" component={Auth} />
+          <Stack.Screen name="QR" component={QRCode} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
