@@ -34,8 +34,7 @@ const QRCode: React.FC<React.PropsWithChildren<Props> & Props> = () => {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }: BarCodeEvent) => {
-    const returnData = data.split("--");
-    linkTo(returnData[1]);
+    linkTo(data);
   };
 
   if (hasPermission === null) {
