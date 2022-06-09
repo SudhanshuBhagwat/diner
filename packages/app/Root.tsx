@@ -25,6 +25,8 @@ import QRCode from "./src/screens/QRCode";
 import { QrcodeIcon } from "react-native-heroicons/outline";
 import { Font } from "shared/Font";
 import * as Linking from "expo-linking";
+import React from "react";
+import { StatusBar } from "expo-status-bar";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -95,6 +97,7 @@ function Root() {
       }}
       onLayout={onLayoutRootView}
     >
+      <StatusBar style="auto" />
       <NavigationContainer
         linking={linking}
         fallback={<Text>Loading...</Text>}
@@ -107,7 +110,7 @@ function Root() {
               <Text
                 style={{
                   fontSize: 30,
-                  fontFamily: Font[900],
+                  fontFamily: Font["900"],
                 }}
               >
                 Diner
