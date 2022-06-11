@@ -1,11 +1,12 @@
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, Image } from "react-native";
 import { Font } from "shared/Font";
 
 export interface Item {
   id: number;
   name: string;
   restaurant: string;
+  image: string;
   badges: string[];
   description: string;
   price: number;
@@ -20,7 +21,12 @@ const MenuCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
 }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.image} />
+      <Image
+        source={{
+          uri: item.image,
+        }}
+        style={styles.image}
+      />
       <View style={styles.detailsContainer}>
         <Text style={styles.text}>
           {item.name} @ {item.restaurant}
@@ -50,8 +56,8 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     borderRadius: 12,
-    backgroundColor: "#16ff",
     marginRight: 8,
+    aspectRatio: 1,
   },
   text: {
     fontFamily: Font[700],

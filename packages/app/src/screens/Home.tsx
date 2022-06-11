@@ -2,7 +2,9 @@ import React from "react";
 import { Text, StyleSheet, View, FlatList } from "react-native";
 import { Font } from "shared/Font";
 import MenuCard, { Item } from "../components/Home/MenuCard";
+import RestaurantCard from "../components/Home/RestaurantCard";
 import { DATA } from "../fixtures/items";
+import { RESTAURANTS } from "../fixtures/restaurants";
 
 interface Props {}
 
@@ -34,6 +36,19 @@ const Home: React.FC<React.PropsWithChildren<Props> & Props> = () => {
           </View>
         </View>
       ))}
+      <View style={styles.section}>
+        <Text style={styles.title}>Restaurants</Text>
+        <View style={styles.list}>
+          <FlatList
+            data={RESTAURANTS}
+            horizontal
+            renderItem={({ item }) => <RestaurantCard restaurant={item} />}
+            keyExtractor={(item) => String(item.id)}
+            contentContainerStyle={{ paddingRight: 16 }}
+            ItemSeparatorComponent={() => <Separator />}
+          />
+        </View>
+      </View>
     </View>
   );
 };
