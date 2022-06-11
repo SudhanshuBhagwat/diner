@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, StyleSheet, View, FlatList } from "react-native";
 import { Font } from "shared/Font";
-import MenuCard, { Item } from "../components/Home/MenuCard";
+import MenuCard from "../components/Home/MenuCard";
 import RestaurantCard from "../components/Home/RestaurantCard";
 import { DATA } from "../fixtures/items";
 import { RESTAURANTS } from "../fixtures/restaurants";

@@ -1,16 +1,7 @@
 import React from "react";
 import { Text, StyleSheet, View, Image } from "react-native";
 import { Font } from "shared/Font";
-
-export interface Item {
-  id: number;
-  name: string;
-  restaurant: string;
-  image: string;
-  badges: string[];
-  description: string;
-  price: number;
-}
+import { Item } from "../../models/items";
 
 interface Props {
   item: Item;
