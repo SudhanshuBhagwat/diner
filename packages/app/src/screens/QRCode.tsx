@@ -1,7 +1,7 @@
 import { useLinkTo } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { BarCodeReadEvent } from "react-native-camera";
+import { BarCodeReadEvent, GoogleVisionBarcodeType } from "react-native-camera";
 import QRCodeScanner from "react-native-qrcode-scanner";
 import { Font } from "shared/Font";
 
@@ -11,7 +11,10 @@ const QRCode: React.FC<React.PropsWithChildren<Props> & Props> = () => {
   const linkTo = useLinkTo();
 
   function onSuccess(event: BarCodeReadEvent) {
-    console.log(event.data);
+    const type = event.type;
+    if (String(type) === "QR_CODE") {
+      linkTo(event.data);
+    }
   }
 
   return (

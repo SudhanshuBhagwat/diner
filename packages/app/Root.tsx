@@ -27,6 +27,7 @@ import { Font } from "shared/Font";
 import * as Linking from "expo-linking";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
+import Restaurant from "./src/screens/Restaurant";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -36,17 +37,25 @@ const MyTheme = {
   },
 };
 
-const Stack = createNativeStackNavigator();
+export type RootStackParams = {
+  Home: undefined;
+  QR: undefined;
+  Auth: undefined;
+  Restaurant: {
+    restaurant: string;
+  };
+};
+const Stack = createNativeStackNavigator<RootStackParams>();
 
 const prefix = Linking.createURL("/");
 const linking: LinkingOptions<ReactNavigation.RootParamList> = {
   prefixes: [prefix],
   config: {
     screens: {
-      Home: {
-        path: "Home/:user",
+      Restaurant: {
+        path: "Restaurant/:restaurant",
         parse: {
-          user: (user: string) => user,
+          restaurant: (restaurantId: string) => restaurantId,
         },
       },
     },
@@ -104,6 +113,7 @@ function Root() {
         theme={MyTheme}
       >
         <Stack.Navigator
+          initialRouteName="Home"
           screenOptions={({ route, navigation }) => ({
             headerShadowVisible: false,
             headerTitle: () => (
@@ -126,6 +136,7 @@ function Root() {
         >
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Auth" component={Auth} />
+          <Stack.Screen name="Restaurant" component={Restaurant} />
           <Stack.Screen name="QR" component={QRCode} />
         </Stack.Navigator>
       </NavigationContainer>

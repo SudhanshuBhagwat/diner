@@ -1,0 +1,92 @@
+export const DATA = [
+  {
+    name: "Recently Tried",
+    id: 10,
+    items: [
+      {
+        id: 1,
+        name: "Pizza",
+        restaurant: "Test",
+        badges: ["Veg", "Italian"],
+        description: "Jallepeno, Cheese, Tomatoes",
+        price: 149,
+      },
+      {
+        id: 2,
+        name: "Pizza",
+        restaurant: "Test",
+        badges: ["Veg", "Italian"],
+        description: "Jallepeno, Cheese, Tomatoes",
+        price: 149,
+      },
+      {
+        id: 3,
+        name: "Pizza",
+        restaurant: "Test",
+        badges: ["Veg", "Italian"],
+        description: "Jallepeno, Cheese, Tomatoes",
+        price: 149,
+      },
+      {
+        id: 4,
+        name: "Pizza",
+        restaurant: "Test",
+        badges: ["Veg", "Italian"],
+        description: "Jallepeno, Cheese, Tomatoes",
+        price: 149,
+      },
+    ],
+  },
+  {
+    name: "Recently Tried",
+    id: 20,
+    items: [
+      {
+        id: 1,
+        name: "Pizza",
+        restaurant: "Test",
+        badges: ["Veg", "Italian"],
+        description: "Jallepeno, Cheese, Tomatoes",
+        price: 149,
+      },
+      {
+        id: 2,
+        name: "Pizza",
+        restaurant: "Test",
+        badges: ["Veg", "Italian"],
+        description: "Jallepeno, Cheese, Tomatoes",
+        price: 149,
+      },
+      {
+        id: 3,
+        name: "Pizza",
+        restaurant: "Test",
+        badges: ["Veg", "Italian"],
+        description: "Jallepeno, Cheese, Tomatoes",
+        price: 149,
+      },
+    ],
+  },
+  {
+    name: "Recently Tried",
+    id: 30,
+    items: [
+      {
+        id: 1,
+        name: "Pizza",
+        restaurant: "Test",
+        badges: ["Veg", "Italian"],
+        description: "Jallepeno, Cheese, Tomatoes",
+        price: 149,
+      },
+      {
+        id: 2,
+        name: "Pizza",
+        restaurant: "Test",
+        badges: ["Veg", "Italian"],
+        description: "Jallepeno, Cheese, Tomatoes",
+        price: 149,
+      },
+    ],
+  },
+];
