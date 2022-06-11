@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, Image, Dimensions } from "react-native";
 import { Font } from "shared/Font";
 import { RootStackParams } from "../../Root";
 import { RESTAURANTS } from "../fixtures/restaurants";
@@ -15,6 +15,12 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
 
   return (
     <View style={styles.container}>
+      <Image
+        source={{
+          uri: restaurant?.image,
+        }}
+        style={styles.image}
+      />
       <Text style={styles.text}>{restaurant?.name}</Text>
     </View>
   );
@@ -23,8 +29,10 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+  },
+  image: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height * 0.3,
   },
   text: {
     fontFamily: Font[900],
