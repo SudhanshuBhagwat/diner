@@ -1,5 +1,12 @@
 import React from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import { LocationMarkerIcon, StarIcon } from "react-native-heroicons/outline";
 import { Font } from "shared/Font";
 import { Restaurant } from "../../models/restaurant";
@@ -12,7 +19,7 @@ const RestaurantCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
   restaurant,
 }) => {
   return (
-    <View style={styles.container}>
+    <View>
       <Image
         style={styles.image}
         source={{
@@ -37,9 +44,6 @@ const RestaurantCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   image: {
     height: 150,
     width: 240,

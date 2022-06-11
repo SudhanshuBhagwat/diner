@@ -1,12 +1,14 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { Text, StyleSheet, View, FlatList } from "react-native";
+import { Text, StyleSheet, View, FlatList, Pressable } from "react-native";
 import { Font } from "shared/Font";
+import { RootStackParams } from "../../Root";
 import MenuCard from "../components/Home/MenuCard";
 import RestaurantCard from "../components/Home/RestaurantCard";
 import { DATA } from "../fixtures/items";
 import { RESTAURANTS } from "../fixtures/restaurants";
 
-interface Props {}
+type Props = NativeStackScreenProps<RootStackParams, "Home">;
 
 const Separator = () => {
   return (
@@ -18,7 +20,9 @@ const Separator = () => {
   );
 };
 
-const Home: React.FC<React.PropsWithChildren<Props> & Props> = () => {
+const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({
+  navigation,
+}) => {
   return (
     <View style={styles.container}>
       {DATA.map((menu) => (
@@ -42,7 +46,17 @@ const Home: React.FC<React.PropsWithChildren<Props> & Props> = () => {
           <FlatList
             data={RESTAURANTS}
             horizontal
-            renderItem={({ item }) => <RestaurantCard restaurant={item} />}
+            renderItem={({ item }) => (
+              <Pressable
+                onPress={() =>
+                  navigation.navigate("Restaurant", {
+                    restaurant: String(item.id),
+                  })
+                }
+              >
+                <RestaurantCard restaurant={item} />
+              </Pressable>
+            )}
             keyExtractor={(item) => String(item.id)}
             contentContainerStyle={{ paddingRight: 16 }}
             ItemSeparatorComponent={() => <Separator />}
