@@ -1,20 +1,23 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import {
-  Text,
-  StyleSheet,
-  View,
-  Image,
-  Dimensions,
+  FlatList,
   ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 import { LocationMarkerIcon } from "react-native-heroicons/outline";
 import LinearGradient from "react-native-linear-gradient";
 import { SharedElement } from "react-navigation-shared-element";
 import { Font } from "shared/Font";
 import { RootStackParams } from "../../Root";
+import MenuCard from "../components/Home/MenuCard";
 import Nav from "../components/Home/Nav";
-import { RESTAURANTS } from "../fixtures/restaurants";
+import MenuBottomSheet from "../components/Restaurant/MenuBottomSheet";
+import { DATA } from "../fixtures/items";
+import { Separator } from "./Home";
 
 type Props = NativeStackScreenProps<RootStackParams, "Restaurant">;
 
@@ -40,7 +43,7 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
           </ImageBackground>
         </SharedElement>
         <Nav />
-        <View style={styles.contents}>
+        <View style={styles.headerContents}>
           <Text style={styles.text}>{restaurant.name}</Text>
           <View style={styles.locationContainer}>
             <LocationMarkerIcon size={16} color="#dddddd" />
@@ -48,6 +51,22 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
           </View>
         </View>
       </View>
+      <ScrollView>
+        <View style={styles.contents}>
+          {DATA.map((menu) => (
+            <View key={menu.id}>
+              <Text style={styles.title}>{menu.name}</Text>
+              <View style={styles.list}>
+                {DATA[0].items.map((item) => (
+                  <View key={item.id} style={styles.separator}>
+                    <MenuCard item={item} />
+                  </View>
+                ))}
+              </View>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -58,11 +77,15 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 350,
+    height: 320,
     aspectRatio: 16 / 9,
     resizeMode: "cover",
   },
   contents: {
+    paddingVertical: 16,
+    paddingLeft: 16,
+  },
+  headerContents: {
     position: "absolute",
     bottom: 16,
     left: 16,
@@ -81,6 +104,16 @@ const styles = StyleSheet.create({
     color: "#dddddd",
     fontFamily: Font[600],
     marginLeft: 4,
+  },
+  title: {
+    fontSize: 20,
+    fontFamily: Font[900],
+  },
+  list: {
+    marginTop: 8,
+  },
+  separator: {
+    paddingVertical: 6,
   },
 });
 

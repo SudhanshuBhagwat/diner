@@ -10,11 +10,12 @@ import { RESTAURANTS } from "../fixtures/restaurants";
 
 type Props = NativeStackScreenProps<RootStackParams, "Home">;
 
-const Separator = () => {
+export const Separator = () => {
   return (
     <View
       style={{
         width: 14,
+        height: 16,
       }}
     />
   );

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  Image,
-  Pressable,
-  TouchableOpacity,
-} from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { LocationMarkerIcon, StarIcon } from "react-native-heroicons/outline";
 import { SharedElement } from "react-navigation-shared-element";
 import { Font } from "shared/Font";
