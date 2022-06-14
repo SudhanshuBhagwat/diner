@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { LocationMarkerIcon, StarIcon } from "react-native-heroicons/outline";
+import { SharedElement } from "react-navigation-shared-element";
 import { Font } from "shared/Font";
 import { Restaurant } from "../../models/restaurant";
 
@@ -20,12 +21,14 @@ const RestaurantCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
 }) => {
   return (
     <View>
-      <Image
-        style={styles.image}
-        source={{
-          uri: restaurant.image,
-        }}
-      />
+      <SharedElement id={`${restaurant.id}`}>
+        <Image
+          style={styles.image}
+          source={{
+            uri: restaurant.image,
+          }}
+        />
+      </SharedElement>
       <View style={styles.detailsContainer}>
         <View>
           <Text style={styles.text}>{restaurant.name}</Text>
@@ -48,6 +51,7 @@ const styles = StyleSheet.create({
     height: 150,
     width: 240,
     borderRadius: 14,
+    resizeMode: "cover",
   },
   text: {
     marginTop: 4,

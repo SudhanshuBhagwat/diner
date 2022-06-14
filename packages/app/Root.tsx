@@ -14,11 +14,10 @@ import {
   LinkingOptions,
   NavigationContainer,
 } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { loadAsync } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useEffect, useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import Auth from "./src/screens/Auth";
 import Home from "./src/screens/Home";
 import QRCode from "./src/screens/QRCode";
@@ -27,6 +26,9 @@ import { Font } from "shared/Font";
 import * as Linking from "expo-linking";
 import React from "react";
 import Restaurant from "./src/screens/Restaurant";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createSharedElementStackNavigator } from "react-navigation-shared-element";
+import { Restaurant as IRestaurant } from "./src/models/restaurant";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -41,10 +43,10 @@ export type RootStackParams = {
   QR: undefined;
   Auth: undefined;
   Restaurant: {
-    restaurant: string;
+    restaurant: IRestaurant;
   };
 };
-const Stack = createNativeStackNavigator<RootStackParams>();
+const Stack = createSharedElementStackNavigator<RootStackParams>();
 
 const prefix = Linking.createURL("/");
 const linking: LinkingOptions<ReactNavigation.RootParamList> = {
@@ -107,12 +109,18 @@ function Root() {
     >
       <NavigationContainer
         linking={linking}
-        fallback={<Text>Loading...</Text>}
+        fallback={<ActivityIndicator />}
         theme={MyTheme}
       >
         <Stack.Navigator
           initialRouteName="Home"
-          screenOptions={({ route, navigation }) => ({
+          screenOptions={({
+            route,
+            navigation,
+          }: {
+            route: any;
+            navigation: any;
+          }) => ({
             headerShadowVisible: false,
             headerTitle: () => (
               <Text
@@ -125,7 +133,7 @@ function Root() {
               </Text>
             ),
             headerRight: () =>
-              route.name !== "QR" ? (
+              route.name === "Home" ? (
                 <Pressable onPress={() => navigation.navigate("QR")}>
                   <QrcodeIcon size={26} color="black" />
                 </Pressable>
@@ -134,7 +142,14 @@ function Root() {
         >
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Auth" component={Auth} />
-          <Stack.Screen name="Restaurant" component={Restaurant} />
+          <Stack.Screen
+            name="Restaurant"
+            component={Restaurant}
+            sharedElements={(route) => [route.params.restaurant]}
+            options={{
+              headerShown: false,
+            }}
+          />
           <Stack.Screen name="QR" component={QRCode} />
         </Stack.Navigator>
       </NavigationContainer>

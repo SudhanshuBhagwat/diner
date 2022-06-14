@@ -49,10 +49,13 @@ const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({
             renderItem={({ item }) => (
               <Pressable
                 onPress={() =>
-                  navigation.navigate("Restaurant", {
-                    restaurant: String(item.id),
+                  navigation.push("Restaurant", {
+                    restaurant: item,
                   })
                 }
+                style={{
+                  width: 240,
+                }}
               >
                 <RestaurantCard restaurant={item} />
               </Pressable>
