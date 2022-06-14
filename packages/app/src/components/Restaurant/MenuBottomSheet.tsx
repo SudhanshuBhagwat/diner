@@ -17,18 +17,16 @@ const MenuBottomSheet: React.FC<
   }, []);
 
   return (
-    <View style={styles.container}>
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={1}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}
-      >
-        <View style={styles.contentContainer}>
-          <Text style={styles.text}>MenuBottomSheet</Text>
-        </View>
-      </BottomSheet>
-    </View>
+    <BottomSheet
+      ref={bottomSheetRef}
+      index={1}
+      snapPoints={snapPoints}
+      onChange={handleSheetChanges}
+    >
+      <View style={styles.contentContainer}>
+        <Text style={styles.text}>MenuBottomSheet</Text>
+      </View>
+    </BottomSheet>
   );
 };
 
