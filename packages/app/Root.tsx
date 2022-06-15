@@ -134,9 +134,15 @@ function Root() {
             ),
             headerRight: () =>
               route.name === "Home" ? (
-                <Pressable onPress={() => navigation.navigate("QR")}>
-                  <QrcodeIcon size={26} color="black" />
-                </Pressable>
+                <View
+                  style={{
+                    marginRight: 16,
+                  }}
+                >
+                  <Pressable onPress={() => navigation.navigate("QR")}>
+                    <QrcodeIcon size={26} color="black" />
+                  </Pressable>
+                </View>
               ) : null,
           })}
         >
