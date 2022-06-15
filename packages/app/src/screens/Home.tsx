@@ -54,9 +54,6 @@ const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({
                     restaurant: item,
                   })
                 }
-                style={{
-                  width: 240,
-                }}
               >
                 <RestaurantCard restaurant={item} />
               </Pressable>

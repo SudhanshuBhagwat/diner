@@ -1,8 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useState } from "react";
 import {
-  FlatList,
   ImageBackground,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,13 +17,13 @@ import MenuCard from "../components/Home/MenuCard";
 import Nav from "../components/Home/Nav";
 import MenuBottomSheet from "../components/Restaurant/MenuBottomSheet";
 import { DATA } from "../fixtures/items";
-import { Separator } from "./Home";
 
 type Props = NativeStackScreenProps<RootStackParams, "Restaurant">;
 
 const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
   route,
 }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const restaurant = route.params.restaurant;
 
   return (
@@ -59,7 +59,9 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
               <View style={styles.list}>
                 {DATA[0].items.map((item) => (
                   <View key={item.id} style={styles.separator}>
-                    <MenuCard item={item} />
+                    <Pressable onPress={() => setIsOpen(!isOpen)}>
+                      <MenuCard item={item} />
+                    </Pressable>
                   </View>
                 ))}
               </View>
@@ -67,6 +69,7 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
           ))}
         </View>
       </ScrollView>
+      {isOpen && <MenuBottomSheet onClose={setIsOpen} />}
     </View>
   );
 };

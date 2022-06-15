@@ -1,41 +1,32 @@
-import React, { useCallback, useMemo, useRef } from "react";
-import { Text, StyleSheet, View } from "react-native";
-import { Font } from "shared/Font";
 import BottomSheet from "@gorhom/bottom-sheet";
+import React, { useMemo, useRef } from "react";
+import { StyleSheet, View } from "react-native";
+import { Font } from "shared/Font";
 
-interface Props {}
+interface Props {
+  onClose: (value: boolean) => void;
+}
 
-const MenuBottomSheet: React.FC<
-  React.PropsWithChildren<Props> & Props
-> = () => {
+const MenuBottomSheet: React.FC<React.PropsWithChildren<Props> & Props> = ({
+  children,
+  onClose,
+}) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
-
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
-  }, []);
+  const snapPoints = useMemo(() => ["80%"], []);
 
   return (
     <BottomSheet
       ref={bottomSheetRef}
-      index={1}
       snapPoints={snapPoints}
-      onChange={handleSheetChanges}
+      enablePanDownToClose
+      onClose={() => onClose(false)}
     >
-      <View style={styles.contentContainer}>
-        <Text style={styles.text}>MenuBottomSheet</Text>
-      </View>
+      <View style={styles.contentContainer}>{children}</View>
     </BottomSheet>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: "grey",
-  },
   contentContainer: {
     flex: 1,
     alignItems: "center",
