@@ -1,6 +1,6 @@
-import BottomSheet from "@gorhom/bottom-sheet";
-import React, { useMemo, useRef } from "react";
-import { StyleSheet, View } from "react-native";
+import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import React, { useCallback, useMemo, useRef } from "react";
+import { Pressable, StyleSheet, View } from "react-native";
 import { Font } from "shared/Font";
 
 interface Props {
@@ -12,13 +12,26 @@ const MenuBottomSheet: React.FC<React.PropsWithChildren<Props> & Props> = ({
   onClose,
 }) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ["80%"], []);
+  const snapPoints = useMemo(() => ["90%"], []);
+
+  const renderBackdrop = useCallback(
+    (props) => (
+      <BottomSheetBackdrop
+        {...props}
+        opacity={0.5}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+      />
+    ),
+    []
+  );
 
   return (
     <BottomSheet
       ref={bottomSheetRef}
       snapPoints={snapPoints}
       enablePanDownToClose
+      backdropComponent={renderBackdrop}
       onClose={() => onClose(false)}
     >
       <View style={styles.contentContainer}>{children}</View>

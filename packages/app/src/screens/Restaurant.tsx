@@ -15,7 +15,8 @@ import { Font } from "shared/Font";
 import { RootStackParams } from "../../Root";
 import MenuCard from "../components/Home/MenuCard";
 import Nav from "../components/Home/Nav";
-import MenuBottomSheet from "../components/Restaurant/MenuBottomSheet";
+import Item from "../components/Restaurant/Item";
+import MenuBottomSheet from "../components/shared/BottomSheet";
 import { DATA } from "../fixtures/items";
 
 type Props = NativeStackScreenProps<RootStackParams, "Restaurant">;
@@ -69,7 +70,11 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
           ))}
         </View>
       </ScrollView>
-      {isOpen && <MenuBottomSheet onClose={setIsOpen} />}
+      {isOpen && (
+        <MenuBottomSheet onClose={setIsOpen}>
+          <Item />
+        </MenuBottomSheet>
+      )}
     </View>
   );
 };
