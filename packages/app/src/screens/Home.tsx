@@ -29,40 +29,38 @@ const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({
       {DATA.map((menu) => (
         <View key={menu.id} style={styles.section}>
           <Text style={styles.title}>{menu.name}</Text>
-          <View style={styles.list}>
-            <FlatList
-              data={menu.items}
-              horizontal
-              renderItem={({ item }) => <MenuCard item={item} />}
-              keyExtractor={(item) => String(item.id)}
-              contentContainerStyle={{ paddingRight: 16 }}
-              ItemSeparatorComponent={() => <Separator />}
-            />
-          </View>
-        </View>
-      ))}
-      <View style={styles.section}>
-        <Text style={styles.title}>Restaurants</Text>
-        <View style={styles.list}>
           <FlatList
-            data={RESTAURANTS}
+            data={menu.items}
             horizontal
             renderItem={({ item }) => (
-              <Pressable
-                onPress={() =>
-                  navigation.push("Restaurant", {
-                    restaurant: item,
-                  })
-                }
-              >
-                <RestaurantCard restaurant={item} />
-              </Pressable>
+              <MenuCard item={item} onPress={() => {}} />
             )}
             keyExtractor={(item) => String(item.id)}
             contentContainerStyle={{ paddingRight: 16 }}
             ItemSeparatorComponent={() => <Separator />}
           />
         </View>
+      ))}
+      <View style={styles.section}>
+        <Text style={styles.title}>Restaurants</Text>
+        <FlatList
+          data={RESTAURANTS}
+          horizontal
+          renderItem={({ item }) => (
+            <Pressable
+              onPress={() =>
+                navigation.push("Restaurant", {
+                  restaurant: item,
+                })
+              }
+            >
+              <RestaurantCard restaurant={item} />
+            </Pressable>
+          )}
+          keyExtractor={(item) => String(item.id)}
+          contentContainerStyle={{ paddingRight: 16 }}
+          ItemSeparatorComponent={() => <Separator />}
+        />
       </View>
     </View>
   );
@@ -80,9 +78,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontFamily: Font[900],
-  },
-  list: {
-    marginTop: 8,
   },
 });
 

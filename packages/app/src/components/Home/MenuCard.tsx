@@ -1,44 +1,49 @@
 import React from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { Text, StyleSheet, View, Image, Pressable } from "react-native";
 import { Font } from "shared/Font";
 import { Item } from "../../models/items";
 
 interface Props {
   item: Item;
+  onPress: () => void;
 }
 
 const MenuCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
   item,
+  onPress,
 }) => {
   return (
-    <View style={styles.container}>
-      <Image
-        source={{
-          uri: item.image,
-        }}
-        style={styles.image}
-      />
-      <View style={styles.detailsContainer}>
-        <Text style={styles.text}>
-          {item.name} @ {item.restaurant}
-        </Text>
-        <View style={styles.badges}>
-          {item.badges.map((badge: string, idx: number) => (
-            <Text key={idx} style={styles.badge}>
-              {badge}
-            </Text>
-          ))}
+    <Pressable onPress={() => onPress()}>
+      <View style={styles.container}>
+        <Image
+          source={{
+            uri: item.image,
+          }}
+          style={styles.image}
+        />
+        <View style={styles.detailsContainer}>
+          <Text style={styles.text}>
+            {item.name} @ {item.restaurant}
+          </Text>
+          <View style={styles.badges}>
+            {item.badges.map((badge: string, idx: number) => (
+              <Text key={idx} style={styles.badge}>
+                {badge}
+              </Text>
+            ))}
+          </View>
+          <Text style={styles.description}>{item.description}</Text>
+          <Text style={styles.price}>₹{item.price}</Text>
         </View>
-        <Text style={styles.description}>{item.description}</Text>
-        <Text style={styles.price}>₹{item.price}</Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    paddingVertical: 6,
   },
   detailsContainer: {
     justifyContent: "space-between",

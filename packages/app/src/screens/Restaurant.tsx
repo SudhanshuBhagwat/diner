@@ -1,10 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { useState } from "react";
+import React from "react";
 import {
-  FlatList,
   ImageBackground,
-  Pressable,
-  ScrollView,
   SectionList,
   StyleSheet,
   Text,
@@ -13,6 +10,7 @@ import {
 import { LocationMarkerIcon } from "react-native-heroicons/outline";
 import LinearGradient from "react-native-linear-gradient";
 import { SharedElement } from "react-navigation-shared-element";
+import { useDispatch, useSelector } from "react-redux";
 import { Font } from "shared/Font";
 import MenuCard from "../components/Home/MenuCard";
 import Nav from "../components/Home/Nav";
@@ -20,13 +18,18 @@ import { RootStackParams } from "../components/navigation";
 import Item from "../components/Restaurant/Item";
 import MenuBottomSheet from "../components/shared/BottomSheet";
 import { DATA } from "../fixtures/menuItems";
+import { RootState } from "../redux";
+import { close, open } from "../redux/modal-store";
 
 type Props = NativeStackScreenProps<RootStackParams, "Restaurant">;
 
 const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
   route,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const isOpen = useSelector(
+    (state: RootState) => state.modalStore.isModalOpen
+  );
+  const dispatch = useDispatch();
   const restaurant = route.params.restaurant;
 
   return (
@@ -59,19 +62,14 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
         sections={DATA}
         keyExtractor={(item, index) => `${item.id}-index`}
         renderItem={({ item }) => (
-          <Pressable
-            style={styles.separator}
-            onPress={() => setIsOpen(!isOpen)}
-          >
-            <MenuCard item={item} />
-          </Pressable>
+          <MenuCard item={item} onPress={() => dispatch(open())} />
         )}
         renderSectionHeader={({ section: { name } }) => (
           <Text style={styles.title}>{name}</Text>
         )}
       />
       {isOpen && (
-        <MenuBottomSheet onClose={setIsOpen}>
+        <MenuBottomSheet onClose={() => dispatch(close())}>
           <Item />
         </MenuBottomSheet>
       )}
@@ -119,9 +117,6 @@ const styles = StyleSheet.create({
   },
   list: {
     marginTop: 8,
-  },
-  separator: {
-    paddingVertical: 6,
   },
 });
 

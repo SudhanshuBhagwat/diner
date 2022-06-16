@@ -13,7 +13,12 @@ import { loadAsync } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import Navigation from "./src/components/navigation";
+import Item from "./src/components/Restaurant/Item";
+import MenuBottomSheet from "./src/components/shared/BottomSheet";
+import { RootState } from "./src/redux";
+import { close } from "./src/redux/modal-store";
 
 function Root() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -59,8 +64,20 @@ function Root() {
       }}
       onLayout={onLayoutRootView}
     >
-      <Navigation />
+      <Main />
     </View>
+  );
+}
+
+function Main() {
+  const isModalOpen = useSelector(
+    (state: RootState) => state.modalStore.isModalOpen
+  );
+
+  return (
+    <>
+      <Navigation />
+    </>
   );
 }
 
