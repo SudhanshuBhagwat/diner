@@ -7,16 +7,24 @@ import { Restaurant } from "../../models/restaurant";
 
 interface Props {
   restaurant: Restaurant;
+  large?: boolean;
 }
 
 const RestaurantCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
   restaurant,
+  large,
 }) => {
   return (
     <View>
       <SharedElement id={`${restaurant.id}`}>
         <Image
-          style={styles.image}
+          style={[
+            styles.image,
+            {
+              width: "100%",
+              height: 200,
+            },
+          ]}
           source={{
             uri: restaurant.image,
           }}
@@ -44,7 +52,6 @@ const styles = StyleSheet.create({
     height: 150,
     width: 240,
     borderRadius: 14,
-    aspectRatio: 16 / 9,
     resizeMode: "cover",
   },
   text: {
