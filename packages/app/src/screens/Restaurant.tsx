@@ -14,9 +14,9 @@ import { LocationMarkerIcon } from "react-native-heroicons/outline";
 import LinearGradient from "react-native-linear-gradient";
 import { SharedElement } from "react-navigation-shared-element";
 import { Font } from "shared/Font";
-import { RootStackParams } from "../../Root";
 import MenuCard from "../components/Home/MenuCard";
 import Nav from "../components/Home/Nav";
+import { RootStackParams } from "../components/navigation";
 import Item from "../components/Restaurant/Item";
 import MenuBottomSheet from "../components/shared/BottomSheet";
 import { DATA } from "../fixtures/menuItems";
@@ -55,7 +55,6 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
         </View>
       </View>
       <SectionList
-        // style={styles.contents}
         contentContainerStyle={styles.contents}
         sections={DATA}
         keyExtractor={(item, index) => `${item.id}-index`}
