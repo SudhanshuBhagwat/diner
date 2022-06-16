@@ -1,7 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ImageBackground,
+  LayoutChangeEvent,
   SectionList,
   StyleSheet,
   Text,
@@ -24,10 +25,19 @@ type Props = NativeStackScreenProps<RootStackParams, "Restaurant">;
 const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
   route,
 }) => {
-  const dispatch = useDispatch();
   const restaurant = route.params.restaurant;
   const item = route.params.item;
-  const [isOpen, setIsOpen] = useState<boolean>(item ? true : false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (item) {
+        setIsOpen(true);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <View style={styles.container}>

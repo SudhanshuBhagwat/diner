@@ -1,5 +1,12 @@
 import React from "react";
-import { Text, StyleSheet, View, Image, Pressable } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  Pressable,
+  LayoutChangeEvent,
+} from "react-native";
 import { Font } from "shared/Font";
 import { Item } from "../../models/items";
 
