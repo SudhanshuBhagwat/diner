@@ -33,7 +33,22 @@ const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({
             data={menu.items}
             horizontal
             renderItem={({ item }) => (
-              <MenuCard item={item} onPress={() => {}} />
+              <MenuCard
+                item={item}
+                onPress={() => {
+                  navigation.push("Restaurant", {
+                    restaurant: {
+                      id: 2,
+                      name: "Shwarma King",
+                      rating: 4.5,
+                      image:
+                        "https://images.unsplash.com/photo-1623800330578-2cd67efaec75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+                      location: "Akurdi",
+                    },
+                    item,
+                  });
+                }}
+              />
             )}
             keyExtractor={(item) => String(item.id)}
             contentContainerStyle={{ paddingRight: 16 }}

@@ -20,6 +20,7 @@ import QRCode from "../screens/QRCode";
 import Restaurant from "../screens/Restaurant";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import { Restaurant as IRestaurant } from "../models/restaurant";
+import { Item } from "../models/items";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -50,6 +51,7 @@ export type RootStackParams = {
   Auth: undefined;
   Restaurant: {
     restaurant: IRestaurant;
+    item?: Item;
   };
 };
 

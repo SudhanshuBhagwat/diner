@@ -13,7 +13,7 @@ const MenuCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
   onPress,
 }) => {
   return (
-    <Pressable onPress={() => onPress()}>
+    <Pressable onPress={onPress}>
       <View style={styles.container}>
         <Image
           source={{
