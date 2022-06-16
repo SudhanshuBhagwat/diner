@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { LocationMarkerIcon, StarIcon } from "react-native-heroicons/outline";
 import { SharedElement } from "react-navigation-shared-element";

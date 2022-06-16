@@ -1,9 +1,11 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import {
+  FlatList,
   ImageBackground,
   Pressable,
   ScrollView,
+  SectionList,
   StyleSheet,
   Text,
   View,
@@ -17,7 +19,7 @@ import MenuCard from "../components/Home/MenuCard";
 import Nav from "../components/Home/Nav";
 import Item from "../components/Restaurant/Item";
 import MenuBottomSheet from "../components/shared/BottomSheet";
-import { DATA } from "../fixtures/items";
+import { DATA } from "../fixtures/menuItems";
 
 type Props = NativeStackScreenProps<RootStackParams, "Restaurant">;
 
@@ -52,24 +54,23 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
           </View>
         </View>
       </View>
-      <ScrollView>
-        <View style={styles.contents}>
-          {DATA.map((menu) => (
-            <View key={menu.id}>
-              <Text style={styles.title}>{menu.name}</Text>
-              <View style={styles.list}>
-                {DATA[0].items.map((item) => (
-                  <View key={item.id} style={styles.separator}>
-                    <Pressable onPress={() => setIsOpen(!isOpen)}>
-                      <MenuCard item={item} />
-                    </Pressable>
-                  </View>
-                ))}
-              </View>
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+      <SectionList
+        // style={styles.contents}
+        contentContainerStyle={styles.contents}
+        sections={DATA}
+        keyExtractor={(item, index) => `${item.id}-index`}
+        renderItem={({ item }) => (
+          <Pressable
+            style={styles.separator}
+            onPress={() => setIsOpen(!isOpen)}
+          >
+            <MenuCard item={item} />
+          </Pressable>
+        )}
+        renderSectionHeader={({ section: { name } }) => (
+          <Text style={styles.title}>{name}</Text>
+        )}
+      />
       {isOpen && (
         <MenuBottomSheet onClose={setIsOpen}>
           <Item />
@@ -90,8 +91,8 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   contents: {
-    paddingVertical: 16,
     paddingLeft: 16,
+    paddingVertical: 16,
   },
   headerContents: {
     position: "absolute",
