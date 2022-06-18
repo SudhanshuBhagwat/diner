@@ -6,39 +6,79 @@ import {
   TextInput,
   Pressable,
   Image,
+  ScrollView,
 } from "react-native";
 import { Font } from "shared/Font";
 import Dropdown from "../../components/Dropdown";
 import { launchImageLibrary } from "react-native-image-picker";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParams } from "../../components/navigation";
+import { PlusIcon } from "react-native-heroicons/outline";
+import { BORDER_COLOR, RUPEE } from "../../utilities/constants";
+import useImagePicker from "../../hooks/useImagePicker";
 
-interface Props {}
+type Props = NativeStackScreenProps<RootStackParams, "AddRestaurant">;
 
-const BORDER_COLOR = "#b3b3b3";
-
-const AddRestaurant: React.FC<React.PropsWithChildren<Props> & Props> = () => {
-  const [uri, setUri] = useState<string | undefined>(undefined);
-
-  function chooseImage() {
-    launchImageLibrary(
-      {
-        mediaType: "photo",
-      },
-      ({ didCancel, assets, errorCode, errorMessage }) => {
-        if (didCancel) {
-          return;
-        }
-        if (errorCode) {
-          console.error(errorMessage);
-          return;
-        }
-        const file = assets ? assets[0] : null;
-        setUri(file === null ? undefined : file.uri);
-      }
-    );
-  }
-
+const AddRestaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
+  navigation,
+}) => {
   return (
     <View style={styles.container}>
+      <ScrollView
+        contentContainerStyle={{
+          paddingBottom: 90,
+        }}
+      >
+        {/* <RestaurantInfo /> */}
+        <View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text style={styles.main}>Menus</Text>
+            <Pressable onPress={() => navigation.push("AddMenu")}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  paddingHorizontal: 16,
+                  paddingVertical: 8,
+                  backgroundColor: "#3f3f3f",
+                  borderRadius: 8,
+                  alignItems: "center",
+                }}
+              >
+                <PlusIcon color="white" size={20} />
+                <Text
+                  style={{
+                    fontFamily: Font[600],
+                    fontSize: 16,
+                    marginLeft: 8,
+                    color: "white",
+                  }}
+                >
+                  Add Menu
+                </Text>
+              </View>
+            </Pressable>
+          </View>
+          <Text style={styles.message}>No Menus Added</Text>
+        </View>
+      </ScrollView>
+      <Pressable onPress={() => {}}>
+        <Text style={styles.addRestaurant}>Add Restaurant</Text>
+      </Pressable>
+    </View>
+  );
+};
+
+const RestaurantInfo = () => {
+  const { uri, chooseImage } = useImagePicker();
+
+  return (
+    <View>
+      <Text style={styles.main}>Restaurant Info</Text>
       <Pressable onPress={() => chooseImage()}>
         {uri === undefined ? (
           <View style={[styles.border, styles.imageContainer]}>
@@ -75,7 +115,7 @@ const AddRestaurant: React.FC<React.PropsWithChildren<Props> & Props> = () => {
             alignItems: "center",
           }}
         >
-          <Text style={[styles.label, { marginRight: 16 }]}>₹</Text>
+          <Text style={[styles.label, { marginRight: 16 }]}>{RUPEE}</Text>
           <TextInput
             placeholder="1400"
             style={[styles.input, { width: "30%" }]}
@@ -84,9 +124,6 @@ const AddRestaurant: React.FC<React.PropsWithChildren<Props> & Props> = () => {
           <Dropdown />
         </View>
       </View>
-      <Pressable onPress={() => {}}>
-        <Text style={styles.addRestaurant}>Add Restaurant</Text>
-      </Pressable>
     </View>
   );
 };
@@ -135,7 +172,20 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     textAlign: "center",
     borderRadius: 8,
-    marginTop: 16,
+    width: "100%",
+    position: "absolute",
+    bottom: 16,
+    zIndex: 10,
+  },
+  main: {
+    fontSize: 24,
+    fontFamily: Font[700],
+  },
+  message: {
+    fontSize: 16,
+    fontFamily: Font[400],
+    textAlign: "center",
+    marginTop: 40,
   },
 });
 

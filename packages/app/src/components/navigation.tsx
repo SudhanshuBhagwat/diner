@@ -24,6 +24,8 @@ import { Item } from "../models/items";
 import Restaurants from "../screens/Restaurants";
 import AddRestaurant from "../screens/Restaurant/AddRestaurant";
 import { StackNavigationOptions } from "@react-navigation/stack";
+import AddMenu from "../screens/Restaurant/Menu/AddMenu";
+import AddItem from "../screens/Restaurant/Menu/AddItem";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -58,6 +60,8 @@ export type RootStackParams = {
   };
   Restaurants: undefined;
   AddRestaurant: undefined;
+  AddMenu: undefined;
+  AddItem: undefined;
 };
 
 const Stack = createSharedElementStackNavigator<RootStackParams>();
@@ -130,6 +134,8 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
         />
         <Stack.Screen name="Restaurants" component={Restaurants} />
         <Stack.Screen name="AddRestaurant" component={AddRestaurant} />
+        <Stack.Screen name="AddMenu" component={AddMenu} />
+        <Stack.Screen name="AddItem" component={AddItem} />
         <Stack.Screen name="QR" component={QRCode} />
       </Stack.Navigator>
     </NavigationContainer>
