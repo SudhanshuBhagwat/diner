@@ -26,8 +26,6 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
-      - name: Navigate to App directory
-        run: cd packages/app
-
       - name: 🚀 Build app
+        working-directory: ./packages/app
         run: eas build --platform android --non-interactive
