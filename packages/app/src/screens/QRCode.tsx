@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { BarCodeReadEvent, GoogleVisionBarcodeType } from "react-native-camera";
 import QRCodeScanner from "react-native-qrcode-scanner";
-import { Font } from "shared/Font";
+import { Font } from "@diner/shared/Font";
 
 interface Props {}
 

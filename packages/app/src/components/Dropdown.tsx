@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dropdown as RNDropdown } from "react-native-element-dropdown";
 import { Text, StyleSheet, View } from "react-native";
-import { Font } from "shared/Font";
+import { Font } from "@diner/shared/Font";
 
 interface Props {}
 

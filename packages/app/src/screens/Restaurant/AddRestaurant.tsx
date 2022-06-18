@@ -8,7 +8,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { Font } from "shared/Font";
+import { Font } from "@diner/shared/Font";
 import Dropdown from "../../components/Dropdown";
 import { launchImageLibrary } from "react-native-image-picker";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";

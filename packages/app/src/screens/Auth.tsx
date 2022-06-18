@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import AuthForm from "shared/components/AuthForm";
+import AuthForm from "@diner/shared/components/AuthForm";
 
 function Auth() {
   return (

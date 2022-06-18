@@ -8,7 +8,7 @@ import {
   Image,
   TextInput,
 } from "react-native";
-import { Font } from "shared/Font";
+import { Font } from "@diner/shared/Font";
 import { RootStackParams } from "../../../components/navigation";
 import useImagePicker from "../../../hooks/useImagePicker";
 import { BORDER_COLOR, RUPEE } from "../../../utilities/constants";

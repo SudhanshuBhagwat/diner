@@ -1,7 +1,7 @@
 import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import React, { useCallback, useMemo, useRef } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
-import { Font } from "shared/Font";
+import { Font } from "@diner/shared/Font";
 
 interface Props {
   onClose: (value: boolean) => void;

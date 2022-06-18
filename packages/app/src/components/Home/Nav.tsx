@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
 import { ChevronLeftIcon } from "react-native-heroicons/outline";
-import { Font } from "shared/Font";
+import { Font } from "@shared/Font";
 
 interface Props {}
 

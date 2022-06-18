@@ -8,7 +8,7 @@ import {
   Pressable,
 } from "react-native";
 import { MinusIcon, PlusIcon, StarIcon } from "react-native-heroicons/outline";
-import { Font } from "shared/Font";
+import { Font } from "@diner/shared/Font";
 
 interface Props {}
 

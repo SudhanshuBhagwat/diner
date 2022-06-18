@@ -12,7 +12,7 @@ import {
   Pressable,
 } from "react-native";
 import { ChevronLeftIcon, QrcodeIcon } from "react-native-heroicons/outline";
-import { Font } from "shared/Font";
+import { Font } from "@diner/shared/Font";
 import * as Linking from "expo-linking";
 import Home from "../screens/Home";
 import Auth from "../screens/Auth";

@@ -7,7 +7,7 @@ import {
   Pressable,
   LayoutChangeEvent,
 } from "react-native";
-import { Font } from "shared/Font";
+import { Font } from "@diner/shared/Font";
 import { Item } from "../../models/items";
 
 interface Props {

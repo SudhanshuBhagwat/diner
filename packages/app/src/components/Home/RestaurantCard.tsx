@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { LocationMarkerIcon, StarIcon } from "react-native-heroicons/outline";
 import { SharedElement } from "react-navigation-shared-element";
-import { Font } from "shared/Font";
+import { Font } from "@diner/shared/Font";
 import { Restaurant } from "../../models/restaurant";
 
 interface Props {

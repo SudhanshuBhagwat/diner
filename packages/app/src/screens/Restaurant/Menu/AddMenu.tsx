@@ -8,7 +8,7 @@ import {
   Image,
   TextInput,
 } from "react-native";
-import { Font } from "shared/Font";
+import { Font } from "@diner/shared/Font";
 import Dropdown from "../../../components/Dropdown";
 import { RootStackParams } from "../../../components/navigation";
 import { launchImageLibrary } from "react-native-image-picker";

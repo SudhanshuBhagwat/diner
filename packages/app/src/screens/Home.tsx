@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { Text, StyleSheet, View, FlatList, Pressable } from "react-native";
-import { Font } from "shared/Font";
+import { Font } from "@diner/shared/Font";
 import MenuCard from "../components/Home/MenuCard";
 import RestaurantCard from "../components/Home/RestaurantCard";
 import { RootStackParams } from "../components/navigation";

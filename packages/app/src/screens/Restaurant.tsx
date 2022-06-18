@@ -12,7 +12,7 @@ import { LocationMarkerIcon } from "react-native-heroicons/outline";
 import LinearGradient from "react-native-linear-gradient";
 import { SharedElement } from "react-navigation-shared-element";
 import { useDispatch } from "react-redux";
-import { Font } from "shared/Font";
+import { Font } from "@diner/shared/Font";
 import MenuCard from "../components/Home/MenuCard";
 import Nav from "../components/Home/Nav";
 import { RootStackParams } from "../components/navigation";
