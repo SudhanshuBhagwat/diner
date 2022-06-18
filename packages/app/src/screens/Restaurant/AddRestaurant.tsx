@@ -85,20 +85,7 @@ const AddRestaurant: React.FC<React.PropsWithChildren<Props> & Props> = () => {
         </View>
       </View>
       <Pressable onPress={() => {}}>
-        <Text
-          style={{
-            backgroundColor: "#3f3f3f",
-            color: "white",
-            fontFamily: Font[600],
-            fontSize: 18,
-            paddingVertical: 16,
-            textAlign: "center",
-            borderRadius: 8,
-            marginTop: 16,
-          }}
-        >
-          Add Restaurant
-        </Text>
+        <Text style={styles.addRestaurant}>Add Restaurant</Text>
       </Pressable>
     </View>
   );
@@ -134,10 +121,21 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 8,
     marginTop: 8,
+    fontFamily: Font[500],
   },
   label: {
     fontSize: 18,
     fontFamily: Font[600],
+  },
+  addRestaurant: {
+    backgroundColor: "#3f3f3f",
+    color: "white",
+    fontFamily: Font[600],
+    fontSize: 18,
+    paddingVertical: 16,
+    textAlign: "center",
+    borderRadius: 8,
+    marginTop: 16,
   },
 });
 

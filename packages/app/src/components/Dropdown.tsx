@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Dropdown as RNDropdown } from "react-native-element-dropdown";
 import { Text, StyleSheet, View } from "react-native";
+import { Font } from "shared/Font";
 
 interface Props {}
 
@@ -28,7 +29,6 @@ const Dropdown: React.FC<React.PropsWithChildren<Props> & Props> = () => {
       style={styles.dropdown}
       placeholderStyle={styles.placeholderStyle}
       selectedTextStyle={styles.selectedTextStyle}
-      inputSearchStyle={styles.inputSearchStyle}
       iconStyle={styles.iconStyle}
       data={data}
       labelField="label"
@@ -68,21 +68,20 @@ const styles = StyleSheet.create({
   textItem: {
     flex: 1,
     fontSize: 16,
+    fontFamily: Font[500],
   },
   placeholderStyle: {
     fontSize: 16,
     color: "#bdbdbd",
+    fontFamily: Font[500],
   },
   selectedTextStyle: {
     fontSize: 16,
+    fontFamily: Font[500],
   },
   iconStyle: {
     width: 20,
     height: 20,
-  },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
   },
 });
 export default Dropdown;
