@@ -25,7 +25,7 @@ const Restaurants: React.FC<React.PropsWithChildren<Props> & Props> = ({
         }}
       >
         <Text style={styles.text}>Your Restaurants</Text>
-        <Pressable>
+        <Pressable onPress={() => navigation.push("AddRestaurant")}>
           <View
             style={{
               flexDirection: "row",

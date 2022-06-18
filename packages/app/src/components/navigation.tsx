@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
   Pressable,
 } from "react-native";
-import { QrcodeIcon } from "react-native-heroicons/outline";
+import { ChevronLeftIcon, QrcodeIcon } from "react-native-heroicons/outline";
 import { Font } from "shared/Font";
 import * as Linking from "expo-linking";
 import Home from "../screens/Home";
@@ -22,6 +22,8 @@ import { createSharedElementStackNavigator } from "react-navigation-shared-eleme
 import { Restaurant as IRestaurant } from "../models/restaurant";
 import { Item } from "../models/items";
 import Restaurants from "../screens/Restaurants";
+import AddRestaurant from "../screens/Restaurant/AddRestaurant";
+import { StackNavigationOptions } from "@react-navigation/stack";
 
 const MyTheme = {
   ...DefaultTheme,
@@ -55,6 +57,7 @@ export type RootStackParams = {
     item?: Item;
   };
   Restaurants: undefined;
+  AddRestaurant: undefined;
 };
 
 const Stack = createSharedElementStackNavigator<RootStackParams>();
@@ -69,7 +72,7 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
       theme={MyTheme}
     >
       <Stack.Navigator
-        initialRouteName="Restaurants"
+        initialRouteName="AddRestaurant"
         screenOptions={({
           route,
           navigation,
@@ -88,18 +91,31 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
               Diner
             </Text>
           ),
+          headerLeft: () =>
+            navigation.canGoBack() && (
+              <Pressable onPress={() => navigation.goBack()}>
+                <ChevronLeftIcon
+                  size={26}
+                  color="black"
+                  strokeWidth={2}
+                  style={{
+                    marginLeft: 16,
+                  }}
+                />
+              </Pressable>
+            ),
           headerRight: () =>
-            route.name === "Home" ? (
+            route.name === "Home" && (
               <View
                 style={{
                   marginRight: 16,
                 }}
               >
-                <Pressable onPress={() => navigation.navigate("QR")}>
+                <Pressable onPress={() => navigation.push("QR")}>
                   <QrcodeIcon size={26} color="black" />
                 </Pressable>
               </View>
-            ) : null,
+            ),
         })}
       >
         <Stack.Screen name="Home" component={Home} />
@@ -113,6 +129,7 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
           }}
         />
         <Stack.Screen name="Restaurants" component={Restaurants} />
+        <Stack.Screen name="AddRestaurant" component={AddRestaurant} />
         <Stack.Screen name="QR" component={QRCode} />
       </Stack.Navigator>
     </NavigationContainer>
