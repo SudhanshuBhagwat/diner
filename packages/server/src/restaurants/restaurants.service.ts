@@ -1,26 +1,39 @@
 import { Injectable } from '@nestjs/common';
-import { CreateRestaurantDto } from './dto/create-restaurant.dto';
-import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class RestaurantsService {
-  create(createRestaurantDto: CreateRestaurantDto) {
-    return 'This action adds a new restaurant';
-  }
+  constructor(private prisma: PrismaService) {}
 
-  findAll() {
-    return `This action returns all restaurants`;
+  create(createRestaurantDto: Prisma.RestaurantCreateInput) {
+    return this.prisma.restaurant.create({
+      data: createRestaurantDto,
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} restaurant`;
+    return this.prisma.restaurant.findFirst({
+      where: {
+        id,
+      },
+    });
   }
 
-  update(id: number, updateRestaurantDto: UpdateRestaurantDto) {
-    return `This action updates a #${id} restaurant`;
+  update(id: number, updateRestaurantDto: Prisma.RestaurantUpdateInput) {
+    return this.prisma.restaurant.update({
+      where: {
+        id,
+      },
+      data: updateRestaurantDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} restaurant`;
+    return this.prisma.restaurant.delete({
+      where: {
+        id,
+      },
+    });
   }
 }
