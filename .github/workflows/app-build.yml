@@ -28,4 +28,4 @@ jobs:
 
       - name: 🚀 Build app
         working-directory: ./packages/app
-        run: eas build --platform android --non-interactive
+        run: eas build --profile preview --platform android --non-interactive
