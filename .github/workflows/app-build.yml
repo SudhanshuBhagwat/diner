@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  build:
+  build-app-preview-build:
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
