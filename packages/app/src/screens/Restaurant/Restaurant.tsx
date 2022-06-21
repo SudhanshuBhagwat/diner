@@ -13,12 +13,12 @@ import LinearGradient from "react-native-linear-gradient";
 import { SharedElement } from "react-navigation-shared-element";
 import { useDispatch } from "react-redux";
 import { Font } from "@diner/shared/Font";
-import MenuCard from "../components/Home/MenuCard";
-import Nav from "../components/Home/Nav";
-import { RootStackParams } from "../components/navigation";
-import Item from "../components/Restaurant/Item";
-import MenuBottomSheet from "../components/shared/BottomSheet";
-import { DATA } from "../fixtures/menuItems";
+import MenuCard from "../../components/Home/MenuCard";
+import Nav from "../../components/Home/Nav";
+import { RootStackParams } from "../../components/navigation";
+import Item from "../../components/Restaurant/Item";
+import MenuBottomSheet from "../../components/shared/BottomSheet";
+import { DATA } from "../../fixtures/menuItems";
 
 type Props = NativeStackScreenProps<RootStackParams, "Restaurant">;
 

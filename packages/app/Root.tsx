@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Inter_100Thin,
   Inter_200ExtraLight,
@@ -13,12 +14,9 @@ import { loadAsync } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import Navigation from "./src/components/navigation";
-import Item from "./src/components/Restaurant/Item";
-import MenuBottomSheet from "./src/components/shared/BottomSheet";
+import { useSelector } from "react-redux";
 import { RootState } from "./src/redux";
-import { close } from "./src/redux/modal-store";
+import Navigation from "./src/components/navigation";
 
 function Root() {
   const [appIsReady, setAppIsReady] = useState(false);

@@ -17,15 +17,15 @@ import * as Linking from "expo-linking";
 import Home from "../screens/Home";
 import Auth from "../screens/Auth";
 import QRCode from "../screens/QRCode";
-import Restaurant from "../screens/Restaurant";
+import Restaurant from "../screens/Restaurant/Restaurant";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import { Restaurant as IRestaurant } from "../models/restaurant";
 import { Item } from "../models/items";
-import Restaurants from "../screens/Restaurants";
 import AddRestaurant from "../screens/Restaurant/AddRestaurant";
 import { StackNavigationOptions } from "@react-navigation/stack";
 import AddMenu from "../screens/Restaurant/Menu/AddMenu";
 import AddItem from "../screens/Restaurant/Menu/AddItem";
+import Restaurants from "../screens/Restaurant/Restaurants";
 
 const MyTheme = {
   ...DefaultTheme,

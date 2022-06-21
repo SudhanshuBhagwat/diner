@@ -3,10 +3,10 @@ import React from "react";
 import { Text, StyleSheet, View, FlatList, Pressable } from "react-native";
 import { PlusIcon } from "react-native-heroicons/outline";
 import { Font } from "@diner/shared/Font";
-import RestaurantCard from "../components/Home/RestaurantCard";
-import navigation, { RootStackParams } from "../components/navigation";
-import { RESTAURANTS } from "../fixtures/restaurants";
-import { Separator } from "./Home";
+import { RootStackParams } from "../../components/navigation";
+import { RESTAURANTS } from "../../fixtures/restaurants";
+import RestaurantCard from "../../components/Home/RestaurantCard";
+import { Separator } from "../Home";
 
 type Props = NativeStackScreenProps<RootStackParams, "Restaurants">;
 

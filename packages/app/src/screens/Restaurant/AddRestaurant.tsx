@@ -16,6 +16,7 @@ import { RootStackParams } from "../../components/navigation";
 import { PlusIcon } from "react-native-heroicons/outline";
 import { BORDER_COLOR, RUPEE } from "../../utilities/constants";
 import useImagePicker from "../../hooks/useImagePicker";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 type Props = NativeStackScreenProps<RootStackParams, "AddRestaurant">;
 
@@ -29,44 +30,10 @@ const AddRestaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
           paddingBottom: 90,
         }}
       >
-        {/* <RestaurantInfo /> */}
-        <View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text style={styles.main}>Menus</Text>
-            <Pressable onPress={() => navigation.push("AddMenu")}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  paddingHorizontal: 16,
-                  paddingVertical: 8,
-                  backgroundColor: "#3f3f3f",
-                  borderRadius: 8,
-                  alignItems: "center",
-                }}
-              >
-                <PlusIcon color="white" size={20} />
-                <Text
-                  style={{
-                    fontFamily: Font[600],
-                    fontSize: 16,
-                    marginLeft: 8,
-                    color: "white",
-                  }}
-                >
-                  Add Menu
-                </Text>
-              </View>
-            </Pressable>
-          </View>
-          <Text style={styles.message}>No Menus Added</Text>
-        </View>
+        <RestaurantInfo />
+        <MenuInfo />
       </ScrollView>
-      <Pressable onPress={() => {}}>
+      <Pressable onPress={() => navigation.goBack()}>
         <Text style={styles.addRestaurant}>Add Restaurant</Text>
       </Pressable>
     </View>
@@ -124,6 +91,52 @@ const RestaurantInfo = () => {
           <Dropdown />
         </View>
       </View>
+    </View>
+  );
+};
+
+const MenuInfo = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParams>>();
+
+  return (
+    <View
+      style={{
+        marginTop: 16,
+      }}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <Text style={styles.main}>Menus</Text>
+        <Pressable onPress={() => navigation.navigate("AddMenu")}>
+          <View
+            style={{
+              flexDirection: "row",
+              paddingHorizontal: 16,
+              paddingVertical: 8,
+              backgroundColor: "#3f3f3f",
+              borderRadius: 8,
+              alignItems: "center",
+            }}
+          >
+            <PlusIcon color="white" size={20} />
+            <Text
+              style={{
+                fontFamily: Font[600],
+                fontSize: 16,
+                marginLeft: 8,
+                color: "white",
+              }}
+            >
+              Add Menu
+            </Text>
+          </View>
+        </Pressable>
+      </View>
+      <Text style={styles.message}>No Menus Added</Text>
     </View>
   );
 };
