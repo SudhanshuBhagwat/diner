@@ -6,14 +6,25 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class MenusService {
   constructor(private prisma: PrismaService) {}
 
-  create(createMenuDto: Prisma.MenuCreateInput) {
+  async create(createMenuDto: Prisma.MenuCreateInput, restaurantId: number) {
     return this.prisma.menu.create({
-      data: createMenuDto,
+      data: {
+        name: createMenuDto.name,
+        restaurant: {
+          connect: {
+            id: restaurantId,
+          },
+        },
+      },
     });
   }
 
-  findAll() {
-    return `This action returns all menus`;
+  findAll(restaurantId: number) {
+    return this.prisma.menu.findMany({
+      where: {
+        restaurantId,
+      },
+    });
   }
 
   findOne(id: number) {

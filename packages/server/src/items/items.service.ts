@@ -1,19 +1,44 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { v2 as cloudinary } from 'cloudinary';
 
 @Injectable()
 export class ItemsService {
   constructor(private prisma: PrismaService) {}
 
-  create(createItemDto: Prisma.ItemCreateInput) {
+  async create(
+    createItemDto: Prisma.ItemCreateInput & {
+      image: any;
+    },
+    menuId: number,
+  ) {
+    const { secure_url } = await cloudinary.uploader.upload(
+      createItemDto.image,
+      {
+        upload_preset: 'ml_default',
+      },
+    );
+
     return this.prisma.item.create({
-      data: createItemDto,
+      data: {
+        ...createItemDto,
+        imageUrl: secure_url,
+        menu: {
+          connect: {
+            id: menuId,
+          },
+        },
+      },
     });
   }
 
-  findAll() {
-    return `This action returns all items`;
+  findAll(menuId: number) {
+    return this.prisma.item.findMany({
+      where: {
+        menuId,
+      },
+    });
   }
 
   findOne(id: number) {

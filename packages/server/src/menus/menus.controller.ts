@@ -6,8 +6,10 @@ import {
   Patch,
   Param,
   Delete,
+  Req,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { Request } from 'express';
 import { MenusService } from './menus.service';
 
 @Controller('menus')
@@ -15,13 +17,15 @@ export class MenusController {
   constructor(private readonly menusService: MenusService) {}
 
   @Post()
-  create(@Body() createMenuDto: Prisma.MenuCreateInput) {
-    return this.menusService.create(createMenuDto);
+  create(@Body() createMenuDto: Prisma.MenuCreateInput, @Req() req: Request) {
+    const restaurantId = req.query.restaurantId as string;
+    return this.menusService.create(createMenuDto, +restaurantId);
   }
 
   @Get()
-  findAll() {
-    return this.menusService.findAll();
+  findAll(@Req() req: Request) {
+    const restaurantId = req.query.restaurantId as string;
+    return this.menusService.findAll(+restaurantId);
   }
 
   @Get(':id')

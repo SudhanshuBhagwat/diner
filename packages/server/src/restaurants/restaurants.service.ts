@@ -1,14 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { v2 as cloudinary } from 'cloudinary';
 
 @Injectable()
 export class RestaurantsService {
   constructor(private prisma: PrismaService) {}
 
-  create(createRestaurantDto: Prisma.RestaurantCreateInput) {
+  async create(
+    createRestaurantDto: Prisma.RestaurantUncheckedCreateInput & {
+      image: any;
+    },
+  ) {
+    const { secure_url } = await cloudinary.uploader.upload(
+      createRestaurantDto.image,
+      {
+        upload_preset: 'ml_default',
+      },
+    );
+
     return this.prisma.restaurant.create({
-      data: createRestaurantDto,
+      data: {
+        name: createRestaurantDto.name,
+        ownerName: createRestaurantDto.ownerName,
+        since: createRestaurantDto.since,
+        location: createRestaurantDto.location,
+        userId: createRestaurantDto.userId,
+        imageUrl: secure_url,
+      },
     });
   }
 

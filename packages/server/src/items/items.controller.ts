@@ -6,22 +6,32 @@ import {
   Patch,
   Param,
   Delete,
+  Req,
 } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { Prisma } from '@prisma/client';
+import { Request } from 'express';
 
 @Controller('items')
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
   @Post()
-  create(@Body() createItemDto: Prisma.ItemCreateInput) {
-    return this.itemsService.create(createItemDto);
+  create(
+    @Body()
+    createItemDto: Prisma.ItemCreateInput & {
+      image: any;
+    },
+    @Req() req: Request,
+  ) {
+    const menuId = req.query.menuId as string;
+    return this.itemsService.create(createItemDto, +menuId);
   }
 
   @Get()
-  findAll() {
-    return this.itemsService.findAll();
+  findAll(@Req() req: Request) {
+    const menuId = req.query.menuId as string;
+    return this.itemsService.findAll(+menuId);
   }
 
   @Get(':id')
