@@ -76,7 +76,7 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
       theme={MyTheme}
     >
       <Stack.Navigator
-        initialRouteName="Restaurants"
+        initialRouteName="Home"
         screenOptions={({
           route,
           navigation,

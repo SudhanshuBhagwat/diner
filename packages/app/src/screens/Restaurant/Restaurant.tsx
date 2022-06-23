@@ -21,6 +21,7 @@ import MenuBottomSheet from "../../components/shared/BottomSheet";
 import { DATA } from "../../fixtures/menuItems";
 
 type Props = NativeStackScreenProps<RootStackParams, "Restaurant">;
+const ITEM_OPEN_TIMEOUT = 1000;
 
 const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
   route,
@@ -34,7 +35,7 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
       if (item) {
         setIsOpen(true);
       }
-    }, 1000);
+    }, ITEM_OPEN_TIMEOUT);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -64,6 +65,15 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
           </View>
         </View>
       </View>
+      <View
+        style={{
+          borderTopLeftRadius: 16,
+          borderTopRightRadius: 16,
+          backgroundColor: "white",
+          height: 16,
+          top: -16,
+        }}
+      />
       <SectionList
         contentContainerStyle={styles.contents}
         sections={DATA}
@@ -96,11 +106,12 @@ const styles = StyleSheet.create({
   },
   contents: {
     paddingLeft: 16,
-    paddingVertical: 16,
+    paddingBottom: 16,
+    backgroundColor: "white",
   },
   headerContents: {
     position: "absolute",
-    bottom: 16,
+    bottom: 24,
     left: 16,
   },
   text: {

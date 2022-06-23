@@ -20,7 +20,7 @@ const RestaurantCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
         <Image
           style={[
             styles.image,
-            {
+            large && {
               width: "100%",
               height: 200,
             },
