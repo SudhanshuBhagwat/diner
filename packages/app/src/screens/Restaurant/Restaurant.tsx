@@ -67,24 +67,30 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
       </View>
       <View
         style={{
+          flex: 1,
+          flexGrow: 1,
+          top: -16,
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
-          backgroundColor: "white",
-          height: 16,
-          top: -16,
+          overflow: "hidden",
         }}
-      />
-      <SectionList
-        contentContainerStyle={styles.contents}
-        sections={DATA}
-        keyExtractor={(item, index) => `${item.id}-index`}
-        renderItem={({ item }) => (
-          <MenuCard item={item} onPress={() => setIsOpen(true)} />
-        )}
-        renderSectionHeader={({ section: { name } }) => (
-          <Text style={styles.title}>{name}</Text>
-        )}
-      />
+      >
+        <SectionList
+          contentContainerStyle={styles.contents}
+          sections={DATA}
+          keyExtractor={(item, index) => `${item.id}-index`}
+          renderItem={({ item }) => (
+            <MenuCard
+              item={item}
+              showAddButton
+              onPress={() => setIsOpen(true)}
+            />
+          )}
+          renderSectionHeader={({ section: { name } }) => (
+            <Text style={styles.title}>{name}</Text>
+          )}
+        />
+      </View>
       {isOpen && (
         <MenuBottomSheet onClose={() => setIsOpen(false)}>
           <Item />
@@ -106,7 +112,7 @@ const styles = StyleSheet.create({
   },
   contents: {
     paddingLeft: 16,
-    paddingBottom: 16,
+    paddingVertical: 16,
     backgroundColor: "white",
   },
   headerContents: {
