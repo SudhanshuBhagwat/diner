@@ -42,6 +42,22 @@ const cartStore = createSlice({
         state.itemsInCart.push(newItem);
       }
     },
+    addItemsToCart: (state, action: PayloadAction<CartItem>) => {
+      var itemFound = false;
+      if (state.itemsInCart.length > 0) {
+        state.itemsInCart.forEach((currItem, key) => {
+          if (currItem.id === action.payload.id) {
+            state.itemsInCart[key].quantity += action.payload.quantity;
+            itemFound = true;
+          }
+        });
+        if (!itemFound) {
+          state.itemsInCart.push(action.payload);
+        }
+      } else {
+        state.itemsInCart.push(action.payload);
+      }
+    },
     removeFromCart: (state, action) => {
       if (state.itemsInCart.length > 1) {
         state.itemsInCart.map((currItem, key) => {
@@ -57,7 +73,8 @@ const cartStore = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, emptyCart } = cartStore.actions;
+export const { addToCart, addItemsToCart, removeFromCart, emptyCart } =
+  cartStore.actions;
 
 export const itemCount = (state: RootState) => {
   var items = 0;

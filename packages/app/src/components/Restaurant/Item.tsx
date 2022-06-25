@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import { MinusIcon, PlusIcon, StarIcon } from "react-native-heroicons/outline";
 import { Font } from "@diner/shared/Font";
+import { useDispatch } from "react-redux";
+import { addItemsToCart } from "../../redux/cartStore";
 
 interface Props {}
 
@@ -26,6 +28,7 @@ const DATA = {
   ratings: 3.6,
   ratingCount: 600,
 };
+
 const SPACING: number = 20;
 const ICON_SIZE: number = 20;
 const ICON_COLOR: string = "#999999";
@@ -33,6 +36,7 @@ const ICON_COLOR: string = "#999999";
 const Item: React.FC<React.PropsWithChildren<Props> & Props> = () => {
   const [items, setItems] = useState<number>(1);
   const totalPrice = DATA.price * items;
+  const dispatch = useDispatch();
 
   function increment() {
     setItems((items) => items + 1);
@@ -40,6 +44,21 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = () => {
 
   function decrement() {
     setItems((items) => items - 1);
+  }
+
+  function addItemToCart() {
+    dispatch(
+      addItemsToCart({
+        id: DATA.id,
+        description: DATA.description,
+        image: DATA.image,
+        name: DATA.name,
+        price: DATA.price,
+        restaurant: "Test",
+        badges: DATA.badges,
+        quantity: items,
+      })
+    );
   }
 
   return (
@@ -95,7 +114,7 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = () => {
               </View>
             </Pressable>
           </View>
-          <Pressable style={styles.addToCart}>
+          <Pressable style={styles.addToCart} onPress={addItemToCart}>
             <Text
               style={{
                 color: "white",

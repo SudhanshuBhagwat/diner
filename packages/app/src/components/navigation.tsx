@@ -129,7 +129,15 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
         <Stack.Screen
           name="Restaurant"
           component={Restaurant}
-          sharedElements={(route) => [route.params.restaurant]}
+          sharedElements={(route, otherRoute, showing) => {
+            if (
+              (otherRoute.name === "ShoppingCart" && !showing) ||
+              !route.params.restaurant
+            ) {
+              return [];
+            }
+            return [route.params.restaurant];
+          }}
           options={{
             headerShown: false,
           }}
