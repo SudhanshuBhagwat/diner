@@ -1,13 +1,91 @@
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, Pressable } from "react-native";
 import { Font } from "@diner/shared/Font";
+import { PADDING_LEFT } from "../utilities/constants";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux";
+import { CartItem, items, totalPrice } from "../redux/cartStore";
+import MenuItem from "../components/Menu/MenuItem";
 
 interface Props {}
 
 const ShoppingCart: React.FC<React.PropsWithChildren<Props> & Props> = () => {
+  const itemsInCart = useSelector((state: RootState) => items(state));
+  const totalItemsPrice = useSelector((state: RootState) => totalPrice(state));
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>ShoppingCart</Text>
+      <Text style={styles.title}>My Cart</Text>
+      {itemsInCart.length > 0 ? (
+        <View>
+          {itemsInCart.map((item: CartItem) => (
+            <MenuItem key={item.id} item={item} />
+          ))}
+          <View
+            style={{
+              height: 1,
+              backgroundColor: "#eeeeee",
+              marginVertical: 6,
+            }}
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingRight: 16,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                fontFamily: Font[600],
+                color: "#9b9b9b",
+              }}
+            >
+              Total
+            </Text>
+            <Text
+              style={{
+                fontSize: 18,
+                fontFamily: Font[600],
+              }}
+            >
+              ₹{totalItemsPrice}
+            </Text>
+          </View>
+        </View>
+      ) : (
+        <View
+          style={{
+            height: "50%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 18,
+              fontFamily: Font[600],
+              color: "#797979",
+            }}
+          >
+            No items in cart
+          </Text>
+        </View>
+      )}
+      <Pressable style={styles.checkout} onPress={() => {}}>
+        <Text
+          style={{
+            textAlign: "center",
+            color: "white",
+            fontSize: 16,
+            fontFamily: Font[600],
+          }}
+        >
+          Checkout
+        </Text>
+      </Pressable>
     </View>
   );
 };
@@ -15,11 +93,20 @@ const ShoppingCart: React.FC<React.PropsWithChildren<Props> & Props> = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    paddingHorizontal: PADDING_LEFT,
   },
-  text: {
+  title: {
+    fontSize: 26,
     fontFamily: Font[900],
+  },
+  checkout: {
+    position: "absolute",
+    bottom: 20,
+    width: "100%",
+    left: 16,
+    borderRadius: 8,
+    backgroundColor: "#242424",
+    paddingVertical: 16,
   },
 });
 

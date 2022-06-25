@@ -11,6 +11,7 @@ import { MinusIcon, PlusIcon, StarIcon } from "react-native-heroicons/outline";
 import { Font } from "@diner/shared/Font";
 import { useDispatch } from "react-redux";
 import { addItemsToCart } from "../../redux/cartStore";
+import { ICON_COLOR, ICON_SIZE } from "../../utilities/constants";
 
 interface Props {}
 
@@ -30,8 +31,6 @@ const DATA = {
 };
 
 const SPACING: number = 20;
-const ICON_SIZE: number = 20;
-const ICON_COLOR: string = "#999999";
 
 const Item: React.FC<React.PropsWithChildren<Props> & Props> = () => {
   const [items, setItems] = useState<number>(1);

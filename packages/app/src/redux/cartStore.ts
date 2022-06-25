@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from ".";
 import { Item } from "../models/items";
 
-interface CartItem extends Item {
+export interface CartItem extends Item {
   quantity: number;
 }
 
@@ -63,9 +63,19 @@ const cartStore = createSlice({
         state.itemsInCart.map((currItem, key) => {
           if (currItem.id === action.payload.id) {
             state.itemsInCart[key].quantity--;
+            if (state.itemsInCart[key].quantity === 0) {
+              state.itemsInCart = state.itemsInCart.filter(
+                (item) => item.id === action.payload.id
+              );
+            }
           }
         });
       }
+    },
+    removeItem: (state, action: PayloadAction<CartItem>) => {
+      state.itemsInCart = state.itemsInCart.filter(
+        (item) => item.id === action.payload.id
+      );
     },
     emptyCart: (state, action) => {
       state.itemsInCart = [];
@@ -73,8 +83,13 @@ const cartStore = createSlice({
   },
 });
 
-export const { addToCart, addItemsToCart, removeFromCart, emptyCart } =
-  cartStore.actions;
+export const {
+  addToCart,
+  addItemsToCart,
+  removeFromCart,
+  removeItem,
+  emptyCart,
+} = cartStore.actions;
 
 export const itemCount = (state: RootState) => {
   var items = 0;
@@ -91,5 +106,13 @@ export const totalPrice = (state: RootState) => {
   });
   return price;
 };
+
+export const givenItemCoumt = (state: RootState, item: CartItem) => {
+  return state.modalStore.itemsInCart.find(
+    (currItem) => currItem.id === item.id
+  );
+};
+
+export const items = (state: RootState) => state.modalStore.itemsInCart;
 
 export default cartStore;
