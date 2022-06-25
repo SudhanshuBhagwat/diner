@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import modalStore from "./modal-store";
+import cartStore from "./cartStore";
 
 const store = configureStore({
   reducer: {
-    modalStore: modalStore.reducer,
+    modalStore: cartStore.reducer,
   },
 });
 

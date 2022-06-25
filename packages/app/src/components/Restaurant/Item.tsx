@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -31,6 +31,17 @@ const ICON_SIZE: number = 20;
 const ICON_COLOR: string = "#999999";
 
 const Item: React.FC<React.PropsWithChildren<Props> & Props> = () => {
+  const [items, setItems] = useState<number>(1);
+  const totalPrice = DATA.price * items;
+
+  function increment() {
+    setItems((items) => items + 1);
+  }
+
+  function decrement() {
+    setItems((items) => items - 1);
+  }
+
   return (
     <View style={styles.container}>
       <View
@@ -62,7 +73,7 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = () => {
       <View>
         <View style={styles.buttonContainer}>
           <View style={styles.itemCountContainer}>
-            <Pressable>
+            <Pressable onPress={decrement}>
               <View
                 style={{
                   marginRight: SPACING,
@@ -72,8 +83,8 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = () => {
                 <MinusIcon size={ICON_SIZE} color={ICON_COLOR} />
               </View>
             </Pressable>
-            <Text style={styles.itemCount}>1</Text>
-            <Pressable>
+            <Text style={styles.itemCount}>{items}</Text>
+            <Pressable onPress={increment}>
               <View
                 style={{
                   marginLeft: SPACING,
@@ -101,7 +112,7 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = () => {
                 fontFamily: Font[600],
               }}
             >
-              ₹{DATA.price}
+              ₹{totalPrice}
             </Text>
           </Pressable>
         </View>

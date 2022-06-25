@@ -45,13 +45,15 @@ const MenuCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
               <Text style={styles.text}>
                 {item.name} @ {item.restaurant}
               </Text>
-              <View style={styles.badges}>
-                {item.badges.map((badge: string, idx: number) => (
-                  <Text key={idx} style={styles.badge}>
-                    {badge}
-                  </Text>
-                ))}
-              </View>
+              {item.badges && (
+                <View style={styles.badges}>
+                  {item.badges.map((badge: string, idx: number) => (
+                    <Text key={idx} style={styles.badge}>
+                      {badge}
+                    </Text>
+                  ))}
+                </View>
+              )}
             </View>
             {showAddButton && (
               <Pressable onPress={onAddButtonClicked}>

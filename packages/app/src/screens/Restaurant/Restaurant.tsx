@@ -19,6 +19,7 @@ import { RootStackParams } from "../../components/navigation";
 import Item from "../../components/Restaurant/Item";
 import MenuBottomSheet from "../../components/shared/BottomSheet";
 import { DATA } from "../../fixtures/menuItems";
+import { addToCart } from "../../redux/cartStore";
 
 type Props = NativeStackScreenProps<RootStackParams, "Restaurant">;
 const ITEM_OPEN_TIMEOUT = 1000;
@@ -29,6 +30,7 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
   const restaurant = route.params.restaurant;
   const item = route.params.item;
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -83,6 +85,7 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
             <MenuCard
               item={item}
               showAddButton
+              onAddButtonClicked={() => dispatch(addToCart(item))}
               onPress={() => setIsOpen(true)}
             />
           )}

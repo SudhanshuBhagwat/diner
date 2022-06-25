@@ -1,0 +1,26 @@
+import React from "react";
+import { Text, StyleSheet, View } from "react-native";
+import { Font } from "@diner/shared/Font";
+
+interface Props {}
+
+const ShoppingCart: React.FC<React.PropsWithChildren<Props> & Props> = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>ShoppingCart</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    fontFamily: Font[900],
+  },
+});
+
+export default ShoppingCart;

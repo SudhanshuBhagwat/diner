@@ -3,7 +3,7 @@ export interface Item {
   name: string;
   restaurant: string;
   image: string;
-  badges: string[];
+  badges?: string[];
   description: string;
   price: number;
 }
