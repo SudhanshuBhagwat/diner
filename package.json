@@ -15,9 +15,11 @@
     "expo:build": "lerna run build --scope app"
   },
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

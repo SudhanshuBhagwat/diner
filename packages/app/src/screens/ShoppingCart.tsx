@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux";
 import { CartItem, items, totalPrice } from "../redux/cartStore";
 import MenuItem from "../components/Menu/MenuItem";
+import CartPriceItem from "../components/CartPriceItem";
 
 interface Props {}
 
@@ -28,32 +29,7 @@ const ShoppingCart: React.FC<React.PropsWithChildren<Props> & Props> = () => {
               marginVertical: 6,
             }}
           />
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingRight: 16,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 18,
-                fontFamily: Font[600],
-                color: "#9b9b9b",
-              }}
-            >
-              Total
-            </Text>
-            <Text
-              style={{
-                fontSize: 18,
-                fontFamily: Font[600],
-              }}
-            >
-              ₹{totalItemsPrice}
-            </Text>
-          </View>
+          <CartPriceItem title="Total" price={totalItemsPrice} />
         </View>
       ) : (
         <View

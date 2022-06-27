@@ -58,19 +58,18 @@ const cartStore = createSlice({
         state.itemsInCart.push(action.payload);
       }
     },
-    removeFromCart: (state, action) => {
-      if (state.itemsInCart.length > 1) {
-        state.itemsInCart.map((currItem, key) => {
-          if (currItem.id === action.payload.id) {
-            state.itemsInCart[key].quantity--;
-            if (state.itemsInCart[key].quantity === 0) {
-              state.itemsInCart = state.itemsInCart.filter(
-                (item) => item.id === action.payload.id
-              );
-            }
+    removeFromCart: (state, action: PayloadAction<CartItem>) => {
+      state.itemsInCart.map((currItem, key) => {
+        if (currItem.id === action.payload.id) {
+          state.itemsInCart[key].quantity--;
+          if (state.itemsInCart[key].quantity === 0) {
+            state.itemsInCart = state.itemsInCart.filter(
+              (item) => item.id === action.payload.id
+            );
+            console.log(state.itemsInCart);
           }
-        });
-      }
+        }
+      });
     },
     removeItem: (state, action: PayloadAction<CartItem>) => {
       state.itemsInCart = state.itemsInCart.filter(
