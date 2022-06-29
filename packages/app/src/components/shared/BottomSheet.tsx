@@ -4,11 +4,13 @@ import { Pressable, StyleSheet, View } from "react-native";
 import { Font } from "@diner/shared/Font";
 
 interface Props {
+  open: boolean;
   onClose: (value: boolean) => void;
 }
 
 const MenuBottomSheet: React.FC<React.PropsWithChildren<Props> & Props> = ({
   children,
+  open,
   onClose,
 }) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -26,8 +28,15 @@ const MenuBottomSheet: React.FC<React.PropsWithChildren<Props> & Props> = ({
     []
   );
 
+  if (open) {
+    bottomSheetRef.current?.expand();
+  } else {
+    bottomSheetRef.current?.close();
+  }
+
   return (
     <BottomSheet
+      index={-1}
       ref={bottomSheetRef}
       snapPoints={snapPoints}
       enablePanDownToClose

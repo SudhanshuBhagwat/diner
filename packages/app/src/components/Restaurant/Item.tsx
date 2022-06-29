@@ -13,7 +13,9 @@ import { useDispatch } from "react-redux";
 import { addItemsToCart } from "../../redux/cartStore";
 import { ICON_COLOR, ICON_SIZE } from "../../utilities/constants";
 
-interface Props {}
+interface Props {
+  close: () => void;
+}
 
 const { width } = Dimensions.get("screen");
 
@@ -32,7 +34,7 @@ const DATA = {
 
 const SPACING: number = 20;
 
-const Item: React.FC<React.PropsWithChildren<Props> & Props> = () => {
+const Item: React.FC<React.PropsWithChildren<Props> & Props> = ({ close }) => {
   const [items, setItems] = useState<number>(1);
   const totalPrice = DATA.price * items;
   const dispatch = useDispatch();
@@ -58,6 +60,7 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = () => {
         quantity: items,
       })
     );
+    close();
   }
 
   return (

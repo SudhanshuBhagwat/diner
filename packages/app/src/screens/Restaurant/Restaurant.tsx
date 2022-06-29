@@ -38,7 +38,6 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
         setIsOpen(true);
       }
     }, ITEM_OPEN_TIMEOUT);
-
     return () => clearTimeout(timeout);
   }, []);
 
@@ -94,11 +93,9 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
           )}
         />
       </View>
-      {isOpen && (
-        <MenuBottomSheet onClose={() => setIsOpen(false)}>
-          <Item />
-        </MenuBottomSheet>
-      )}
+      <MenuBottomSheet open={isOpen} onClose={() => setIsOpen(false)}>
+        <Item close={() => setIsOpen(false)} />
+      </MenuBottomSheet>
     </View>
   );
 };
