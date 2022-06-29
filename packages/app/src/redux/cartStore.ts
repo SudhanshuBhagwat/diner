@@ -64,16 +64,15 @@ const cartStore = createSlice({
           state.itemsInCart[key].quantity--;
           if (state.itemsInCart[key].quantity === 0) {
             state.itemsInCart = state.itemsInCart.filter(
-              (item) => item.id === action.payload.id
+              (item) => item.id !== action.payload.id
             );
-            console.log(state.itemsInCart);
           }
         }
       });
     },
     removeItem: (state, action: PayloadAction<CartItem>) => {
       state.itemsInCart = state.itemsInCart.filter(
-        (item) => item.id === action.payload.id
+        (item) => item.id !== action.payload.id
       );
     },
     emptyCart: (state, action) => {
