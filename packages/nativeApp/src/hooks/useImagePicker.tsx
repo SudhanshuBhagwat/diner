@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { launchImageLibrary } from "react-native-image-picker";
+import { useState } from 'react';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 const useImagePicker = (): {
   uri: string | undefined;
@@ -10,7 +10,7 @@ const useImagePicker = (): {
   function chooseImage() {
     launchImageLibrary(
       {
-        mediaType: "photo",
+        mediaType: 'photo',
       },
       ({ didCancel, assets, errorCode, errorMessage }) => {
         if (didCancel) {
@@ -22,7 +22,7 @@ const useImagePicker = (): {
         }
         const file = assets ? assets[0] : null;
         setUri(file === null ? undefined : file.uri);
-      }
+      },
     );
   }
 

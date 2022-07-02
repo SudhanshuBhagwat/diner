@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from ".";
-import { Item } from "../models/items";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '.';
+import { Item } from '../models/items';
 
 export interface CartItem extends Item {
   quantity: number;
@@ -16,7 +16,7 @@ const initialState: INITIAL_STATE = {
 
 const cartStore = createSlice({
   initialState,
-  name: "cartStore",
+  name: 'cartStore',
   reducers: {
     addToCart: (state, action: PayloadAction<Item>) => {
       var itemFound = false;
@@ -64,7 +64,7 @@ const cartStore = createSlice({
           state.itemsInCart[key].quantity--;
           if (state.itemsInCart[key].quantity === 0) {
             state.itemsInCart = state.itemsInCart.filter(
-              (item) => item.id !== action.payload.id
+              item => item.id !== action.payload.id,
             );
           }
         }
@@ -72,10 +72,10 @@ const cartStore = createSlice({
     },
     removeItem: (state, action: PayloadAction<CartItem>) => {
       state.itemsInCart = state.itemsInCart.filter(
-        (item) => item.id !== action.payload.id
+        item => item.id !== action.payload.id,
       );
     },
-    emptyCart: (state, action) => {
+    emptyCart: state => {
       state.itemsInCart = [];
     },
   },
@@ -91,7 +91,7 @@ export const {
 
 export const itemCount = (state: RootState) => {
   var items = 0;
-  state.modalStore.itemsInCart.forEach((item) => {
+  state.modalStore.itemsInCart.forEach(item => {
     items += item.quantity;
   });
   return items;
@@ -99,16 +99,14 @@ export const itemCount = (state: RootState) => {
 
 export const totalPrice = (state: RootState) => {
   var price = 0;
-  state.modalStore.itemsInCart.forEach((item) => {
+  state.modalStore.itemsInCart.forEach(item => {
     price += item.quantity * item.price;
   });
   return price;
 };
 
 export const givenItemCoumt = (state: RootState, item: CartItem) => {
-  return state.modalStore.itemsInCart.find(
-    (currItem) => currItem.id === item.id
-  );
+  return state.modalStore.itemsInCart.find(currItem => currItem.id === item.id);
 };
 
 export const items = (state: RootState) => state.modalStore.itemsInCart;

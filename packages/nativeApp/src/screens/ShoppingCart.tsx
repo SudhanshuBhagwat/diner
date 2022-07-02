@@ -1,12 +1,11 @@
-import React from "react";
-import { Text, StyleSheet, View, Pressable } from "react-native";
-import { Font } from "@diner/shared/Font";
-import { PADDING_LEFT } from "../utilities/constants";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux";
-import { CartItem, items, totalPrice } from "../redux/cartStore";
-import MenuItem from "../components/Menu/MenuItem";
-import CartPriceItem from "../components/CartPriceItem";
+import React from 'react';
+import { Text, StyleSheet, View, Pressable } from 'react-native';
+import { PADDING_LEFT } from '../utilities/constants';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux';
+import { CartItem, items, totalPrice } from '../redux/cartStore';
+import MenuItem from '../components/Menu/MenuItem';
+import CartPriceItem from '../components/CartPriceItem';
 
 interface Props {}
 
@@ -25,7 +24,7 @@ const ShoppingCart: React.FC<React.PropsWithChildren<Props> & Props> = () => {
           <View
             style={{
               height: 1,
-              backgroundColor: "#eeeeee",
+              backgroundColor: '#eeeeee',
               marginVertical: 6,
             }}
           />
@@ -34,18 +33,15 @@ const ShoppingCart: React.FC<React.PropsWithChildren<Props> & Props> = () => {
       ) : (
         <View
           style={{
-            height: "50%",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+            height: '50%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
           <Text
             style={{
               fontSize: 18,
-              fontFamily: Font[600],
-              color: "#797979",
-            }}
-          >
+              color: '#797979',
+            }}>
             No items in cart
           </Text>
         </View>
@@ -53,12 +49,10 @@ const ShoppingCart: React.FC<React.PropsWithChildren<Props> & Props> = () => {
       <Pressable style={styles.checkout} onPress={() => {}}>
         <Text
           style={{
-            textAlign: "center",
-            color: "white",
+            textAlign: 'center',
+            color: 'white',
             fontSize: 16,
-            fontFamily: Font[600],
-          }}
-        >
+          }}>
           Checkout
         </Text>
       </Pressable>
@@ -73,15 +67,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 26,
-    fontFamily: Font[900],
   },
   checkout: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 20,
-    width: "100%",
+    width: '100%',
     left: 16,
     borderRadius: 8,
-    backgroundColor: "#242424",
+    backgroundColor: '#242424',
     paddingVertical: 16,
   },
 });

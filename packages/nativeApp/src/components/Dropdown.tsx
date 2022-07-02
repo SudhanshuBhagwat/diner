@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { Dropdown as RNDropdown } from "react-native-element-dropdown";
-import { Text, StyleSheet, View } from "react-native";
-import { Font } from "@diner/shared/Font";
+import React, { useState } from 'react';
+import { Dropdown as RNDropdown } from 'react-native-element-dropdown';
+import { Text, StyleSheet, View } from 'react-native';
 
 interface Props {}
 
 const data = [
-  { label: "One", value: "1" },
-  { label: "Two", value: "2" },
-  { label: "Three", value: "3" },
-  { label: "Four", value: "4" },
+  { label: 'One', value: '1' },
+  { label: 'Two', value: '2' },
+  { label: 'Three', value: '3' },
+  { label: 'Four', value: '4' },
 ];
 
 const Dropdown: React.FC<React.PropsWithChildren<Props> & Props> = () => {
@@ -35,7 +34,7 @@ const Dropdown: React.FC<React.PropsWithChildren<Props> & Props> = () => {
       valueField="value"
       placeholder="Select item"
       value={value}
-      onChange={(item) => {
+      onChange={item => {
         setValue(item.value);
       }}
       renderLeftIcon={() => <View />}
@@ -48,10 +47,10 @@ const styles = StyleSheet.create({
   dropdown: {
     flex: 1,
     height: 50,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 8,
     padding: 16,
-    borderColor: "#b3b3b3",
+    borderColor: '#b3b3b3',
     borderWidth: 2,
     marginTop: 8,
     marginLeft: 16,
@@ -61,23 +60,20 @@ const styles = StyleSheet.create({
   },
   item: {
     padding: 16,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   textItem: {
     flex: 1,
     fontSize: 16,
-    fontFamily: Font[500],
   },
   placeholderStyle: {
     fontSize: 16,
-    color: "#bdbdbd",
-    fontFamily: Font[500],
+    color: '#bdbdbd',
   },
   selectedTextStyle: {
     fontSize: 16,
-    fontFamily: Font[500],
   },
   iconStyle: {
     width: 20,

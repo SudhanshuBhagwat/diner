@@ -1,15 +1,7 @@
-import React from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  Image,
-  Pressable,
-  LayoutChangeEvent,
-} from "react-native";
-import { Font } from "@diner/shared/Font";
-import { Item } from "../../models/items";
-import { PlusIcon } from "react-native-heroicons/outline";
+import React from 'react';
+import { Text, StyleSheet, View, Image, Pressable } from 'react-native';
+import { Item } from '../../models/items';
+import { PlusIcon } from 'react-native-heroicons/outline';
 
 interface Props {
   item: Item;
@@ -36,11 +28,10 @@ const MenuCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
         <View style={styles.detailsContainer}>
           <View
             style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
             <View>
               <Text style={styles.text}>
                 {item.name} @ {item.restaurant}
@@ -58,7 +49,7 @@ const MenuCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
             {showAddButton && (
               <Pressable onPress={onAddButtonClicked}>
                 <View style={styles.addToCardButton}>
-                  <PlusIcon color={"white"} size={16} />
+                  <PlusIcon color={'white'} size={16} />
                 </View>
               </Pressable>
             )}
@@ -73,7 +64,7 @@ const MenuCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingVertical: 6,
   },
   detailsContainer: {
@@ -87,31 +78,27 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
   },
   text: {
-    fontFamily: Font[700],
     fontSize: 16,
   },
   price: {
-    fontFamily: Font[700],
     fontSize: 16,
   },
   description: {
-    fontFamily: Font[500],
-    color: "#797979",
+    color: '#797979',
     fontSize: 16,
   },
   badges: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   badge: {
-    fontFamily: Font[500],
     paddingVertical: 4,
     paddingHorizontal: 8,
     marginRight: 6,
-    backgroundColor: "wheat",
+    backgroundColor: 'wheat',
     borderRadius: 6,
   },
   addToCardButton: {
-    backgroundColor: "#3f3f3f",
+    backgroundColor: '#3f3f3f',
     borderRadius: 8,
     padding: 8,
   },

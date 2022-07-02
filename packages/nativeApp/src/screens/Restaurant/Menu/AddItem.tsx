@@ -1,5 +1,5 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React from "react";
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React from 'react';
 import {
   Text,
   StyleSheet,
@@ -7,13 +7,12 @@ import {
   Pressable,
   Image,
   TextInput,
-} from "react-native";
-import { Font } from "@diner/shared/Font";
-import { RootStackParams } from "../../../components/navigation";
-import useImagePicker from "../../../hooks/useImagePicker";
-import { BORDER_COLOR, RUPEE } from "../../../utilities/constants";
+} from 'react-native';
+import { RootStackParams } from '../../../components/navigation';
+import useImagePicker from '../../../hooks/useImagePicker';
+import { BORDER_COLOR, RUPEE } from '../../../utilities/constants';
 
-type Props = NativeStackScreenProps<RootStackParams, "AddItem">;
+type Props = NativeStackScreenProps<RootStackParams, 'AddItem'>;
 
 const AddItem: React.FC<React.PropsWithChildren<Props> & Props> = ({
   navigation,
@@ -26,7 +25,7 @@ const AddItem: React.FC<React.PropsWithChildren<Props> & Props> = ({
       <Pressable onPress={() => chooseImage()}>
         {uri === undefined ? (
           <View style={[styles.border, styles.imageContainer]}>
-            <Text style={[styles.label, { color: "#bdbdbd" }]}>
+            <Text style={[styles.label, { color: '#bdbdbd' }]}>
               Click to Add Image
             </Text>
           </View>
@@ -68,48 +67,44 @@ const styles = StyleSheet.create({
   },
   main: {
     fontSize: 24,
-    fontFamily: Font[700],
   },
   inputContainer: {
     marginTop: 16,
   },
   border: {
     borderWidth: 3,
-    borderStyle: "dashed",
+    borderStyle: 'dashed',
     borderColor: BORDER_COLOR,
   },
   input: {
-    width: "100%",
+    width: '100%',
     borderColor: BORDER_COLOR,
     borderWidth: 2,
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
     marginTop: 8,
-    fontFamily: Font[500],
   },
   imageContainer: {
     height: 240,
-    width: "100%",
+    width: '100%',
     marginVertical: 16,
-    justifyContent: "center",
-    alignItems: "center",
-    resizeMode: "cover",
+    justifyContent: 'center',
+    alignItems: 'center',
+    resizeMode: 'cover',
     borderRadius: 16,
   },
   label: {
     fontSize: 18,
-    fontFamily: Font[600],
   },
   addButton: {
-    backgroundColor: "#3f3f3f",
-    color: "white",
-    fontFamily: Font[600],
+    backgroundColor: '#3f3f3f',
+    color: 'white',
     fontSize: 18,
     paddingVertical: 16,
-    textAlign: "center",
+    textAlign: 'center',
     borderRadius: 8,
-    width: "100%",
+    width: '100%',
     marginTop: 16,
   },
 });

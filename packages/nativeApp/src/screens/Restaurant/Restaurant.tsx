@@ -1,27 +1,25 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { useEffect, useState } from "react";
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React, { useEffect, useState } from 'react';
 import {
   ImageBackground,
-  LayoutChangeEvent,
   SectionList,
   StyleSheet,
   Text,
   View,
-} from "react-native";
-import { LocationMarkerIcon } from "react-native-heroicons/outline";
-import LinearGradient from "react-native-linear-gradient";
-import { SharedElement } from "react-navigation-shared-element";
-import { useDispatch } from "react-redux";
-import { Font } from "@diner/shared/Font";
-import MenuCard from "../../components/Home/MenuCard";
-import Nav from "../../components/Home/Nav";
-import { RootStackParams } from "../../components/navigation";
-import Item from "../../components/Restaurant/Item";
-import MenuBottomSheet from "../../components/shared/BottomSheet";
-import { DATA } from "../../fixtures/menuItems";
-import { addToCart } from "../../redux/cartStore";
+} from 'react-native';
+import { LocationMarkerIcon } from 'react-native-heroicons/outline';
+import LinearGradient from 'react-native-linear-gradient';
+import { SharedElement } from 'react-navigation-shared-element';
+import { useDispatch } from 'react-redux';
+import MenuCard from '../../components/Home/MenuCard';
+import Nav from '../../components/Home/Nav';
+import { RootStackParams } from '../../components/navigation';
+import Item from '../../components/Restaurant/Item';
+import MenuBottomSheet from '../../components/shared/BottomSheet';
+import { DATA } from '../../fixtures/menuItems';
+import { addToCart } from '../../redux/cartStore';
 
-type Props = NativeStackScreenProps<RootStackParams, "Restaurant">;
+type Props = NativeStackScreenProps<RootStackParams, 'Restaurant'>;
 const ITEM_OPEN_TIMEOUT = 1000;
 
 const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
@@ -49,12 +47,10 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
             style={styles.image}
             source={{
               uri: restaurant.image,
-            }}
-          >
+            }}>
             <LinearGradient
-              colors={["#00000000", "#000000"]}
-              style={{ height: "100%", width: "100%" }}
-            ></LinearGradient>
+              colors={['#00000000', '#000000']}
+              style={{ height: '100%', width: '100%' }}></LinearGradient>
           </ImageBackground>
         </SharedElement>
         <Nav />
@@ -73,13 +69,12 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
           top: -16,
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
-          overflow: "hidden",
-        }}
-      >
+          overflow: 'hidden',
+        }}>
         <SectionList
           contentContainerStyle={styles.contents}
           sections={DATA}
-          keyExtractor={(item, index) => `${item.id}-index`}
+          keyExtractor={(item, index) => `${item.id}-${index}`}
           renderItem={({ item }) => (
             <MenuCard
               item={item}
@@ -105,39 +100,36 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    width: "100%",
+    width: '100%',
     height: 320,
     aspectRatio: 16 / 9,
-    resizeMode: "cover",
+    resizeMode: 'cover',
   },
   contents: {
     paddingLeft: 16,
     paddingVertical: 16,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   headerContents: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 24,
     left: 16,
   },
   text: {
     fontSize: 26,
-    color: "white",
-    fontFamily: Font[900],
+    color: 'white',
   },
   locationContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   location: {
     fontSize: 16,
-    color: "#dddddd",
-    fontFamily: Font[600],
+    color: '#dddddd',
     marginLeft: 4,
   },
   title: {
     fontSize: 20,
-    fontFamily: Font[900],
   },
   list: {
     marginTop: 8,

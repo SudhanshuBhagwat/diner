@@ -1,14 +1,13 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React from "react";
-import { Text, StyleSheet, View, FlatList, Pressable } from "react-native";
-import { PlusIcon } from "react-native-heroicons/outline";
-import { Font } from "@diner/shared/Font";
-import { RootStackParams } from "../../components/navigation";
-import { RESTAURANTS } from "../../fixtures/restaurants";
-import RestaurantCard from "../../components/Home/RestaurantCard";
-import { Separator } from "../Home";
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React from 'react';
+import { Text, StyleSheet, View, FlatList, Pressable } from 'react-native';
+import { PlusIcon } from 'react-native-heroicons/outline';
+import { RootStackParams } from '../../components/navigation';
+import { RESTAURANTS } from '../../fixtures/restaurants';
+import RestaurantCard from '../../components/Home/RestaurantCard';
+import { Separator } from '../Home';
 
-type Props = NativeStackScreenProps<RootStackParams, "Restaurants">;
+type Props = NativeStackScreenProps<RootStackParams, 'Restaurants'>;
 
 const Restaurants: React.FC<React.PropsWithChildren<Props> & Props> = ({
   navigation,
@@ -17,34 +16,30 @@ const Restaurants: React.FC<React.PropsWithChildren<Props> & Props> = ({
     <View style={styles.container}>
       <View
         style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           marginBottom: 16,
           paddingRight: 16,
-        }}
-      >
+        }}>
         <Text style={styles.text}>Your Restaurants</Text>
-        <Pressable onPress={() => navigation.push("AddRestaurant")}>
+        <Pressable onPress={() => navigation.push('AddRestaurant')}>
           <View
             style={{
-              flexDirection: "row",
+              flexDirection: 'row',
               paddingHorizontal: 16,
               paddingVertical: 8,
-              backgroundColor: "#3f3f3f",
+              backgroundColor: '#3f3f3f',
               borderRadius: 8,
-              alignItems: "center",
-            }}
-          >
+              alignItems: 'center',
+            }}>
             <PlusIcon color="white" size={20} />
             <Text
               style={{
-                fontFamily: Font[600],
                 fontSize: 16,
                 marginLeft: 8,
-                color: "white",
-              }}
-            >
+                color: 'white',
+              }}>
               Add
             </Text>
           </View>
@@ -55,15 +50,14 @@ const Restaurants: React.FC<React.PropsWithChildren<Props> & Props> = ({
         renderItem={({ item }) => (
           <Pressable
             onPress={() =>
-              navigation.push("Restaurant", {
+              navigation.push('Restaurant', {
                 restaurant: item,
               })
-            }
-          >
+            }>
             <RestaurantCard restaurant={item} large />
           </Pressable>
         )}
-        keyExtractor={(item) => String(item.id)}
+        keyExtractor={item => String(item.id)}
         contentContainerStyle={{ paddingRight: 16 }}
         ItemSeparatorComponent={() => <Separator />}
       />
@@ -79,7 +73,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 24,
-    fontFamily: Font[900],
     marginBottom: 8,
   },
 });

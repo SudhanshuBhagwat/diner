@@ -8,7 +8,6 @@ import {
   Pressable,
 } from 'react-native';
 import { ChevronLeftIcon, QrcodeIcon } from 'react-native-heroicons/outline';
-import { Font } from '@diner/shared/Font';
 import Home from '../screens/Home';
 import Auth from '../screens/Auth';
 import QRCode from '../screens/QRCode';
@@ -84,7 +83,6 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
             <Text
               style={{
                 fontSize: 30,
-                fontFamily: Font['900'],
               }}>
               Diner
             </Text>
@@ -149,9 +147,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
-    fontFamily: Font[900],
-  },
+  text: {},
 });
 
 export default Navigation;

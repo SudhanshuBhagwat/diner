@@ -1,7 +1,6 @@
-import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
-import React, { useCallback, useMemo, useRef } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
-import { Font } from "@diner/shared/Font";
+import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
+import React, { useCallback, useMemo, useRef } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 interface Props {
   open: boolean;
@@ -14,10 +13,10 @@ const MenuBottomSheet: React.FC<React.PropsWithChildren<Props> & Props> = ({
   onClose,
 }) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ["90%"], []);
+  const snapPoints = useMemo(() => ['90%'], []);
 
   const renderBackdrop = useCallback(
-    (props) => (
+    props => (
       <BottomSheetBackdrop
         {...props}
         opacity={0.5}
@@ -25,7 +24,7 @@ const MenuBottomSheet: React.FC<React.PropsWithChildren<Props> & Props> = ({
         appearsOnIndex={0}
       />
     ),
-    []
+    [],
   );
 
   if (open) {
@@ -41,8 +40,7 @@ const MenuBottomSheet: React.FC<React.PropsWithChildren<Props> & Props> = ({
       snapPoints={snapPoints}
       enablePanDownToClose
       backdropComponent={renderBackdrop}
-      onClose={() => onClose(false)}
-    >
+      onClose={() => onClose(false)}>
       <View style={styles.contentContainer}>{children}</View>
     </BottomSheet>
   );
@@ -51,11 +49,9 @@ const MenuBottomSheet: React.FC<React.PropsWithChildren<Props> & Props> = ({
 const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
   },
-  text: {
-    fontFamily: Font[900],
-  },
+  text: {},
 });
 
 export default MenuBottomSheet;
