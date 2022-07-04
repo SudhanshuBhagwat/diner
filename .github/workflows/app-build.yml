@@ -1,8 +1,4 @@
 name: Building a Preview version of Diner App
-on:
-  push:
-    branches:
-      - main
 jobs:
   build-app-preview-build:
     runs-on: ubuntu-latest
@@ -16,16 +12,7 @@ jobs:
           node-version: "14"
           cache: yarn
 
-      - name: 🏗 Setup Expo and EAS
-        uses: expo/expo-github-action@v7
-        with:
-          expo-version: latest
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
-
       - name: 📦 Install dependencies
         run: yarn install
 
       - name: 🚀 Build app
-        working-directory: ./packages/app
-        run: eas build --profile preview --platform android --non-interactive
