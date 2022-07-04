@@ -118,6 +118,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 26,
     color: 'white',
+    fontFamily: 'Inter',
+    fontWeight: '900',
   },
   locationContainer: {
     flexDirection: 'row',
@@ -127,9 +129,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#dddddd',
     marginLeft: 4,
+    fontFamily: 'Inter',
+    fontWeight: '600',
   },
   title: {
     fontSize: 20,
+    fontFamily: 'Inter',
+    color: 'black',
+    fontWeight: '900',
   },
   list: {
     marginTop: 8,

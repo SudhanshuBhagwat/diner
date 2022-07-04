@@ -67,6 +67,9 @@ const styles = StyleSheet.create({
   },
   main: {
     fontSize: 24,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '700',
   },
   inputContainer: {
     marginTop: 16,
@@ -84,6 +87,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 8,
     marginTop: 8,
+    fontFamily: 'Inter',
+    fontWeight: '500',
   },
   imageContainer: {
     height: 240,
@@ -96,6 +101,9 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 18,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '600',
   },
   addButton: {
     backgroundColor: '#3f3f3f',
@@ -106,6 +114,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: '100%',
     marginTop: 16,
+    fontFamily: 'Inter',
+    fontWeight: '600',
   },
 });
 

@@ -39,6 +39,8 @@ const Restaurants: React.FC<React.PropsWithChildren<Props> & Props> = ({
                 fontSize: 16,
                 marginLeft: 8,
                 color: 'white',
+                fontFamily: 'Inter',
+                fontWeight: '600',
               }}>
               Add
             </Text>

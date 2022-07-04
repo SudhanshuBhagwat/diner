@@ -106,6 +106,8 @@ const styles = StyleSheet.create({
   description: {
     color: '#797979',
     fontSize: 16,
+    fontFamily: 'Inter',
+    fontWeight: '500',
   },
   image: {
     height: 100,
@@ -116,9 +118,15 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '700',
   },
   price: {
     fontSize: 16,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '700',
   },
   itemCountContainer: {
     backgroundColor: '#eeeeee',
@@ -130,6 +138,9 @@ const styles = StyleSheet.create({
   },
   itemCount: {
     fontSize: 20,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '600',
   },
 });
 

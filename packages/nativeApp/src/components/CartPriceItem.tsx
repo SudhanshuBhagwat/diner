@@ -29,9 +29,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     color: '#9b9b9b',
+    fontFamily: 'Inter',
+    fontWeight: '600',
   },
   price: {
     fontSize: 18,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '600',
   },
 });
 

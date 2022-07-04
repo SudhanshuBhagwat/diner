@@ -79,17 +79,7 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
           navigation: any;
         }) => ({
           headerShadowVisible: false,
-          headerTitle: () => (
-            <Text
-              style={{
-                color: 'black',
-                fontSize: 30,
-                fontFamily: 'Inter',
-                fontWeight: '900',
-              }}>
-              Diner
-            </Text>
-          ),
+          headerTitle: () => <Text style={styles.title}>Diner</Text>,
           headerLeft: () =>
             navigation.canGoBack() && (
               <Pressable onPress={() => navigation.goBack()}>
@@ -97,18 +87,13 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
                   size={26}
                   color="black"
                   strokeWidth={2}
-                  style={{
-                    marginLeft: 16,
-                  }}
+                  style={styles.chevronLeft}
                 />
               </Pressable>
             ),
           headerRight: () =>
             route.name === 'Home' && (
-              <View
-                style={{
-                  marginRight: 16,
-                }}>
+              <View style={styles.qrButton}>
                 <Pressable onPress={() => navigation.push('QR')}>
                   <QrcodeIcon size={26} color="black" />
                 </Pressable>
@@ -145,12 +130,18 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  title: {
+    color: 'black',
+    fontSize: 30,
+    fontFamily: 'Inter',
+    fontWeight: '900',
   },
-  text: {},
+  chevronLeft: {
+    marginLeft: 16,
+  },
+  qrButton: {
+    marginRight: 16,
+  },
 });
 
 export default Navigation;

@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
   text: {
     marginTop: 4,
     fontSize: 16,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '700',
   },
   locationContainer: {
     flexDirection: 'row',
@@ -65,6 +68,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#a1a1a1',
     marginLeft: 4,
+    fontFamily: 'Inter',
+    fontWeight: '500',
   },
   detailsContainer: {
     paddingHorizontal: 4,
@@ -84,6 +89,8 @@ const styles = StyleSheet.create({
   rating: {
     color: 'white',
     marginRight: 2,
+    fontFamily: 'Inter',
+    fontWeight: '600',
   },
 });
 

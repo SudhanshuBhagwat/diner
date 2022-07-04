@@ -67,13 +67,21 @@ const styles = StyleSheet.create({
   textItem: {
     flex: 1,
     fontSize: 16,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '500',
   },
   placeholderStyle: {
     fontSize: 16,
     color: '#bdbdbd',
+    fontFamily: 'Inter',
+    fontWeight: '500',
   },
   selectedTextStyle: {
     fontSize: 16,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '500',
   },
   iconStyle: {
     width: 20,

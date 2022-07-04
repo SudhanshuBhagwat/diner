@@ -41,6 +41,8 @@ const ShoppingCart: React.FC<React.PropsWithChildren<Props> & Props> = () => {
             style={{
               fontSize: 18,
               color: '#797979',
+              fontFamily: 'Inter',
+              fontWeight: '600',
             }}>
             No items in cart
           </Text>
@@ -52,6 +54,8 @@ const ShoppingCart: React.FC<React.PropsWithChildren<Props> & Props> = () => {
             textAlign: 'center',
             color: 'white',
             fontSize: 16,
+            fontFamily: 'Inter',
+            fontWeight: '600',
           }}>
           Checkout
         </Text>

@@ -79,13 +79,21 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '700',
   },
   price: {
     fontSize: 16,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '700',
   },
   description: {
     color: '#797979',
     fontSize: 16,
+    fontFamily: 'Inter',
+    fontWeight: '500',
   },
   badges: {
     flexDirection: 'row',
@@ -96,6 +104,9 @@ const styles = StyleSheet.create({
     marginRight: 6,
     backgroundColor: 'wheat',
     borderRadius: 6,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '500',
   },
   addToCardButton: {
     backgroundColor: '#3f3f3f',

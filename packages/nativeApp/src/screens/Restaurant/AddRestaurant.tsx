@@ -121,6 +121,8 @@ const MenuInfo = () => {
                 fontSize: 16,
                 marginLeft: 8,
                 color: 'white',
+                fontFamily: 'Inter',
+                fontWeight: '600',
               }}>
               Add Menu
             </Text>

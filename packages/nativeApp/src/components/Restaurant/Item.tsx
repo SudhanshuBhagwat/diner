@@ -116,6 +116,8 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = ({ close }) => {
               style={{
                 color: 'white',
                 fontSize: 16,
+                fontFamily: 'Inter',
+                fontWeight: '600',
               }}>
               Add to cart
             </Text>
@@ -123,6 +125,8 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = ({ close }) => {
               style={{
                 color: 'white',
                 fontSize: 16,
+                fontFamily: 'Inter',
+                fontWeight: '600',
               }}>
               ₹{totalPrice}
             </Text>
@@ -151,9 +155,14 @@ const styles = StyleSheet.create({
   menuName: {
     fontSize: 16,
     color: '#bbbbbb',
+    fontFamily: 'Inter',
+    fontWeight: '600',
   },
   name: {
     fontSize: 32,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '900',
   },
   description: {
     fontSize: 18,
@@ -170,6 +179,9 @@ const styles = StyleSheet.create({
   },
   itemCount: {
     fontSize: 20,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '600',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -187,6 +199,9 @@ const styles = StyleSheet.create({
   ratings: {
     fontSize: 16,
     marginHorizontal: 4,
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '600',
   },
 });
 

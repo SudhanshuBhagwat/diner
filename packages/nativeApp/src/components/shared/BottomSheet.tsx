@@ -51,7 +51,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  text: {},
+  text: {
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '900',
+  },
 });
 
 export default MenuBottomSheet;

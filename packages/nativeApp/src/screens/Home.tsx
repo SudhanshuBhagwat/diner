@@ -50,7 +50,7 @@ const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({
               />
             )}
             keyExtractor={item => String(item.id)}
-            contentContainerStyle={{ paddingRight: 16 }}
+            contentContainerStyle={styles.contentContainer}
             ItemSeparatorComponent={() => <Separator />}
           />
         </View>
@@ -71,7 +71,7 @@ const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({
             </Pressable>
           )}
           keyExtractor={item => String(item.id)}
-          contentContainerStyle={{ paddingRight: 16 }}
+          contentContainerStyle={styles.contentContainer}
           ItemSeparatorComponent={() => <Separator />}
         />
       </View>
@@ -90,8 +90,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontFamily: 'InterBlack',
+    color: 'black',
+    fontFamily: 'Inter',
+    fontWeight: '900',
   },
+  contentContainer: { paddingRight: 16 },
 });
 
 export default Home;

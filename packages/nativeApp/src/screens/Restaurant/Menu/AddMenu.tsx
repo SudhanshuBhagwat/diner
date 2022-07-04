@@ -41,6 +41,8 @@ const AddMenu: React.FC<React.PropsWithChildren<Props> & Props> = ({
                 fontSize: 16,
                 marginLeft: 8,
                 color: 'white',
+                fontFamily: 'Inter',
+                fontWeight: '600',
               }}>
               Add Item
             </Text>
@@ -67,6 +69,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 8,
     marginTop: 8,
+    fontFamily: 'Inter',
+    fontWeight: '500',
   },
   label: {
     fontSize: 18,
@@ -82,9 +86,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 16,
     zIndex: 10,
+    fontFamily: 'Inter',
+    fontWeight: '600',
   },
   main: {
     fontSize: 24,
+    fontFamily: 'Inter',
+    fontWeight: '700',
   },
 });
 
