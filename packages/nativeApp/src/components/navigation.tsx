@@ -82,7 +82,10 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
           headerTitle: () => (
             <Text
               style={{
+                color: 'black',
                 fontSize: 30,
+                fontFamily: 'Inter',
+                fontWeight: '900',
               }}>
               Diner
             </Text>
