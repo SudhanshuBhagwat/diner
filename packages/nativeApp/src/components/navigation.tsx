@@ -105,9 +105,9 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
         <Stack.Screen
           name="Restaurant"
           component={Restaurant}
-          sharedElements={(route, otherRoute, showing) => {
+          sharedElements={(route, otherRoute) => {
             if (
-              (otherRoute.name === 'ShoppingCart' && !showing) ||
+              otherRoute.name === 'ShoppingCart' ||
               !route.params.restaurant
             ) {
               return [];

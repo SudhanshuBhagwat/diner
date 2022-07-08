@@ -9,8 +9,11 @@ import { RootStackParams } from '../navigation';
 import { itemCount } from '../../redux/cartStore';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
+import { ICON_COLOR } from '../../utilities/constants';
 
 interface Props {}
+
+const ICON_SIZE = 20;
 
 const Nav: React.FC<React.PropsWithChildren<Props> & Props> = () => {
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
@@ -18,12 +21,14 @@ const Nav: React.FC<React.PropsWithChildren<Props> & Props> = () => {
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => navigation.goBack()}>
-        <ChevronLeftIcon color={'black'} size={30} style={styles.back} />
+      <Pressable onPress={() => navigation.goBack()} style={styles.back}>
+        <ChevronLeftIcon color={ICON_COLOR} size={ICON_SIZE} />
       </Pressable>
       <View>
-        <Pressable onPress={() => navigation.navigate('ShoppingCart')}>
-          <ShoppingBagIcon color={'black'} size={30} style={styles.back} />
+        <Pressable
+          onPress={() => navigation.navigate('ShoppingCart')}
+          style={styles.back}>
+          <ShoppingBagIcon color={ICON_COLOR} size={ICON_SIZE} />
         </Pressable>
         {itemsInCart > 0 && (
           <View
@@ -58,13 +63,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     position: 'absolute',
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
     paddingVertical: 20,
-    marginTop: 16,
+    marginTop: 20,
   },
   back: {
     backgroundColor: '#eeeeee',
-    borderRadius: 6,
+    borderRadius: 100,
+    padding: 6,
   },
 });
 

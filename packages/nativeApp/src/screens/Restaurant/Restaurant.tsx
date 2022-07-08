@@ -67,10 +67,6 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
         style={{
           flex: 1,
           flexGrow: 1,
-          top: -16,
-          borderTopLeftRadius: 16,
-          borderTopRightRadius: 16,
-          overflow: 'hidden',
         }}>
         <SectionList
           contentContainerStyle={styles.contents}
