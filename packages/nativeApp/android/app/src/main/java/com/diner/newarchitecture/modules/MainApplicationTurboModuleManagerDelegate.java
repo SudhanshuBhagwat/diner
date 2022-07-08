@@ -1,4 +1,4 @@
-package com.nativeapp.newarchitecture.modules;
+package com.diner.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

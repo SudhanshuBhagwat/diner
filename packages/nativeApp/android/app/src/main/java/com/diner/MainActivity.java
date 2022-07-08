@@ -1,4 +1,4 @@
-package com.nativeapp;
+package com.diner;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;

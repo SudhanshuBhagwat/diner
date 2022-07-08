@@ -1,5 +1,9 @@
 import React from 'react';
-import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
+import {
+  DefaultTheme,
+  LinkingOptions,
+  NavigationContainer,
+} from '@react-navigation/native';
 import {
   Text,
   StyleSheet,
@@ -29,20 +33,19 @@ const MyTheme = {
   },
 };
 
-// const prefix = Linking.createURL("/");
-// const linking: LinkingOptions<ReactNavigation.RootParamList> = {
-//   prefixes: [prefix, "https://diner-omega.vercel.app"],
-//   config: {
-//     screens: {
-//       Restaurant: {
-//         path: "Restaurant/:restaurant",
-//         parse: {
-//           restaurant: (restaurantId: string) => restaurantId,
-//         },
-//       },
-//     },
-//   },
-// };
+const linking: LinkingOptions<ReactNavigation.RootParamList> = {
+  prefixes: ['https://diner-omega.vercel.app', 'diner://'],
+  config: {
+    screens: {
+      Restaurant: {
+        path: 'Restaurant/:restaurant',
+        parse: {
+          restaurant: (restaurantId: string) => restaurantId,
+        },
+      },
+    },
+  },
+};
 
 export type RootStackParams = {
   Home: undefined;
@@ -66,7 +69,7 @@ interface Props {}
 const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
   return (
     <NavigationContainer
-      // linking={linking}
+      linking={linking}
       fallback={<ActivityIndicator />}
       theme={MyTheme}>
       <Stack.Navigator

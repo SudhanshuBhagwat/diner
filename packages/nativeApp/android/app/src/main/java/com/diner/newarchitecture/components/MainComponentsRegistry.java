@@ -1,4 +1,4 @@
-package com.nativeapp.newarchitecture.components;
+package com.diner.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
