@@ -4,6 +4,7 @@ import { Text, StyleSheet, View, FlatList, Pressable } from 'react-native';
 import MenuCard from '../components/Home/MenuCard';
 import RestaurantCard from '../components/Home/RestaurantCard';
 import { RootStackParams } from '../components/navigation';
+import Screen from '../components/Screen';
 import { DATA } from '../fixtures/items';
 import { RESTAURANTS } from '../fixtures/restaurants';
 
@@ -24,7 +25,7 @@ const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({
   navigation,
 }) => {
   return (
-    <View style={styles.container}>
+    <Screen>
       {DATA.map(menu => (
         <View key={menu.id} style={styles.section}>
           <Text style={styles.title}>{menu.name}</Text>
@@ -75,15 +76,11 @@ const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({
           ItemSeparatorComponent={() => <Separator />}
         />
       </View>
-    </View>
+    </Screen>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 8,
-  },
   section: {
     paddingLeft: 16,
     marginBottom: 16,

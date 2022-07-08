@@ -5,6 +5,7 @@ import { RootStackParams } from '../../../components/navigation';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { PlusIcon } from 'react-native-heroicons/outline';
 import { BORDER_COLOR } from '../../../utilities/constants';
+import Screen from '../../../components/Screen';
 
 type Props = NativeStackScreenProps<RootStackParams, 'AddRestaurant'>;
 
@@ -12,7 +13,7 @@ const AddMenu: React.FC<React.PropsWithChildren<Props> & Props> = ({
   navigation,
 }) => {
   return (
-    <View style={styles.container}>
+    <Screen style={styles.container}>
       <Text style={styles.main}>Menu Info</Text>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Menu Name</Text>
@@ -49,7 +50,7 @@ const AddMenu: React.FC<React.PropsWithChildren<Props> & Props> = ({
           </View>
         </Pressable>
       </View>
-    </View>
+    </Screen>
   );
 };
 

@@ -6,6 +6,7 @@ import { RootState } from '../redux';
 import { CartItem, items, totalPrice } from '../redux/cartStore';
 import MenuItem from '../components/Menu/MenuItem';
 import CartPriceItem from '../components/CartPriceItem';
+import Screen from '../components/Screen';
 
 interface Props {}
 
@@ -14,7 +15,7 @@ const ShoppingCart: React.FC<React.PropsWithChildren<Props> & Props> = () => {
   const totalItemsPrice = useSelector((state: RootState) => totalPrice(state));
 
   return (
-    <View style={styles.container}>
+    <Screen style={styles.container}>
       <Text style={styles.title}>My Cart</Text>
       {itemsInCart.length > 0 ? (
         <View>
@@ -60,13 +61,12 @@ const ShoppingCart: React.FC<React.PropsWithChildren<Props> & Props> = () => {
           Checkout
         </Text>
       </Pressable>
-    </View>
+    </Screen>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingHorizontal: PADDING_LEFT,
   },
   title: {

@@ -9,6 +9,7 @@ import {
   TextInput,
 } from 'react-native';
 import { RootStackParams } from '../../../components/navigation';
+import Screen from '../../../components/Screen';
 import useImagePicker from '../../../hooks/useImagePicker';
 import { BORDER_COLOR, RUPEE } from '../../../utilities/constants';
 
@@ -20,7 +21,7 @@ const AddItem: React.FC<React.PropsWithChildren<Props> & Props> = ({
   const { uri, chooseImage } = useImagePicker();
 
   return (
-    <View style={styles.container}>
+    <Screen style={styles.container}>
       <Text style={styles.main}>Item Info</Text>
       <Pressable onPress={() => chooseImage()}>
         {uri === undefined ? (
@@ -56,7 +57,7 @@ const AddItem: React.FC<React.PropsWithChildren<Props> & Props> = ({
       <Pressable onPress={() => navigation.goBack()}>
         <Text style={styles.addButton}>Add Item</Text>
       </Pressable>
-    </View>
+    </Screen>
   );
 };
 

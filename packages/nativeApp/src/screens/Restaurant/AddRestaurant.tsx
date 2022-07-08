@@ -13,6 +13,7 @@ import {
 import { PlusIcon } from 'react-native-heroicons/outline';
 import Dropdown from '../../components/Dropdown';
 import { RootStackParams } from '../../components/navigation';
+import Screen from '../../components/Screen';
 import useImagePicker from '../../hooks/useImagePicker';
 import { BORDER_COLOR, RUPEE } from '../../utilities/constants';
 
@@ -22,7 +23,7 @@ const AddRestaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
   navigation,
 }) => {
   return (
-    <View style={styles.container}>
+    <Screen style={styles.container}>
       <ScrollView
         contentContainerStyle={{
           paddingBottom: 90,
@@ -33,7 +34,7 @@ const AddRestaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
       <Pressable onPress={() => navigation.goBack()}>
         <Text style={styles.addRestaurant}>Add Restaurant</Text>
       </Pressable>
-    </View>
+    </Screen>
   );
 };
 
@@ -136,7 +137,6 @@ const MenuInfo = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingHorizontal: 16,
   },
   imageContainer: {

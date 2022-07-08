@@ -6,6 +6,7 @@ import { RootStackParams } from '../../components/navigation';
 import { RESTAURANTS } from '../../fixtures/restaurants';
 import RestaurantCard from '../../components/Home/RestaurantCard';
 import { Separator } from '../Home';
+import Screen from '../../components/Screen';
 
 type Props = NativeStackScreenProps<RootStackParams, 'Restaurants'>;
 
@@ -13,7 +14,7 @@ const Restaurants: React.FC<React.PropsWithChildren<Props> & Props> = ({
   navigation,
 }) => {
   return (
-    <View style={styles.container}>
+    <Screen style={styles.container}>
       <View
         style={{
           flexDirection: 'row',
@@ -63,7 +64,7 @@ const Restaurants: React.FC<React.PropsWithChildren<Props> & Props> = ({
         contentContainerStyle={{ paddingRight: 16 }}
         ItemSeparatorComponent={() => <Separator />}
       />
-    </View>
+    </Screen>
   );
 };
 

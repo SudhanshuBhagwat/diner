@@ -3,7 +3,8 @@
 import { Font } from '@diner/shared/Font';
 import { useLinkTo } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import Screen from '../components/Screen';
 
 interface Props {}
 
@@ -18,7 +19,7 @@ const QRCode: React.FC<React.PropsWithChildren<Props> & Props> = () => {
   // }
 
   return (
-    <View style={styles.container}>
+    <Screen>
       {/* <QRCodeScanner
         onRead={onSuccess}
         reactivate
@@ -29,7 +30,7 @@ const QRCode: React.FC<React.PropsWithChildren<Props> & Props> = () => {
           </Text>
         }
       /> */}
-    </View>
+    </Screen>
   );
 };
 

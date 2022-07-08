@@ -1,19 +1,13 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
 import AuthForm from '@diner/shared/components/AuthForm';
+import Screen from '../components/Screen';
 
 function Auth() {
   return (
-    <View style={styles.container}>
+    <Screen>
       <AuthForm handleGoogleSignIn={() => {}} handleLogin={() => {}} />
-    </View>
+    </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default Auth;

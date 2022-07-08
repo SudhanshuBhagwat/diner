@@ -15,6 +15,7 @@ import MenuCard from '../../components/Home/MenuCard';
 import Nav from '../../components/Home/Nav';
 import { RootStackParams } from '../../components/navigation';
 import Item from '../../components/Restaurant/Item';
+import Screen from '../../components/Screen';
 import MenuBottomSheet from '../../components/shared/BottomSheet';
 import { DATA } from '../../fixtures/menuItems';
 import { addToCart } from '../../redux/cartStore';
@@ -40,7 +41,7 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
   }, []);
 
   return (
-    <View style={styles.container}>
+    <Screen style={styles.container}>
       <View>
         <SharedElement id={String(restaurant.id)}>
           <ImageBackground
@@ -91,7 +92,7 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
       <MenuBottomSheet open={isOpen} onClose={() => setIsOpen(false)}>
         <Item close={() => setIsOpen(false)} />
       </MenuBottomSheet>
-    </View>
+    </Screen>
   );
 };
 

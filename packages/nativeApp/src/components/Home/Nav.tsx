@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     paddingHorizontal: 16,
     paddingVertical: 20,
+    marginTop: 16,
   },
   back: {
     backgroundColor: '#eeeeee',
