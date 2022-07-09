@@ -38,9 +38,9 @@ const linking: LinkingOptions<ReactNavigation.RootParamList> = {
   config: {
     screens: {
       Restaurant: {
-        path: 'Restaurant/:restaurant',
+        path: 'Restaurant/:restaurantId',
         parse: {
-          restaurant: (restaurantId: string) => restaurantId,
+          restaurantId: (restaurantId: string) => +restaurantId,
         },
       },
     },
@@ -52,7 +52,8 @@ export type RootStackParams = {
   QR: undefined;
   Auth: undefined;
   Restaurant: {
-    restaurant: IRestaurant;
+    restaurant?: IRestaurant;
+    restaurantId?: number;
     item?: Item;
   };
   Restaurants: undefined;

@@ -17,13 +17,18 @@ const ICON_SIZE = 20;
 
 const Nav: React.FC<React.PropsWithChildren<Props> & Props> = () => {
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  const showNav = navigation.canGoBack();
   const itemsInCart = useSelector((state: RootState) => itemCount(state));
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => navigation.goBack()} style={styles.back}>
-        <ChevronLeftIcon color={ICON_COLOR} size={ICON_SIZE} />
-      </Pressable>
+      {showNav ? (
+        <Pressable onPress={() => navigation.goBack()} style={styles.back}>
+          <ChevronLeftIcon color={ICON_COLOR} size={ICON_SIZE} />
+        </Pressable>
+      ) : (
+        <View />
+      )}
       <View>
         <Pressable
           onPress={() => navigation.navigate('ShoppingCart')}
@@ -31,23 +36,8 @@ const Nav: React.FC<React.PropsWithChildren<Props> & Props> = () => {
           <ShoppingBagIcon color={ICON_COLOR} size={ICON_SIZE} />
         </Pressable>
         {itemsInCart > 0 && (
-          <View
-            style={{
-              position: 'absolute',
-              bottom: -10,
-              right: -10,
-              backgroundColor: 'red',
-              paddingHorizontal: 8,
-              paddingVertical: 4,
-              borderRadius: 50,
-            }}>
-            <Text
-              style={{
-                color: 'white',
-                fontSize: 10,
-              }}>
-              {itemsInCart}
-            </Text>
+          <View style={styles.indicatorContainer}>
+            <Text style={styles.indicatorStyle}>{itemsInCart}</Text>
           </View>
         )}
       </View>
@@ -71,6 +61,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#eeeeee',
     borderRadius: 100,
     padding: 6,
+  },
+  indicatorContainer: {
+    position: 'absolute',
+    bottom: -10,
+    right: -10,
+    backgroundColor: 'red',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 50,
+  },
+  indicatorStyle: {
+    color: 'white',
+    fontSize: 10,
   },
 });
 

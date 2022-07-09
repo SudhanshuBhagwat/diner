@@ -18,6 +18,7 @@ import Item from '../../components/Restaurant/Item';
 import Screen from '../../components/Screen';
 import MenuBottomSheet from '../../components/shared/BottomSheet';
 import { DATA } from '../../fixtures/menuItems';
+import { RESTAURANTS } from '../../fixtures/restaurants';
 import { addToCart } from '../../redux/cartStore';
 
 type Props = NativeStackScreenProps<RootStackParams, 'Restaurant'>;
@@ -26,7 +27,9 @@ const ITEM_OPEN_TIMEOUT = 1000;
 const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
   route,
 }) => {
-  const restaurant = route.params.restaurant;
+  const restaurant = route.params?.restaurantId
+    ? RESTAURANTS.find(res => res.id === route.params.restaurantId)
+    : route.params.restaurant;
   const item = route.params.item;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -38,7 +41,7 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
       }
     }, ITEM_OPEN_TIMEOUT);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [item]);
 
   return (
     <Screen style={styles.container}>
