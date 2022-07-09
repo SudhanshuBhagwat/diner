@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { LocationMarkerIcon } from 'react-native-heroicons/outline';
+import { LocationMarkerIcon, StarIcon } from 'react-native-heroicons/outline';
 import LinearGradient from 'react-native-linear-gradient';
 import { SharedElement } from 'react-navigation-shared-element';
 import { useDispatch } from 'react-redux';
@@ -54,15 +54,22 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
             }}>
             <LinearGradient
               colors={['#00000000', '#000000']}
-              style={{ height: '100%', width: '100%' }}></LinearGradient>
+              style={styles.linearGradient}
+            />
           </ImageBackground>
         </SharedElement>
         <Nav />
         <View style={styles.headerContents}>
-          <Text style={styles.text}>{restaurant.name}</Text>
-          <View style={styles.locationContainer}>
-            <LocationMarkerIcon size={16} color="#dddddd" />
-            <Text style={styles.location}>{restaurant.location}</Text>
+          <View>
+            <Text style={styles.text}>{restaurant.name}</Text>
+            <View style={styles.locationContainer}>
+              <LocationMarkerIcon size={16} color="#dddddd" />
+              <Text style={styles.location}>{restaurant.location}</Text>
+            </View>
+          </View>
+          <View style={styles.ratingsContainer}>
+            <Text style={styles.ratingsText}>{restaurant.rating}</Text>
+            <StarIcon size={24} color={'yellow'} />
           </View>
         </View>
       </View>
@@ -114,6 +121,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 24,
     left: 16,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
   text: {
     fontSize: 26,
@@ -121,6 +132,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter',
     fontWeight: '900',
   },
+  linearGradient: { height: '100%', width: '100%' },
   locationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -140,6 +152,20 @@ const styles = StyleSheet.create({
   },
   list: {
     marginTop: 8,
+  },
+  ratingsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginRight: 30,
+  },
+  ratingsText: {
+    fontSize: 18,
+    marginRight: 6,
+    color: '#dddddd',
+    fontFamily: 'Inter',
+    fontWeight: '600',
   },
 });
 

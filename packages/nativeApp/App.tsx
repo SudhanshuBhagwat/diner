@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 import Navigation from './src/components/navigation';
 import store from './src/redux';
+import 'react-native-reanimated';
 
 export default function App() {
   return (

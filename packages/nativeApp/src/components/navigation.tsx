@@ -10,8 +10,10 @@ import {
   View,
   ActivityIndicator,
   Pressable,
+  Linking,
 } from 'react-native';
 import { ChevronLeftIcon, QrcodeIcon } from 'react-native-heroicons/outline';
+import SplashScreen from 'react-native-splash-screen';
 import Home from '../screens/Home';
 import Auth from '../screens/Auth';
 import QRCode from '../screens/QRCode';
@@ -45,6 +47,21 @@ const linking: LinkingOptions<ReactNavigation.RootParamList> = {
       },
     },
   },
+  async getInitialURL() {
+    const url = await Linking.getInitialURL();
+    console.log(url);
+
+    return url;
+  },
+  subscribe(listener) {
+    const linkingSubscription = Linking.addEventListener('url', ({ url }) => {
+      listener(url);
+    });
+
+    return () => {
+      linkingSubscription.remove();
+    };
+  },
 };
 
 export type RootStackParams = {
@@ -68,6 +85,10 @@ const Stack = createSharedElementStackNavigator<RootStackParams>();
 interface Props {}
 
 const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
+  React.useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
   return (
     <NavigationContainer
       linking={linking}

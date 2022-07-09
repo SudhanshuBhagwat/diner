@@ -9,7 +9,7 @@ import {
 import { useRoute } from '@react-navigation/native';
 
 interface Props {
-  style: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
 }
 
 const Screen: React.FC<React.PropsWithChildren<Props> & Props> = ({
