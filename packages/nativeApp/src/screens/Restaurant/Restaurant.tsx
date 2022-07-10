@@ -68,7 +68,9 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
             </View>
           </View>
           <View style={styles.ratingsContainer}>
-            <Text style={styles.ratingsText}>{restaurant.rating}</Text>
+            <Text className="font-bold text-xl font-inter">
+              {restaurant.rating}
+            </Text>
             <StarIcon size={24} color={'yellow'} />
           </View>
         </View>

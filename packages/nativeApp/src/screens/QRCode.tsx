@@ -1,4 +1,4 @@
-import { useLinkTo } from '@react-navigation/native';
+import { useIsFocused, useLinkTo } from '@react-navigation/native';
 import React, { useRef } from 'react';
 import { useCameraDevices, Camera } from 'react-native-vision-camera';
 import { useScanBarcodes, BarcodeFormat } from 'vision-camera-code-scanner';
@@ -11,6 +11,7 @@ const APP_URL = 'https://diner-omega.vercel.app';
 
 const QRCode: React.FC<React.PropsWithChildren<Props> & Props> = () => {
   const linkTo = useLinkTo();
+  const isFocused = useIsFocused();
   const [hasPermission, setHasPermission] = React.useState(false);
   const cameraRef = useRef<Camera>();
   const devices = useCameraDevices();
@@ -37,7 +38,7 @@ const QRCode: React.FC<React.PropsWithChildren<Props> & Props> = () => {
 
   return (
     <Screen>
-      {device != null && hasPermission && (
+      {device != null && hasPermission && isFocused && (
         <Camera
           style={StyleSheet.absoluteFill}
           device={device}
