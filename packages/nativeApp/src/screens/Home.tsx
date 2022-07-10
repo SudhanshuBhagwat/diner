@@ -1,12 +1,14 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Text, StyleSheet, View, FlatList, Pressable } from 'react-native';
+import { useQuery } from 'react-query';
 import MenuCard from '../components/Home/MenuCard';
 import RestaurantCard from '../components/Home/RestaurantCard';
 import { RootStackParams } from '../components/navigation';
 import Screen from '../components/Screen';
 import { DATA } from '../fixtures/items';
-import { RESTAURANTS } from '../fixtures/restaurants';
+import { BASE_URL } from '../utilities/constants';
+import { getQuery } from '../utilities/fetchers';
 
 type Props = NativeStackScreenProps<RootStackParams, 'Home'>;
 
@@ -24,6 +26,10 @@ export const Separator = () => {
 const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({
   navigation,
 }) => {
+  const { data } = useQuery('restaurants', () =>
+    getQuery(`${BASE_URL}/restaurants`),
+  );
+
   return (
     <Screen>
       {DATA.map(menu => (
@@ -41,7 +47,7 @@ const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({
                       id: 2,
                       name: 'Shwarma King',
                       rating: 4.5,
-                      image:
+                      imageUrl:
                         'https://images.unsplash.com/photo-1623800330578-2cd67efaec75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
                       location: 'Akurdi',
                     },
@@ -59,7 +65,7 @@ const Home: React.FC<React.PropsWithChildren<Props> & Props> = ({
       <View style={styles.section}>
         <Text style={styles.title}>Restaurants</Text>
         <FlatList
-          data={RESTAURANTS}
+          data={data}
           horizontal
           renderItem={({ item }) => (
             <Pressable

@@ -1,3 +1,5 @@
+export const BASE_URL = 'http:/192.168.1.16:3000';
+
 export const PADDING_LEFT = 16;
 export const ICON_SIZE: number = 20;
 

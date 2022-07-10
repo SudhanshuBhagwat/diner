@@ -40,6 +40,23 @@ export class RestaurantsController {
     return data;
   }
 
+  @Get()
+  async findAll(@Res({ passthrough: true }) res: Response) {
+    let data = {};
+    try {
+      data = await this.restaurantsService.findAll();
+      if (data) {
+        res.status(HttpStatus.OK);
+      } else {
+        res.status(HttpStatus.NOT_FOUND);
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    return data;
+  }
+
   @Get(':id')
   async findOne(
     @Param('id') id: string,
@@ -47,7 +64,7 @@ export class RestaurantsController {
   ) {
     let data = {};
     try {
-      data = await this.restaurantsService.findOne(+id);
+      data = await this.restaurantsService.findOne(Number(id));
       if (data) {
         res.status(HttpStatus.OK);
       } else {

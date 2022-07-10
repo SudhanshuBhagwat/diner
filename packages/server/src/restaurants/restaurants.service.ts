@@ -39,6 +39,10 @@ export class RestaurantsService {
     });
   }
 
+  findAll() {
+    return this.prisma.restaurant.findMany();
+  }
+
   update(id: number, updateRestaurantDto: Prisma.RestaurantUpdateInput) {
     return this.prisma.restaurant.update({
       where: {
