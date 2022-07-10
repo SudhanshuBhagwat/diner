@@ -2,6 +2,7 @@ import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 import { TailwindProvider } from 'tailwindcss-react-native';
+import 'tailwindcss-react-native/types.d';
 import Navigation from './src/components/navigation';
 import store from './src/redux';
 

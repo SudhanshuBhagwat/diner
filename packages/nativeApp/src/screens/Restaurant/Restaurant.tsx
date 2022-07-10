@@ -67,11 +67,11 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
               <Text style={styles.location}>{restaurant.location}</Text>
             </View>
           </View>
-          <View style={styles.ratingsContainer}>
-            <Text className="font-bold text-xl font-inter">
+          <View className="bg-[#ffffff] rounded-md flex-row items-center px-2 py-1 mr-8">
+            <Text className="font-semibold text-lg font-inter mr-2 text-black">
               {restaurant.rating}
             </Text>
-            <StarIcon size={24} color={'yellow'} />
+            <StarIcon size={24} color={'orange'} fill={'yellow'} />
           </View>
         </View>
       </View>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 24,
     left: 16,
-    flex: 1,
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
@@ -154,20 +154,6 @@ const styles = StyleSheet.create({
   },
   list: {
     marginTop: 8,
-  },
-  ratingsContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    marginRight: 30,
-  },
-  ratingsText: {
-    fontSize: 18,
-    marginRight: 6,
-    color: '#dddddd',
-    fontFamily: 'Inter',
-    fontWeight: '600',
   },
 });
 
