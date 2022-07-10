@@ -8,8 +8,8 @@ import {
   View,
 } from 'react-native';
 import { LocationMarkerIcon, StarIcon } from 'react-native-heroicons/outline';
-import LinearGradient from 'react-native-linear-gradient';
-import { SharedElement } from 'react-navigation-shared-element';
+// import LinearGradient from 'react-native-linear-gradient';
+// import { SharedElement } from 'react-navigation-shared-element';
 import { useDispatch } from 'react-redux';
 import MenuCard from '../../components/Home/MenuCard';
 import Nav from '../../components/Home/Nav';
@@ -46,18 +46,18 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
   return (
     <Screen style={styles.container}>
       <View>
-        <SharedElement id={String(restaurant.id)}>
-          <ImageBackground
-            style={styles.image}
-            source={{
-              uri: restaurant.image,
-            }}>
-            <LinearGradient
-              colors={['#00000000', '#000000']}
-              style={styles.linearGradient}
-            />
-          </ImageBackground>
-        </SharedElement>
+        {/* <SharedElement id={String(restaurant.id)}> */}
+        <ImageBackground
+          style={styles.image}
+          source={{
+            uri: restaurant.image,
+          }}>
+          {/* <LinearGradient
+            colors={['#00000000', '#000000']}
+            style={styles.linearGradient}
+          /> */}
+        </ImageBackground>
+        {/* </SharedElement> */}
         <Nav />
         <View style={styles.headerContents}>
           <View>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { LocationMarkerIcon, StarIcon } from 'react-native-heroicons/outline';
-import { SharedElement } from 'react-navigation-shared-element';
+// import { SharedElement } from 'react-navigation-shared-element';
 import { Restaurant } from '../../models/restaurant';
 
 interface Props {
@@ -15,20 +15,20 @@ const RestaurantCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
 }) => {
   return (
     <View>
-      <SharedElement id={`${restaurant.id}`}>
-        <Image
-          style={[
-            styles.image,
-            large && {
-              width: '100%',
-              height: 200,
-            },
-          ]}
-          source={{
-            uri: restaurant.image,
-          }}
-        />
-      </SharedElement>
+      {/* <SharedElement id={`${restaurant.id}`}> */}
+      <Image
+        style={[
+          styles.image,
+          large && {
+            width: '100%',
+            height: 200,
+          },
+        ]}
+        source={{
+          uri: restaurant.image,
+        }}
+      />
+      {/* </SharedElement> */}
       <View style={styles.detailsContainer}>
         <View>
           <Text style={styles.text}>{restaurant.name}</Text>
