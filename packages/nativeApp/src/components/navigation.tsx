@@ -13,7 +13,7 @@ import {
   Linking,
 } from 'react-native';
 import { ChevronLeftIcon, QrcodeIcon } from 'react-native-heroicons/outline';
-import SplashScreen from 'react-native-splash-screen';
+import RNBootSplash from 'react-native-bootsplash';
 import Home from '../screens/Home';
 import Auth from '../screens/Auth';
 import QRCode from '../screens/QRCode';
@@ -85,15 +85,12 @@ const Stack = createSharedElementStackNavigator<RootStackParams>();
 interface Props {}
 
 const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
-  React.useEffect(() => {
-    SplashScreen.hide();
-  }, []);
-
   return (
     <NavigationContainer
       linking={linking}
       fallback={<ActivityIndicator />}
-      theme={MyTheme}>
+      theme={MyTheme}
+      onReady={() => RNBootSplash.hide({ fade: true })}>
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={({
