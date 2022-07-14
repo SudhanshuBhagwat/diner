@@ -1,7 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator,
   ImageBackground,
   SectionList,
   StyleSheet,
@@ -19,7 +18,7 @@ import { RootStackParams } from '../../components/navigation';
 import Item from '../../components/Restaurant/Item';
 import Screen from '../../components/Screen';
 import MenuBottomSheet from '../../components/shared/BottomSheet';
-import { DATA } from '../../fixtures/menuItems';
+import Spinner from '../../components/Spinner';
 import { Restaurant as IRestaurant } from '../../models/restaurant';
 import { addToCart } from '../../redux/cartStore';
 import { BASE_URL } from '../../utilities/constants';
@@ -33,11 +32,21 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
 }) => {
   let restaurant: IRestaurant;
   const restaurantId = route.params.restaurantId;
-
-  const { isLoading, data } = useQuery('restaurant', () =>
-    getQuery(`${BASE_URL}/restaurants/${restaurantId}`),
+  const { isLoading, data } = useQuery(
+    'restaurant',
+    () =>
+      restaurantId
+        ? getQuery(`${BASE_URL}/restaurants/${route.params.restaurantId}`)
+        : null,
+    {
+      enabled: !!restaurantId,
+    },
   );
-  restaurant = route.params.restaurantId ? data : route.params.restaurant;
+  restaurant = data ?? route.params.restaurant;
+  const { isLoading: menuIsLoading, data: menuData } = useQuery(
+    'restaurant-menu',
+    () => getQuery(`${BASE_URL}/restaurants/${route.params.restaurantId}/menu`),
+  );
   const item = route.params.item;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -54,9 +63,7 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
   return (
     <Screen style={styles.container} loading={isLoading}>
       {isLoading ? (
-        <View className="flex flex-1 justify-center items-center">
-          <ActivityIndicator size={'large'} />
-        </View>
+        <Spinner />
       ) : (
         <>
           <View>
@@ -90,22 +97,26 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
             </View>
           </View>
           <View className="flex-1">
-            <SectionList
-              contentContainerStyle={styles.contents}
-              sections={DATA}
-              keyExtractor={(currItem, index) => `${currItem.id}-${index}`}
-              renderItem={({ item }) => (
-                <MenuCard
-                  item={item}
-                  showAddButton
-                  onAddButtonClicked={() => dispatch(addToCart(item))}
-                  onPress={() => setIsOpen(true)}
-                />
-              )}
-              renderSectionHeader={({ section: { name } }) => (
-                <Text style={styles.title}>{name}</Text>
-              )}
-            />
+            {menuIsLoading ? (
+              <Spinner />
+            ) : (
+              <SectionList
+                contentContainerStyle={styles.contents}
+                sections={menuData}
+                keyExtractor={(currItem, index) => `${currItem.id}-${index}`}
+                renderItem={({ item }) => (
+                  <MenuCard
+                    item={item}
+                    showAddButton
+                    onAddButtonClicked={() => dispatch(addToCart(item))}
+                    onPress={() => setIsOpen(true)}
+                  />
+                )}
+                renderSectionHeader={({ section: { name } }) => (
+                  <Text style={styles.title}>{name}</Text>
+                )}
+              />
+            )}
           </View>
           <MenuBottomSheet open={isOpen} onClose={() => setIsOpen(false)}>
             <Item close={() => setIsOpen(false)} />

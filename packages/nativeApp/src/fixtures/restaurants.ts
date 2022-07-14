@@ -3,42 +3,34 @@ import { Restaurant } from '../models/restaurant';
 export const RESTAURANTS: Restaurant[] = [
   {
     id: 1,
-    name: 'Mahercha Chaha',
+    name: 'Nimantran',
     rating: 3.5,
-    image:
-      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
-    location: 'ETV Marathi',
+    imageUrl:
+      'https://b.zmtcdn.com/data/pictures/1/12351/ad05490a9d577277ede94d86e332cf6b.jpg?output-format=webp',
+    location: 'Bibvewadi, Pune',
   },
   {
     id: 2,
-    name: 'Shwarma King',
+    name: 'Pizza Hut',
     rating: 4.5,
-    image:
-      'https://images.unsplash.com/photo-1623800330578-2cd67efaec75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
-    location: 'Akurdi',
+    imageUrl:
+      'https://b.zmtcdn.com/data/pictures/9/18429319/fccdb9edfdf7b5caae6811b76cc925ea.jpg',
+    location: 'FC Road, Pune',
   },
   {
     id: 3,
-    name: 'Barbeque Nation',
+    name: 'Mcdonalds',
     rating: 3.9,
-    image:
-      'https://images.unsplash.com/photo-1613946069412-38f7f1ff0b65?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80',
-    location: 'Chinchwad',
+    imageUrl:
+      'https://b.zmtcdn.com/data/pictures/chains/1/10571/f325f5c3e4761fc65ae04435f70c816c_featured_v2.jpg',
+    location: 'JM Road, Pune',
   },
   {
     id: 4,
-    name: 'Starbucks',
+    name: 'Meals Bowl',
     rating: 4.1,
-    image:
-      'https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
-    location: 'FC Road',
-  },
-  {
-    id: 5,
-    name: 'Nimantran',
-    rating: 4.3,
-    image:
-      'https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
-    location: 'Bibvewadi',
+    imageUrl:
+      'https://b.zmtcdn.com/data/pictures/0/20018320/1b55a0ca38a54a53e5765a2eae3869c9.jpg?output-format=webp',
+    location: 'Kothrud, Pune',
   },
 ];

@@ -39,6 +39,31 @@ export class RestaurantsService {
     });
   }
 
+  getMenusForRestaurant(id: number) {
+    return this.prisma.restaurant.findFirst({
+      where: {
+        id,
+      },
+      select: {
+        Menu: {
+          select: {
+            id: true,
+            name: true,
+            Item: {
+              select: {
+                id: true,
+                imageUrl: true,
+                name: true,
+                price: true,
+                veg: true,
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
   findAll() {
     return this.prisma.restaurant.findMany();
   }

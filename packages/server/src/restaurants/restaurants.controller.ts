@@ -77,6 +77,35 @@ export class RestaurantsController {
     return data;
   }
 
+  @Get(':id/menu')
+  async getMenusForRestaurant(
+    @Param('id') id: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    let data;
+    try {
+      data = await this.restaurantsService.getMenusForRestaurant(Number(id));
+      data = data.Menu.map((menu) => {
+        return {
+          id: menu.id,
+          title: menu.name,
+          data: menu.Item,
+        };
+      });
+      console.log(data);
+
+      if (data) {
+        res.status(HttpStatus.OK);
+      } else {
+        res.status(HttpStatus.NOT_FOUND);
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    return data;
+  }
+
   @Patch(':id')
   async update(
     @Param('id') id: string,

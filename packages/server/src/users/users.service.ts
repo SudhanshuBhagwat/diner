@@ -6,16 +6,16 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  create(createUserDto: Prisma.UserCreateManyInput) {
+  create(createUserDto: Prisma.UserCreateInput) {
     return this.prisma.user.create({
       data: createUserDto,
     });
   }
 
-  findOne(id: string) {
+  findOne(id: number) {
     return this.prisma.user.findFirst({
       where: {
-        uid: id,
+        id,
       },
     });
   }

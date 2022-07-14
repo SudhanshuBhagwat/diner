@@ -17,7 +17,7 @@ export class UsersController {
 
   @Post()
   async create(
-    @Body() createUserDto: Prisma.UserCreateManyInput,
+    @Body() createUserDto: Prisma.UserCreateInput,
     @Res() res: Response,
   ) {
     let data = {};
@@ -39,7 +39,7 @@ export class UsersController {
   async findOne(@Param('id') id: string, @Res() res: Response) {
     let data = {};
     try {
-      data = await this.usersService.findOne(id);
+      data = await this.usersService.findOne(+id);
       if (data) {
         res.status(HttpStatus.OK);
       } else {
