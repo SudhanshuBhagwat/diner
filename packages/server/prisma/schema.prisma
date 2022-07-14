@@ -6,19 +6,18 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
-enum Role {
-  ADMIN
-}
+// enum Role {
+//   ADMIN
+// }
 
 model User {
   id         Int          @id @default(autoincrement())
-  uid        String       @unique(map: "user_constraint")
   name       String
-  role       Role
+  // role       Role
   Restaurant Restaurant[]
 }
 
@@ -49,7 +48,7 @@ model Item {
   id        Int      @id @default(autoincrement())
   name      String
   imageUrl  String
-  price     Int
+  price     Float
   veg       Boolean
   menuId    Int
   menu      Menu     @relation(fields: [menuId], references: [id])
