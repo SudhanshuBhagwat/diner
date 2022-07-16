@@ -138,6 +138,25 @@ const Navigation: React.FC<React.PropsWithChildren<Props> & Props> = () => {
           }}
           options={{
             headerShown: false,
+            cardStyleInterpolator: ({ current: { progress } }) => ({
+              cardStyle: {
+                opacity: progress,
+              },
+            }),
+            transitionSpec: {
+              open: {
+                animation: 'timing',
+                config: {
+                  duration: 200,
+                },
+              },
+              close: {
+                animation: 'timing',
+                config: {
+                  duration: 300,
+                },
+              },
+            },
           }}
         />
         <Stack.Screen name="Restaurants" component={Restaurants} />

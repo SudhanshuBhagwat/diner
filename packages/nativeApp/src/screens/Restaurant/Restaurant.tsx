@@ -50,7 +50,10 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
   );
   const item = route.params.item;
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState({
+    item: null,
+    section: null,
+  });
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -106,13 +109,16 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
                 contentContainerStyle={styles.contents}
                 sections={menuData}
                 keyExtractor={(currItem, index) => `${currItem.id}-${index}`}
-                renderItem={({ item }) => (
+                renderItem={({ item, section }) => (
                   <MenuCard
                     item={item}
                     showAddButton
                     onAddButtonClicked={() => dispatch(addToCart(item))}
                     onPress={() => {
-                      setSelectedItem(item);
+                      setSelectedItem({
+                        section,
+                        item,
+                      });
                       setIsOpen(true);
                     }}
                   />
@@ -124,7 +130,11 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
             )}
           </View>
           <MenuBottomSheet open={isOpen} onClose={() => setIsOpen(false)}>
-            <Item item={selectedItem} close={() => setIsOpen(false)} />
+            <Item
+              item={selectedItem.item}
+              section={selectedItem.section}
+              close={() => setIsOpen(false)}
+            />
           </MenuBottomSheet>
         </>
       )}

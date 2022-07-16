@@ -15,6 +15,7 @@ import { ICON_COLOR, ICON_SIZE } from '../../utilities/constants';
 
 interface Props {
   item: IItem;
+  section: { id: number; name: string };
   close: () => void;
 }
 
@@ -25,17 +26,18 @@ const SPACING: number = 20;
 const Item: React.FC<React.PropsWithChildren<Props> & Props> = ({
   close,
   item,
+  section,
 }) => {
   const [items, setItems] = useState<number>(1);
   const totalPrice = item ? item.price * items : 0;
   const dispatch = useDispatch();
 
   function increment() {
-    setItems(items => items + 1);
+    setItems(currItems => currItems + 1);
   }
 
   function decrement() {
-    setItems(items => items - 1);
+    setItems(currItems => currItems - 1);
   }
 
   function addItemToCart() {
@@ -58,10 +60,7 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = ({
     <View style={styles.container}>
       {item !== null && (
         <>
-          <View
-            style={{
-              flex: 1,
-            }}>
+          <View style={styles.details}>
             {item.imageUrl !== '' ? (
               <Image
                 style={styles.image}
@@ -73,15 +72,12 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = ({
               <View style={styles.imagePlaceholder} />
             )}
             <View style={styles.content}>
-              <Text style={styles.menuName}>{'Test'}</Text>
+              <Text style={styles.menuName}>{section.name}</Text>
               <Text style={styles.name}>{item.name}</Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                }}>
+              <View style={styles.ratingContainer}>
                 <StarIcon size={24} color={'yellow'} fill={'yellow'} />
                 <Text style={styles.ratings}>{1.0}</Text>
-                <Text style={styles.menuName}>({200}+)</Text>
+                <Text style={styles.ratingCount}>({200}+)</Text>
               </View>
               <Text style={styles.description}>{item.description}</Text>
             </View>
@@ -90,44 +86,20 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = ({
             <View style={styles.buttonContainer}>
               <View style={styles.itemCountContainer}>
                 <Pressable onPress={decrement}>
-                  <View
-                    style={{
-                      marginRight: SPACING,
-                      marginLeft: 6,
-                    }}>
+                  <View style={styles.icon}>
                     <MinusIcon size={ICON_SIZE} color={ICON_COLOR} />
                   </View>
                 </Pressable>
                 <Text style={styles.itemCount}>{items}</Text>
                 <Pressable onPress={increment}>
-                  <View
-                    style={{
-                      marginLeft: SPACING,
-                      marginRight: 6,
-                    }}>
+                  <View style={styles.icon}>
                     <PlusIcon size={ICON_SIZE} color={ICON_COLOR} />
                   </View>
                 </Pressable>
               </View>
               <Pressable style={styles.addToCart} onPress={addItemToCart}>
-                <Text
-                  style={{
-                    color: 'white',
-                    fontSize: 16,
-                    fontFamily: 'Inter',
-                    fontWeight: '600',
-                  }}>
-                  Add to cart
-                </Text>
-                <Text
-                  style={{
-                    color: 'white',
-                    fontSize: 16,
-                    fontFamily: 'Inter',
-                    fontWeight: '600',
-                  }}>
-                  ₹{totalPrice}
-                </Text>
+                <Text style={styles.addToCartText}>Add to cart</Text>
+                <Text style={styles.totalPrice}>₹{totalPrice}</Text>
               </Pressable>
             </View>
           </View>
@@ -142,6 +114,9 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     flexDirection: 'column',
     justifyContent: 'space-between',
+  },
+  details: {
+    flex: 1,
   },
   image: {
     height: 260,
@@ -159,10 +134,12 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   menuName: {
-    fontSize: 16,
+    fontSize: 12,
     color: '#bbbbbb',
     fontFamily: 'Inter',
     fontWeight: '600',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   name: {
     fontSize: 32,
@@ -202,12 +179,38 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     paddingHorizontal: 24,
   },
+  addToCartText: {
+    color: 'white',
+    fontSize: 16,
+    fontFamily: 'Inter',
+    fontWeight: '600',
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+  },
   ratings: {
     fontSize: 16,
     marginHorizontal: 4,
     color: 'black',
     fontFamily: 'Inter',
     fontWeight: '600',
+  },
+  ratingCount: {
+    fontSize: 16,
+    marginHorizontal: 4,
+    color: '#bbbbbb',
+    fontFamily: 'Inter',
+    fontWeight: '600',
+  },
+  totalPrice: {
+    color: 'white',
+    fontSize: 16,
+    fontFamily: 'Inter',
+    fontWeight: '600',
+  },
+  icon: {
+    marginLeft: SPACING,
+    marginRight: 6,
   },
 });
 
