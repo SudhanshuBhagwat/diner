@@ -9,33 +9,25 @@ import {
 } from 'react-native';
 import { MinusIcon, PlusIcon, StarIcon } from 'react-native-heroicons/outline';
 import { useDispatch } from 'react-redux';
+import { Item as IItem } from '../../models/items';
 import { addItemsToCart } from '../../redux/cartStore';
 import { ICON_COLOR, ICON_SIZE } from '../../utilities/constants';
 
 interface Props {
+  item: IItem;
   close: () => void;
 }
 
 const { width } = Dimensions.get('screen');
 
-const DATA = {
-  id: 1,
-  name: 'Pizza',
-  menuName: 'Pizzas',
-  image:
-    'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
-  badges: ['Veg', 'Italian'],
-  description: 'Jallepeno, Cheese, Tomatoes',
-  price: 149,
-  ratings: 3.6,
-  ratingCount: 600,
-};
-
 const SPACING: number = 20;
 
-const Item: React.FC<React.PropsWithChildren<Props> & Props> = ({ close }) => {
+const Item: React.FC<React.PropsWithChildren<Props> & Props> = ({
+  close,
+  item,
+}) => {
   const [items, setItems] = useState<number>(1);
-  const totalPrice = DATA.price * items;
+  const totalPrice = item ? item.price * items : 0;
   const dispatch = useDispatch();
 
   function increment() {
@@ -49,13 +41,13 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = ({ close }) => {
   function addItemToCart() {
     dispatch(
       addItemsToCart({
-        id: DATA.id,
-        description: DATA.description,
-        image: DATA.image,
-        name: DATA.name,
-        price: DATA.price,
+        id: item.id,
+        description: item.description,
+        imageUrl: item.imageUrl,
+        name: item.name,
+        price: item.price,
         restaurant: 'Test',
-        badges: DATA.badges,
+        badges: item.badges,
         quantity: items,
       }),
     );
@@ -64,75 +56,83 @@ const Item: React.FC<React.PropsWithChildren<Props> & Props> = ({ close }) => {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          flex: 1,
-        }}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: DATA.image,
-          }}
-        />
-        <View style={styles.content}>
-          <Text style={styles.menuName}>{DATA.menuName}</Text>
-          <Text style={styles.name}>{DATA.name}</Text>
+      {item !== null && (
+        <>
           <View
             style={{
-              flexDirection: 'row',
+              flex: 1,
             }}>
-            <StarIcon size={24} color={'yellow'} fill={'yellow'} />
-            <Text style={styles.ratings}>{DATA.ratings}</Text>
-            <Text style={styles.menuName}>({DATA.ratingCount}+)</Text>
-          </View>
-          <Text style={styles.description}>{DATA.description}</Text>
-        </View>
-      </View>
-      <View>
-        <View style={styles.buttonContainer}>
-          <View style={styles.itemCountContainer}>
-            <Pressable onPress={decrement}>
+            {item.imageUrl !== '' ? (
+              <Image
+                style={styles.image}
+                source={{
+                  uri: item.imageUrl,
+                }}
+              />
+            ) : (
+              <View style={styles.imagePlaceholder} />
+            )}
+            <View style={styles.content}>
+              <Text style={styles.menuName}>{'Test'}</Text>
+              <Text style={styles.name}>{item.name}</Text>
               <View
                 style={{
-                  marginRight: SPACING,
-                  marginLeft: 6,
+                  flexDirection: 'row',
                 }}>
-                <MinusIcon size={ICON_SIZE} color={ICON_COLOR} />
+                <StarIcon size={24} color={'yellow'} fill={'yellow'} />
+                <Text style={styles.ratings}>{1.0}</Text>
+                <Text style={styles.menuName}>({200}+)</Text>
               </View>
-            </Pressable>
-            <Text style={styles.itemCount}>{items}</Text>
-            <Pressable onPress={increment}>
-              <View
-                style={{
-                  marginLeft: SPACING,
-                  marginRight: 6,
-                }}>
-                <PlusIcon size={ICON_SIZE} color={ICON_COLOR} />
-              </View>
-            </Pressable>
+              <Text style={styles.description}>{item.description}</Text>
+            </View>
           </View>
-          <Pressable style={styles.addToCart} onPress={addItemToCart}>
-            <Text
-              style={{
-                color: 'white',
-                fontSize: 16,
-                fontFamily: 'Inter',
-                fontWeight: '600',
-              }}>
-              Add to cart
-            </Text>
-            <Text
-              style={{
-                color: 'white',
-                fontSize: 16,
-                fontFamily: 'Inter',
-                fontWeight: '600',
-              }}>
-              ₹{totalPrice}
-            </Text>
-          </Pressable>
-        </View>
-      </View>
+          <View>
+            <View style={styles.buttonContainer}>
+              <View style={styles.itemCountContainer}>
+                <Pressable onPress={decrement}>
+                  <View
+                    style={{
+                      marginRight: SPACING,
+                      marginLeft: 6,
+                    }}>
+                    <MinusIcon size={ICON_SIZE} color={ICON_COLOR} />
+                  </View>
+                </Pressable>
+                <Text style={styles.itemCount}>{items}</Text>
+                <Pressable onPress={increment}>
+                  <View
+                    style={{
+                      marginLeft: SPACING,
+                      marginRight: 6,
+                    }}>
+                    <PlusIcon size={ICON_SIZE} color={ICON_COLOR} />
+                  </View>
+                </Pressable>
+              </View>
+              <Pressable style={styles.addToCart} onPress={addItemToCart}>
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 16,
+                    fontFamily: 'Inter',
+                    fontWeight: '600',
+                  }}>
+                  Add to cart
+                </Text>
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 16,
+                    fontFamily: 'Inter',
+                    fontWeight: '600',
+                  }}>
+                  ₹{totalPrice}
+                </Text>
+              </Pressable>
+            </View>
+          </View>
+        </>
+      )}
     </View>
   );
 };
@@ -148,6 +148,12 @@ const styles = StyleSheet.create({
     width: width * 0.9,
     borderRadius: 16,
     resizeMode: 'cover',
+  },
+  imagePlaceholder: {
+    height: 260,
+    width: width * 0.9,
+    borderRadius: 16,
+    backgroundColor: '#acacac',
   },
   content: {
     marginTop: 16,

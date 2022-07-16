@@ -88,11 +88,10 @@ export class RestaurantsController {
       data = data.Menu.map((menu) => {
         return {
           id: menu.id,
-          title: menu.name,
+          name: menu.name,
           data: menu.Item,
         };
       });
-      console.log(data);
 
       if (data) {
         res.status(HttpStatus.OK);

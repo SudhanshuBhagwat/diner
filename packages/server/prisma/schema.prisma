@@ -27,6 +27,7 @@ model Restaurant {
   ownerName String
   since     Int
   location  String
+  rating    Float    @default(1.0)
   imageUrl  String
   createdAt DateTime @default(now())
   Menu      Menu[]

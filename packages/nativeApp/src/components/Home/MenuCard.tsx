@@ -19,12 +19,16 @@ const MenuCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
   return (
     <Pressable onPress={onPress}>
       <View style={styles.container}>
-        <Image
-          source={{
-            uri: item.image,
-          }}
-          style={styles.image}
-        />
+        {item.imageUrl !== '' ? (
+          <Image
+            source={{
+              uri: item.imageUrl,
+            }}
+            style={styles.image}
+          />
+        ) : (
+          <View style={styles.imagePlaceholder} />
+        )}
         <View style={styles.detailsContainer}>
           <View
             style={{
@@ -33,10 +37,8 @@ const MenuCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
               alignItems: 'center',
             }}>
             <View>
-              <Text style={styles.text}>
-                {item.name} @ {item.restaurant}
-              </Text>
-              {item.badges && (
+              <Text style={styles.text}>{item.name}</Text>
+              {/* {item.badges && (
                 <View style={styles.badges}>
                   {item.badges.map((badge: string, idx: number) => (
                     <Text key={idx} style={styles.badge}>
@@ -44,7 +46,7 @@ const MenuCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
                     </Text>
                   ))}
                 </View>
-              )}
+              )} */}
             </View>
             {showAddButton && (
               <Pressable onPress={onAddButtonClicked}>
@@ -54,7 +56,6 @@ const MenuCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
               </Pressable>
             )}
           </View>
-          <Text style={styles.description}>{item.description}</Text>
           <Text style={styles.price}>₹{item.price}</Text>
         </View>
       </View>
@@ -65,10 +66,12 @@ const MenuCard: React.FC<React.PropsWithChildren<Props> & Props> = ({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingVertical: 6,
+    marginVertical: 8,
   },
   detailsContainer: {
-    // justifyContent: "space-between",
+    flexGrow: 1,
+    paddingVertical: 8,
+    justifyContent: 'space-between',
   },
   image: {
     height: 100,
@@ -76,15 +79,26 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginRight: 8,
     aspectRatio: 1,
+    resizeMode: 'cover',
+    borderColor: '#dddddd',
+    borderWidth: 1,
+  },
+  imagePlaceholder: {
+    height: 100,
+    width: 100,
+    borderRadius: 12,
+    marginRight: 8,
+    backgroundColor: '#121212',
   },
   text: {
     fontSize: 16,
     color: 'black',
     fontFamily: 'Inter',
     fontWeight: '700',
+    maxWidth: 200,
   },
   price: {
-    fontSize: 16,
+    fontSize: 12,
     color: 'black',
     fontFamily: 'Inter',
     fontWeight: '700',

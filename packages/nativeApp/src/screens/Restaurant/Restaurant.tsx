@@ -32,6 +32,7 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
 }) => {
   let restaurant: IRestaurant;
   const restaurantId = route.params.restaurantId;
+
   const { isLoading, data } = useQuery(
     'restaurant',
     () =>
@@ -45,10 +46,11 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
   restaurant = data ?? route.params.restaurant;
   const { isLoading: menuIsLoading, data: menuData } = useQuery(
     'restaurant-menu',
-    () => getQuery(`${BASE_URL}/restaurants/${route.params.restaurantId}/menu`),
+    () => getQuery(`${BASE_URL}/restaurants/${restaurant.id}/menu`),
   );
   const item = route.params.item;
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -109,7 +111,10 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
                     item={item}
                     showAddButton
                     onAddButtonClicked={() => dispatch(addToCart(item))}
-                    onPress={() => setIsOpen(true)}
+                    onPress={() => {
+                      setSelectedItem(item);
+                      setIsOpen(true);
+                    }}
                   />
                 )}
                 renderSectionHeader={({ section: { name } }) => (
@@ -119,7 +124,7 @@ const Restaurant: React.FC<React.PropsWithChildren<Props> & Props> = ({
             )}
           </View>
           <MenuBottomSheet open={isOpen} onClose={() => setIsOpen(false)}>
-            <Item close={() => setIsOpen(false)} />
+            <Item item={selectedItem} close={() => setIsOpen(false)} />
           </MenuBottomSheet>
         </>
       )}
@@ -138,8 +143,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   contents: {
-    paddingLeft: 16,
-    paddingVertical: 16,
+    paddingHorizontal: 16,
     backgroundColor: 'white',
   },
   headerContents: {
@@ -174,6 +178,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter',
     color: 'black',
     fontWeight: '900',
+    marginTop: 20,
   },
   list: {
     marginTop: 8,
